@@ -1,1 +1,81 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+  	<div class="jumbotron" id="header">
+  	  <h1 class="text-center">Hello, my name is Ryan Nickel</h1>
+  	  <p class="text-center">And I am a developer. This is where I post my thought poops.</p>
+  	</div>
+
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-8 col-md-offset-2">
+	  			<article>
+	  				<h2>Site's coming together</h2>
+	  				<p class="date">November 2nd, 2014</p>
+	  				<p>
+	  					So the design of the site is finally starting to come together. I'm probably going to spend the next few months working on some
+	  					scripts so that I can write my posts in markdown (obviiously), commit them to the repo, push them up to github and have it generate
+	  					the HTML. Yes, I can totally grab someone elses scripts that do exactly that, however I've been wanting to play with some functional
+	  					scripting languages and I figured why not make a project out of it?
+	  				</p>
+
+	  			</article>
+
+
+  			</div>
+  		</div>
+  	</div>
+  </div>
+
+	<div class="footer container">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+				<div class="col-md-6">
+					<p>©2014 - Ryan Nickel</p>
+				</div>
+				<div class="col-md-6 text-right socials">
+					<span class="socicon socicon-twitter"></span>
+					<span class="socicon socicon-instagram"></span>
+					<span class="socicon socicon-github"></span>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	$(document).ready(function(){
+		$window = $(window);
+		var $scroll = $('#header');
+		var $backgroundStart = 200;
+	  $(window).scroll(function() {
+
+	    var yPos = -($window.scrollTop() / 2);
+	    var coords = '50% ' + (yPos - $backgroundStart) + 'px';
+	    $scroll.css({ backgroundPosition: coords });
+	  });
+	});
+	</script>
+
+  </body>
+</html>
