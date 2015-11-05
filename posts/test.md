@@ -11,3 +11,7 @@ code will also pop into the thing
 ```
 
 [and urls](http://www.ryannickel.com)
+
+what about images?
+
+![Alt text](https://volu.me/img/merch-tees.jpg)
