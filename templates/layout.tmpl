@@ -1,3 +1,4 @@
+{{define "header"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,11 +30,15 @@
   	<div class="container">
   		<div class="row">
   			<div class="col-md-8 col-md-offset-2">
-
+{{end}}
+{{define "body"}}
 	  			<article>
+
+
 	  				{{.Content}}
 	  			</article>
-
+{{end}}
+{{define "footer"}}
   			</div>
   		</div>
   	</div>
@@ -72,3 +77,4 @@
 
   </body>
 </html>
+{{end}}
