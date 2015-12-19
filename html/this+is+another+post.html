@@ -1,4 +1,3 @@
-{{define "header"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,21 +21,22 @@
   </head>
   <body>
   <div id="wrapper">
-  	<div class="jumbotron" id="header">
-  	  <h1 class="text-center">Hello, my name is Ryan Nickel</h1>
-  	  <p class="text-center">And I am a developer. This is where I post my thought poops.</p>
-  	</div>
-
   	<div class="container">
   		<div class="row">
   			<div class="col-md-8 col-md-offset-2">
-{{end}}
-{{define "body"}}
 	  			<article>
-	  				{{ .HTMLContent }}
+	  				<p><h1>This is another post</h1>
+
+<p>It&rsquo;s going to do some stuff, and have some code</p>
+
+<p><code>
+this is code
+</code></p>
+
+<p>that was code!</p>
+</p>
+	  				<p>Published Dec 18, 2015 20:37:34</p>
 	  			</article>
-{{end}}
-{{define "footer"}}
   			</div>
   		</div>
   	</div>
@@ -59,20 +59,5 @@
 		</div>
 	</div>
 
-	<script>
-	$(document).ready(function(){
-		$window = $(window);
-		var $scroll = $('#header');
-		var $backgroundStart = 200;
-	  $(window).scroll(function() {
-
-	    var yPos = -($window.scrollTop() / 2);
-	    var coords = '50% ' + (yPos - $backgroundStart) + 'px';
-	    $scroll.css({ backgroundPosition: coords });
-	  });
-	});
-	</script>
-
   </body>
 </html>
-{{end}}
