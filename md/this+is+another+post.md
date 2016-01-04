@@ -4,8 +4,6 @@ draft = false
 title = This is another post
 +++
 
-# This is another post
-
 It's going to do some stuff, and have some code
 
 ```
