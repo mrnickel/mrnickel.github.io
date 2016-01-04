@@ -1,4 +1,4 @@
-{{define "header"}}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,22 +23,15 @@
   <body>
   <div id="wrapper">
   	<div class="jumbotron" id="header">
-  	  <h1 class="text-center">Hello, my name is Ryan Nickel</h1>
-  	  <p class="text-center">And I am a developer. This is where I post my thought poops.</p>
+  	  <h1 class="text-center">Learn more about Ryan Nickel</h1>
   	</div>
 
   	<div class="container">
   		<div class="row">
   			<div class="col-md-8 col-md-offset-2">
-{{end}}
-{{define "body"}}
-	  			<article>
-	  				<h1><a href="/html/{{ .FileNamePrefix }}.html">{{ .Title}}</a></h1>
-	  				{{ .HTMLContent }}
-		            <p class="published-date">{{ .Date.Format "Jan 02, 2006" }}</p>
-	  			</article>
-{{end}}
-{{define "footer"}}
+
+	  			<p>// TODO: Fill this in</p>
+
   			</div>
   		</div>
   	</div>
@@ -49,7 +42,7 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 socials">
 					<p>
-						<a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a>
+						<a href="https://twitter.com/mrnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a>
 					</p>
 					<p>Made with &hearts; in Toronto, Canada</p>
 					<img src="/img/toronto-icon-sm.png" height="70px" />
@@ -61,4 +54,3 @@
 
   </body>
 </html>
-{{end}}

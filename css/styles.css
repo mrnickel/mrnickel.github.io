@@ -4,32 +4,31 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 100px;
+  margin-bottom: 170px;
   background-color: #fbfaee;
   color: #000;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 100px;
-  background-color: #382A2A;
-}
 
 .jumbotron {
-    background: url("/img/toronto.jpg") no-repeat center -200px fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    font-family: 'Oswald', sans-serif;
-    font-weight: normal;
-    color: #fff;
-    height: 400px;
-    text-shadow: 1px 1px 20px #000;
+  background-color:#7A9CA1;
+  font-weight: normal;
+  color: #382A2A;
+  text-shadow: 1px 1px 2px #000;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Oswald', sans-serif;
+}
+
+h1 a {
+  text-decoration: none;
+}
+
+h1 a:hover {
+  text-decoration: underline;
 }
 
 .entry {
@@ -50,32 +49,31 @@ article {
 	padding-left: -15px;
 }
 
-/*h1, h2, h3, h4, h5 {
-  color: #7A9CA1;
-}*/
-
 a {
-  color: #000
+  color: #382A2A;
+  text-decoration: underline;
 }
 
 a:hover {
   color: #000;
 }
 
-.footer h3 {
-  color: #D3E5B9;
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 170px; /* Must match the margin-bottom specified in the body */
+  width: 100%;
+  background-color: #382A2A;
+  padding: 20px;
+  color: #FBFAEE;
+  text-align: center;
 }
 
-.socials {
-  margin-top: 20px;
-  margin-bottom: 10px;
+.footer a {
+  color: #FBFAEE;
 }
 
-.socicon {
-  color: #D3E5B9;
-  margin-left: 5px;
-}
-
-.socicon:hover {
+.published-date {
   color: #5BC1B2;
+  font-weight: lighter;
 }

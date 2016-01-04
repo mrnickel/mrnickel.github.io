@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>RyanNickel.com - {{ .Title }}</title>
+    <title>RyanNickel.com  - {{ .Title }}</title>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -21,34 +22,37 @@
   </head>
   <body>
   <div id="wrapper">
-  	<div class="container">
-  		<div class="row">
-  			<div class="col-md-8 col-md-offset-2">
-	  			<article>
-	  				<p>{{ .HTMLContent }}</p>
-	  				<p>Published {{ .Date.Format "Jan 02, 2006 15:04:05" }}</p>
-	  			</article>
-  			</div>
-  		</div>
-  	</div>
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">{{ .Title }}</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p>{{ .HTMLContent }}</p>
+            <p class="published-date">{{ .Date.Format "Jan 02, 2006" }}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-	<div class="footer container">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-				<div class="col-md-6">
-					<h3>©2015 - Ryan Nickel</h3>
-				</div>
-				<div class="col-md-6 text-right socials">
-					<a href="http://twitter.com/rnickel" target="_new"><span class="socicon socicon-twitter"></span></a>
-					<a href="http://instagram.com/mrnickel" target="_new"><span class="socicon socicon-instagram"></span></a>
-					<a href="http://github.com/mrnickel" target="_new"><span class="socicon socicon-github"></span></a>
-				</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   </body>
 </html>

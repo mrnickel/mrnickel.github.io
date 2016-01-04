@@ -32,9 +32,22 @@
   			<div class="col-md-8 col-md-offset-2">
 
 	  			<article>
-	  				<h1>This is a test</h1>
+	  				<h1><a href="/html/another.html">Another</a></h1>
+	  				<p>This is just another crappy post</p>
 
-<p>This is a test of the markdown parser</p>
+		            <p class="published-date">Jan 04, 2016</p>
+	  			</article>
+
+	  			<article>
+	  				<h1><a href="/html/holy+mother+eff.html">holy mother eff</a></h1>
+	  				<p>This is the content</p>
+
+		            <p class="published-date">Dec 19, 2015</p>
+	  			</article>
+
+	  			<article>
+	  				<h1><a href="/html/this+is+a+test.html">This is a test</a></h1>
+	  				<p>This is a test of the markdown parser</p>
 
 <ul>
 <li>point 1</li>
@@ -52,19 +65,12 @@ code will also pop into the thing
 
 <p><img src="https://volu.me/img/merch-tees.jpg" alt="Alt text" /></p>
 
+		            <p class="published-date">Dec 18, 2015</p>
 	  			</article>
 
 	  			<article>
-	  				<h1>Another</h1>
-
-<p>This is just another crappy post</p>
-
-	  			</article>
-
-	  			<article>
-	  				<h1>This is another post</h1>
-
-<p>It&rsquo;s going to do some stuff, and have some code</p>
+	  				<h1><a href="/html/this+is+another+post.html">This is another post</a></h1>
+	  				<p>It&rsquo;s going to do some stuff, and have some code</p>
 
 <p><code>
 this is code
@@ -72,6 +78,7 @@ this is code
 
 <p>that was code!</p>
 
+		            <p class="published-date">Dec 18, 2015</p>
 	  			</article>
 
   			</div>
@@ -82,33 +89,17 @@ this is code
 	<div class="footer container">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-				<div class="col-md-6">
-					<h3>©2015 - Ryan Nickel</h3>
-				</div>
-				<div class="col-md-6 text-right socials">
-					<a href="http://twitter.com/rnickel" target="_new"><span class="socicon socicon-twitter"></span></a>
-					<a href="http://instagram.com/mrnickel" target="_new"><span class="socicon socicon-instagram"></span></a>
-					<a href="http://github.com/mrnickel" target="_new"><span class="socicon socicon-github"></span></a>
-				</div>
+				<div class="col-md-8 col-md-offset-2 socials">
+					<p>
+						<a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/rnickel">GitHub</a> &#x26AC <a href="/about.html">About</a>
+					</p>
+					<p>Made with &hearts; in Toronto, Canada</p>
+					<img src="/img/toronto-icon-sm.png" height="70px" />
+
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<script>
-	$(document).ready(function(){
-		$window = $(window);
-		var $scroll = $('#header');
-		var $backgroundStart = 200;
-	  $(window).scroll(function() {
-
-	    var yPos = -($window.scrollTop() / 2);
-	    var coords = '50% ' + (yPos - $backgroundStart) + 'px';
-	    $scroll.css({ backgroundPosition: coords });
-	  });
-	});
-	</script>
 
   </body>
 </html>
