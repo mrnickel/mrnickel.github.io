@@ -1,5 +1,5 @@
 +++
-date = 2016-01-17T21:44:13-05:00
+date = 2016-01-18T12:07:58-05:00
 draft = false
 title = Logging with Docker
 +++
