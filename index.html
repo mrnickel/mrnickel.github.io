@@ -32,6 +32,120 @@
   			<div class="col-md-8 col-md-offset-2">
 
 	  			<article>
+	  				<h1><a href="/html/logging_with_docker.html">Logging with Docker</a></h1>
+	  				<p>As of late I&rsquo;ve been trying to learn <a href="https://www.docker.com">Docker</a>. I&rsquo;ve been using Ansible / Vagrant for quite some time now with great success. The only problem I have with the combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me.</p>
+
+<p>As such I&rsquo;ve been trying to move one of our smaller services over to running in a container. This service is a standalone Java application that runs all of the time and manages sending push notifications to all users.</p>
+
+<p>I&rsquo;ve created a small Java app to play with for this post over on <a href="https://github.com/mrnickel/DockerLogLearning">GitHub</a>.</p>
+
+<p>According to the holy rules passed down to us by <a href="https://www.heroku.com">Heroku</a> in the form of writing <a href="http://12factor.net">12 Factor Apps</a>, <a href="http://12factor.net/logs">Thou must treat logs as event streams</a>. Essentially what this means is that all logs need to be out via STDOUT, (I also use STDERR). Nice and easy to deal with when developping the apps, and ultimiately I agree that the application shouldn&rsquo;t worry itself with where logs should be output. I also appreciate that, as a developer, it puts any errors or info messages directly in my face as I&rsquo;m working on them.</p>
+
+<p>As you can see in my <a href="https://github.com/mrnickel/DockerLogLearning/blob/master/src/main/resources/log4j2.xml">log4j2.xml</a> config file, I do just that.</p>
+
+<p>Building and running the docker container will reveal the wealth of data that I am generating to the world.</p>
+
+<p><code>
+testproj 2016-01-17T17:19:18,680 INFO Timer-0 HelloWorld.run - Timer task started at:Sun Jan 17 17:19:18 UTC 2016
+testproj 2016-01-17T17:19:18,678 INFO main HelloWorld.main - TimerTask started
+testproj 2016-01-17T17:19:20,683 INFO Timer-0 HelloWorld.run - Timer task finished at:Sun Jan 17 17:19:20 UTC 2016
+testproj 2016-01-17T17:19:20,684 ERROR Timer-0 HelloWorld.run - This is an error message...
+java.lang.Exception: This is my exception, dawg
+    at com.RyanNickel.TestDockerProj.App.run(App.java:16) [TestDockerProj.jar:?]
+    at java.util.TimerThread.mainLoop(Timer.java:555) [?:1.8.0_66-internal]
+    at java.util.TimerThread.run(Timer.java:505) [?:1.8.0_66-internal]
+testproj 2016-01-17T17:19:28,675 INFO Timer-0 HelloWorld.run - Timer task started at:Sun Jan 17 17:19:28 UTC 2016
+testproj 2016-01-17T17:19:28,683 INFO main HelloWorld.main - TimerTask cancelled
+testproj 2016-01-17T17:19:30,677 INFO Timer-0 HelloWorld.run - Timer task finished at:Sun Jan 17 17:19:30 UTC 2016
+testproj 2016-01-17T17:19:30,677 ERROR Timer-0 HelloWorld.run - This is an error message...
+java.lang.Exception: This is my exception, dawg
+    at com.RyanNickel.TestDockerProj.App.run(App.java:16) [TestDockerProj.jar:?]
+    at java.util.TimerThread.mainLoop(Timer.java:555) [?:1.8.0_66-internal]
+    at java.util.TimerThread.run(Timer.java:505) [?:1.8.0_66-internal]
+</code></p>
+
+<p>As you can see I have 2 types of messages. INFO messages, and ERROR stack traces. Both crucial types of information that one would see in their own production apps.</p>
+
+<p>Great place to start. Obviously I don&rsquo;t want to be looking at each container individually, especailly as our service scales and we are running multiple instances of this container. It&rsquo;s just not a very efficient way to track down issues. Enter log aggregators!</p>
+
+<p>As far as I know, there are 3 main players in the log aggregation space:</p>
+
+<ol>
+<li><a href="https://aws.amazon.com/cloudwatch/">AWS Cloud Watch</a></li>
+<li><a href="https://www.loggly.com">Loggly</a></li>
+<li>[papertrail]](https://papertrailapp.com)</li>
+</ol>
+
+<p>It seemed to me as though the log drivers were the easiest way to go about this. Start the container with a log driver specified, and call it a day, right? They even offer an AWS CloudWatch driver. Awesome! Let&rsquo;s try to implement that shall we!</p>
+
+<p>Now, I&rsquo;m running a mac locally and prefer to have everything working on my own instances before popping them up to a more permanent location. So first step!</p>
+
+<blockquote>
+<p>configure the default logging driver by passing the &mdash;log-driver option to the Docker daemon:
+<code>docker daemon --log-driver=awslogs</code></p>
+</blockquote>
+
+<p>Wait&hellip; what? I can&rsquo;t do that on mac installation&hellip; the docker docs leave much to be desired here.</p>
+
+<p>The easiest way that I&rsquo;ve found to start playing with this logger is to create a new docker-machine with the appropriate log driver and enviornment variables set. Run the following command to create a new <em>awslogging</em> machine:</p>
+
+<p><code>
+docker-machine create -d virtualbox \
+ --engine-opt log-driver=awslogs \
+ --engine-env AWS_ACCESS_KEY_ID=XXX \
+ --engine-env AWS_SECRET_ACCESS_KEY=XXX \ 
+ awslogging
+</code>
+Make sure that you enter your AWS creds in the above snippet.</p>
+
+<p>Once the machine has been created you must use it via:</p>
+
+<p><code>
+docker-machine start awslogging
+eval $(docker-machine env awslogging)
+</code></p>
+
+<p>Now we can build our container image</p>
+
+<p><code>
+docker build -t test-docker-proj .
+</code></p>
+
+<p>And finally we can run the container via:</p>
+
+<p><code>
+docker run --log-driver=awslogs \
+ --log-opt awslogs-region=us-west-2 \
+ --log-opt awslogs-group=myLogGroup \
+ --log-opt awslogs-stream=myContainerStream 
+ test-docker-proj
+</code></p>
+
+<p>Again, ensure that you change the aws-logs* log options to match your AWS setting.</p>
+
+<p>Great! Now we&rsquo;re getting logs pushed up to CloudWatch Yay!</p>
+
+<p><img src="/images/aws_cloudwatch_event_stream.png" alt="AWS CloudWatch event stream" /></p>
+
+<p>So we&rsquo;re getting logs, the only problem is how they&rsquo;re stored. Each line of output is it&rsquo;s own Event. Well that&rsquo;s no good for our ERROR stack traces. That should be recongized as being a single event.</p>
+
+<p>Now I know that it&rsquo;s possible using Amazon&rsquo;s official <a href="https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py">log agent</a> to set some configuration options. The one I&rsquo;m after is the <em>Timestamp format</em>. There don&rsquo;t seem to be any options that the docker logging driver offers to allow me to specify anything outside of the region, group and stream. Even taking a peek at the <a href="https://github.com/docker/docker/blob/master/daemon/logger/awslogs/cloudwatchlogs.go">source file</a> led me to believe that there was nothing I could do.</p>
+
+<p>So it looks as though the awslogs driver is a pretty basic implementation.</p>
+
+<p>With the next blog post we&rsquo;ll look into popping logs up into Loggly and papertrail app to see if they offer anything a little more robust.</p>
+
+		            <p class="published-date">Jan 17, 2016</p>
+	  			</article>
+
+	  			<article>
+	  				<h1><a href="/html/generated_from_install.html">Generated from install</a></h1>
+	  				<p>This is the first post that was generated directly from the static site generator</p>
+
+		            <p class="published-date">Jan 04, 2016</p>
+	  			</article>
+
+	  			<article>
 	  				<h1><a href="/html/hello_world.html">Hello world</a></h1>
 	  				<p>Welcome to my personal site. Here I will be posting my &ldquo;thought poops&rdquo;. It&rsquo;s mostly musings about development and design related stuff&hellip; I think. I likely won&rsquo;t be writing too much. The site is more of a place for me to experiment.</p>
 
