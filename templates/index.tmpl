@@ -33,7 +33,7 @@
 {{end}}
 {{define "body"}}
 	  			<article>
-	  				<h1><a href="/html/{{ .FileNamePrefix }}.html">{{ .Title}}</a></h1>
+				<h1><a href="/{{ .HTMLPath }}">{{ .Title}}</a></h1>
 	  				{{ .HTMLContent }}
 		            <p class="published-date">{{ .Date.Format "Jan 02, 2006" }}</p>
 	  			</article>
