@@ -91,7 +91,7 @@ java.lang.Exception: This is my exception, dawg
 <pre><code>docker-machine create -d virtualbox \
  --engine-opt log-driver=awslogs \
  --engine-env AWS_ACCESS_KEY_ID=XXX \
- --engine-env AWS_SECRET_ACCESS_KEY=XXX \ 
+ --engine-env AWS_SECRET_ACCESS_KEY=XXX \
  awslogging
 </code></pre>
 
@@ -113,7 +113,7 @@ eval $(docker-machine env awslogging)
 <pre><code>docker run --log-driver=awslogs \
  --log-opt awslogs-region=us-west-2 \
  --log-opt awslogs-group=myLogGroup \
- --log-opt awslogs-stream=myContainerStream 
+ --log-opt awslogs-stream=myContainerStream
  test-docker-proj
 </code></pre>
 
@@ -161,5 +161,15 @@ eval $(docker-machine env awslogging)
 		</div>
 	</div>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
   </body>
 </html>
