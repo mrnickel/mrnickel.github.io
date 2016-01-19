@@ -7,8 +7,6 @@
     <title>RyanNickel.com</title>
     <link>http://RyanNickel.com/</link>
     <description>Ryan Nickel's thought poops</description>
-  </channel>
-
 	<item>
 		<title>Logging with Docker</title>
 		<link>http://RyanNickel.com/html/logging_with_docker.html</link>
@@ -130,3 +128,6 @@ eval $(docker-machine env awslogging)
 		<pubDate>Jan 04, 2016</pubDate>
 		<guid isPermaLink="false">http://RyanNickel.com/html/hello_world.html</guid>
 	</item>
+
+</channel>
+</rss>
