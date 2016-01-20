@@ -8,7 +8,6 @@
     <title>RyanNickel.com</title>
     <link>http://RyanNickel.com/</link>
     <description>Ryan Nickel's thought poops</description>
-  </channel>
 {{end}}
 {{define "body"}}
 	<item>
@@ -19,8 +18,11 @@
 				{{ .HTMLContent }}
 			]]>
 		</description>
-		<pubDate>{{ .Date.Format "Jan 02, 2006" }}</pubDate>
+		<pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 MST" }}</pubDate>
 		<guid isPermaLink="false">http://RyanNickel.com/{{ .HTMLPath }}</guid>
 	</item>
 {{end}}
+{{define "footer"}}
+</channel>
 </rss>
+{{end}}

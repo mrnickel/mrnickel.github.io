@@ -32,7 +32,13 @@
   			<div class="col-md-8 col-md-offset-2">
 
 	  			<article>
-	  				<h1><a href="/html/logging_with_docker.html">Logging with Docker</a></h1>
+				<h1><a href="/html/playing_with_go.html">Playing with Go</a></h1>
+
+		            <p class="published-date">Jan 19, 2016</p>
+	  			</article>
+
+	  			<article>
+				<h1><a href="/html/logging_with_docker.html">Logging with Docker</a></h1>
 	  				<p>As of late I&rsquo;ve been trying to learn <a href="https://www.docker.com">Docker</a>. I&rsquo;ve been using Ansible / Vagrant for quite some time now with great success. The only problem I have with the combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me.</p>
 
 <p>As such I&rsquo;ve been trying to move one of our smaller services over to running in a container. This service is a standalone Java application that runs all of the time and manages sending push notifications to all users.</p>
@@ -135,7 +141,7 @@ eval $(docker-machine env awslogging)
 	  			</article>
 
 	  			<article>
-	  				<h1><a href="/html/hello_world.html">Hello world</a></h1>
+				<h1><a href="/html/hello_world.html">Hello world</a></h1>
 	  				<p>Welcome to my personal site. Here I will be posting my &ldquo;thought poops&rdquo;. It&rsquo;s mostly musings about development and design related stuff&hellip; I think. I likely won&rsquo;t be writing too much. The site is more of a place for me to experiment.</p>
 
 		            <p class="published-date">Jan 04, 2016</p>
@@ -151,7 +157,7 @@ eval $(docker-machine env awslogging)
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 socials">
 					<p>
-						<a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a>
+						<a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
 					</p>
 					<p>Made with &hearts; in Toronto, Canada</p>
 					<img src="/img/toronto-icon-sm.png" height="70px" />
@@ -161,7 +167,9 @@ eval $(docker-machine env awslogging)
 		</div>
 	</div>
 
-<script>
+  </body>
+
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -171,5 +179,4 @@ eval $(docker-machine env awslogging)
   ga('send', 'pageview');
 
 </script>
-  </body>
 </html>
