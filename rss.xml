@@ -9,6 +9,60 @@
     <description>Ryan Nickel's thought poops</description>
 
 	<item>
+		<title>Logging with Docker and Loggly</title>
+		<link>http://RyanNickel.com/html/logging_with_docker_and_loggly.html</link>
+		<description>
+			<![CDATA[
+				<p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs.</p>
+
+<p>Now I&rsquo;m partial to taking the path to least resistance, and as such I&rsquo;m going to follow Loggly&rsquo;s own documentation on using the <a href="https://www.loggly.com/docs/docker-logging-driver/">Docker Logging Driver</a>.</p>
+
+<p>From what I understand about using Docker on a Mac, the docker-machine would be where I would have to SSH into in order to perform step 1 (Configure Syslog Daemon).</p>
+
+<p>SSH&rsquo;ing into my default docker-machine via <code>docker-machine ssh default</code> and attempting to execute <code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME</code> leaves me with an error informing me: <code>bash: command not found</code>. Okay, let&rsquo;s install bash then.</p>
+
+<p>The default docker machine flavour of linux on mac is <a href="http://www.tinycorelinux.net">Tiny Core Linux</a>, so we can use their <code>tcl</code> command to bring up their package installer.</p>
+
+<pre><code>$ tce
+$ s // to search
+$ bash // to search for bash
+$ 2 // to install bash.tcz
+$ i // to confirm installation
+</code></pre>
+
+<p>Now that bash is installed, let&rsquo;s try to execute the configuration script again:</p>
+
+<pre><code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME
+</code></pre>
+
+<p>And we get&hellip;</p>
+
+<pre><code>Loggly account or subdomain: XXX
+Username is set
+Please enter Loggly Password:
+</code></pre>
+
+<p>Great! It&rsquo;s asking me for more. Enter the password and&hellip;.</p>
+
+<pre><code>INFO: Initiating Configure Loggly for Linux.
+configure-linux.sh: line 626: base64: command not found
+configure-linux.sh: line 626: echo: write error: Broken pipe
+ERROR: Base64 decode is not supported on your Operating System. Please update your system to support Base64.
+</code></pre>
+
+<p>Well that&rsquo;s no good. After searching for WAY to long on how to install base64 on TCL I came up empty.</p>
+
+<p>Unfortunately it seems as though the Docker Logging Driver for Loggly just isn&rsquo;t an option for me.</p>
+
+<p>Next up I&rsquo;ll try to <a href="https://www.loggly.com/docs/rsyslog-manual-configuration/">manually configure rsyslog</a> instead of using the setup script.</p>
+
+			]]>
+		</description>
+		<pubDate>Fri, 05 Feb 2016 20:57:18 EST</pubDate>
+		<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_loggly.html</guid>
+	</item>
+
+	<item>
 		<title>Logging with Docker</title>
 		<link>http://RyanNickel.com/html/logging_with_docker.html</link>
 		<description>
@@ -71,7 +125,7 @@ java.lang.Exception: This is my exception, dawg
 <pre><code>docker-machine create -d virtualbox \
  --engine-opt log-driver=awslogs \
  --engine-env AWS_ACCESS_KEY_ID=XXX \
- --engine-env AWS_SECRET_ACCESS_KEY=XXX \
+ --engine-env AWS_SECRET_ACCESS_KEY=XXX \ 
  awslogging
 </code></pre>
 
@@ -93,7 +147,7 @@ eval $(docker-machine env awslogging)
 <pre><code>docker run --log-driver=awslogs \
  --log-opt awslogs-region=us-west-2 \
  --log-opt awslogs-group=myLogGroup \
- --log-opt awslogs-stream=myContainerStream
+ --log-opt awslogs-stream=myContainerStream 
  test-docker-proj
 </code></pre>
 

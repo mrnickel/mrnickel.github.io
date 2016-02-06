@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - Logging with Docker and Loggly</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">Logging with Docker and Loggly</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs.</p>
+
+<p>Now I&rsquo;m partial to taking the path to least resistance, and as such I&rsquo;m going to follow Loggly&rsquo;s own documentation on using the <a href="https://www.loggly.com/docs/docker-logging-driver/">Docker Logging Driver</a>.</p>
+
+<p>From what I understand about using Docker on a Mac, the docker-machine would be where I would have to SSH into in order to perform step 1 (Configure Syslog Daemon).</p>
+
+<p>SSH&rsquo;ing into my default docker-machine via <code>docker-machine ssh default</code> and attempting to execute <code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME</code> leaves me with an error informing me: <code>bash: command not found</code>. Okay, let&rsquo;s install bash then.</p>
+
+<p>The default docker machine flavour of linux on mac is <a href="http://www.tinycorelinux.net">Tiny Core Linux</a>, so we can use their <code>tcl</code> command to bring up their package installer.</p>
+
+<pre><code>$ tce
+$ s // to search
+$ bash // to search for bash
+$ 2 // to install bash.tcz
+$ i // to confirm installation
+</code></pre>
+
+<p>Now that bash is installed, let&rsquo;s try to execute the configuration script again:</p>
+
+<pre><code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME
+</code></pre>
+
+<p>And we get&hellip;</p>
+
+<pre><code>Loggly account or subdomain: XXX
+Username is set
+Please enter Loggly Password:
+</code></pre>
+
+<p>Great! It&rsquo;s asking me for more. Enter the password and&hellip;.</p>
+
+<pre><code>INFO: Initiating Configure Loggly for Linux.
+configure-linux.sh: line 626: base64: command not found
+configure-linux.sh: line 626: echo: write error: Broken pipe
+ERROR: Base64 decode is not supported on your Operating System. Please update your system to support Base64.
+</code></pre>
+
+<p>Well that&rsquo;s no good. After searching for WAY to long on how to install base64 on TCL I came up empty.</p>
+
+<p>Unfortunately it seems as though the Docker Logging Driver for Loggly just isn&rsquo;t an option for me.</p>
+
+<p>Next up I&rsquo;ll try to <a href="https://www.loggly.com/docs/rsyslog-manual-configuration/">manually configure rsyslog</a> instead of using the setup script.</p>
+</p>
+            <p class="published-date">Feb 05, 2016</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
