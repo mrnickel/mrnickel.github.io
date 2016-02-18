@@ -32,6 +32,89 @@
   			<div class="col-md-8 col-md-offset-2">
 
 	  			<article>
+				<h1><a href="/html/my_first_go_project.html">My first go project</a></h1>
+	  				<p>It&rsquo;s no secret that I&rsquo;m currently enamoured with <a href="https://golang.org">Go</a>, as well as the projects it powers. (<a href="https://www.docker.com">Docker</a> I&rsquo;m looking at you). As such I recently started my first project with the lovely &ldquo;new&rdquo; language.</p>
+
+<p>I thought I would get my feet wet by creating yet another <a href="https://github.com/mrnickel/StaticSiteGenerator">static site generator</a>. The very generator I use to build this site (because dogfooding is important!).</p>
+
+<p>This post is primarily about getting myself acquainted with Go and writing my first little Go app.</p>
+
+<p>Now, I come from a world of Java and (modern) PHP. A world where namespaces and packages abound - a world of classes. So as you can imagine, this transition made the leap to Go a little bit of a challenge. Don’t get me wrong, Go does have these attributes as well, but that&rsquo;s not what it stresses.</p>
+
+<p>Instead, Go emphasizes simplicity.</p>
+
+<p>As a proponent of simplicity, I decided to dive in head first!</p>
+
+<p>I read over the documentation and got to work.</p>
+
+<p>My <a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441">first version</a> of the app utilized four different packages (not including main):</p>
+
+<ul>
+<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/constants">constants</a></li>
+<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/post">post</a></li>
+<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/publish">publish</a></li>
+<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/stats">stats</a></li>
+</ul>
+
+<p>It worked, but that wasn&rsquo;t my primary goal. The ultimate goal was to educate myself with Go - to learn the right way to do things. From my past experience, in order to know how to do something correctly, you have to do a few wrongs things first.</p>
+
+<p>Now that the project was functional, it was time to take a step back and review.</p>
+
+<p>I sought feedback from the <a href="https://www.reddit.com/r/golang">golang subreddit</a>, and a few people were kind enough to give me some pointers.</p>
+
+<h2>My first mistake: Too Many Packages</h2>
+
+<p>It became apparent that my head was very much in the Java world. &ldquo;Namespace and package all the things&rdquo;, my brain thought.</p>
+
+<p>As outlined by Andrew Gerrand in Google&rsquo;s official Go blog <a href="http://blog.golang.org/organizing-go-code">Organizing Go Code</a>, this is a big no-no:</p>
+
+<blockquote>
+<p>On the other hand, it is also easy to go overboard in splitting your code into small packages, in which case you will likely become bogged down in interface design, rather than just getting the job done.</p>
+</blockquote>
+
+<p>This was me to a T. I had spent far too much time trying to &ldquo;design&rdquo; the interfaces than getting the job done (the job being to learn idiomatic Go).</p>
+
+<p>My main concern was that I would pollute my other packages with private functions that had no business being there. However upon further analysis, I found this would be true with any sort of application.</p>
+
+<p>The solution isn&rsquo;t packages, it&rsquo;s properly writing code (duh!)</p>
+
+<h2>My second mistake: Too Complicated</h2>
+
+<p>With too many packages comes increased dependencies and therefore a web of complexities. This is counter to what Go stresses (simplicity!).
+Peter Bourgon&rsquo;s post about <a href="http://peter.bourgon.org/go-in-production/">Go: Best Practices for Production Enviornments</a>, is a great read. I especially liked his section on <a href="http://peter.bourgon.org/go-in-production/#repository-structure">Repository Structure</a>:</p>
+
+<blockquote>
+<p>Our best practice is to keep things simple.</p>
+</blockquote>
+
+<p>That really struck a chord with me.</p>
+
+<p>This line even more so:</p>
+
+<blockquote>
+<p>Don’t create structure until you demonstrably need it.</p>
+</blockquote>
+
+<p>&ldquo;If it&rsquo;s good enough for SoundCloud&rdquo;, I thought, &ldquo;it&rsquo;s good enough for me!&rdquo; *1. So off I went, on a quest to simplify my application. My end result now has no packages (aside from main), and 3 files. It really doesn&rsquo;t get more straightforward than that.</p>
+
+<p>It wasn&rsquo;t as easy as simply removing packages and tossing everything inside of the root directory. I had my reservations! Primarily, my need to keep the number of lines of code in a file as low as logically possible.</p>
+
+<p>I typically try to keep the number of lines in a file as small as I can. To me, files with a large number of lines in it is a code smell. Obviously you should be able to refactor that, no? Well in Go that isn&rsquo;t necessarily the case. Go seems to lean towards writing code that revolves around adding functionality to structs; this rule isn&rsquo;t quite as set in stone.</p>
+
+<p>The Go sources <a href="https://golang.org/src/net/http/request.go">burst</a> <a href="https://golang.org/src/net/http/server.go">with</a> <a href="https://golang.org/src/net/http/transfer.go">files</a> <a href="https://golang.org/src/net/http/transport.go">having</a> <a href="https://golang.org/src/time/format.go">large</a> <a href="https://golang.org/src/time/time.go">lines of code</a>. It&rsquo;s definitely going to be some time before I get a feel for things, but I&rsquo;m quite comfortable with the size of the post struct (the obvious workhorse for a project such as this).</p>
+
+<p>There&rsquo;s only so much that one can learn in a small project, but schooling oneself is never the less the objective of this project. There&rsquo;s obviously much more I have left to grasp, but that&rsquo;s one of the best things about being a student of programming and life.</p>
+
+<p>There&rsquo;s always more to learn; then perhaps if I’m fortunate, master.</p>
+
+<p>If you have any feedback for me or want to chat further, hit me up on twitter <a href="https://twitter.com/rnickel">@rnickel</a></p>
+
+<p>*1. This is a tidbit I plan on implementing in all my projects going forward, regardless of which language it&rsquo;s written in.</p>
+
+		            <p class="published-date">Feb 18, 2016</p>
+	  			</article>
+
+	  			<article>
 				<h1><a href="/html/logging_with_docker_and_loggly.html">Logging with Docker and Loggly</a></h1>
 	  				<p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs.</p>
 
