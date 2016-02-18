@@ -17,3 +17,8 @@ In the same spirit of Indiana Jones jumping head first into his adventures with 
  - Created the first stadium level iBeacon powered event ([Volu.me taps the power of beacons to enrich the concert experience](https://www.washingtonpost.com/news/innovations/wp/2014/05/29/volu-me-taps-the-power-of-beacons-to-enrich-the-concert-experience/))
  - Worked with BlackBerry to create the official NXNE application and ran 20,000 installs in 2 weeks
  - Written about in [The Record](http://www.therecord.com/waterlooregion/) for my first startup (Follow-Me.ca)
+
+
+ ## Social
+
+ I'm all over the social webs. Check me out on [twitter @rnickel](http://twitter.com/rnickel) or [linkedin](https://ca.linkedin.com/in/rnickel)
