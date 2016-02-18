@@ -1,8 +1,8 @@
-+++
-date = 2016-02-18T08:46:24-05:00
-draft = false
-title = My first go project
-+++
+---
+date: 2016-02-18T08:46:24-05:00
+draft: false
+title: My first go project
+---
 
 
 

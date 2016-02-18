@@ -1,8 +1,8 @@
-+++
-date = 2016-02-05T20:57:18-05:00
-draft = false
-title = Logging with Docker and Loggly
-+++
+---
+date: 2016-02-05T20:57:18-05:00
+draft: false
+title: Logging with Docker and Loggly
+---
 
 
 

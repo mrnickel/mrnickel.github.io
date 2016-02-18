@@ -1,8 +1,8 @@
-+++
-date = 2016-01-18T12:07:58-05:00
-draft = false
-title = Logging with Docker
-+++
+---
+date: 2016-01-18T12:07:58-05:00
+draft: false
+title: Logging with Docker
+---
 
 As of late I've been trying to learn [Docker](https://www.docker.com). I've been using Ansible / Vagrant for quite some time now with great success. The only problem I have with the combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me.
 
@@ -60,7 +60,7 @@ The easiest way that I've found to start playing with this logger is to create a
 docker-machine create -d virtualbox \
  --engine-opt log-driver=awslogs \
  --engine-env AWS_ACCESS_KEY_ID=XXX \
- --engine-env AWS_SECRET_ACCESS_KEY=XXX \ 
+ --engine-env AWS_SECRET_ACCESS_KEY=XXX \
  awslogging
 ```
 Make sure that you enter your AWS creds in the above snippet.
@@ -84,7 +84,7 @@ And finally we can run the container via:
 docker run --log-driver=awslogs \
  --log-opt awslogs-region=us-west-2 \
  --log-opt awslogs-group=myLogGroup \
- --log-opt awslogs-stream=myContainerStream 
+ --log-opt awslogs-stream=myContainerStream
  test-docker-proj
 ```
 

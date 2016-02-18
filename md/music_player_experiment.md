@@ -1,8 +1,8 @@
-+++
-date = 2016-01-05T11:29:15-05:00
-draft = true
-title = Music Player Experiment
-+++
+---
+date: 2016-01-05T11:29:15-05:00
+draft: true
+title: Music Player Experiment
+---
 
 In an effort to become more proficient with Swift and autolayout, I've decided that I'm going to start some UI experiments. This section will be about re-creating
 
