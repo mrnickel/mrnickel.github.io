@@ -17,6 +17,8 @@ In the same spirit of Indiana Jones jumping head first into his adventures with 
  - Created the first stadium level iBeacon powered event ([Volu.me taps the power of beacons to enrich the concert experience](https://www.washingtonpost.com/news/innovations/wp/2014/05/29/volu-me-taps-the-power-of-beacons-to-enrich-the-concert-experience/))
  - Worked with BlackBerry to create the official NXNE application and ran 20,000 installs in 2 weeks
  - Written about in [The Record](http://www.therecord.com/waterlooregion/) for my first startup (Follow-Me.ca)
+ - Worked with large musicians to bring their brand to mobile, including City & Colour, Tegan & Sara, Tragically Hip, Goo Goo Dolls and more
+ - Simultaneously have over 100+ apps across the various app stores
 
 
  ## Social
