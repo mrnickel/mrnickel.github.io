@@ -35,6 +35,6 @@ On a more personal note, some of my (word here) that I enjoy outside of technolo
 
 I really appreciate spending my time outside and connecting with nature. It helps me to relax and remember what's important in life.
 
- ## Social
+## Social
 
- I'm all over the social webs. Check me out on [twitter @rnickel](http://twitter.com/rnickel) or [linkedin](https://ca.linkedin.com/in/rnickel)
+I'm all over the social webs. Check me out on [twitter @rnickel](http://twitter.com/rnickel) or [linkedin](https://ca.linkedin.com/in/rnickel)
