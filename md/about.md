@@ -20,6 +20,20 @@ In the same spirit of Indiana Jones jumping head first into his adventures with 
  - Worked with large musicians to bring their brand to mobile, including City & Colour, Tegan & Sara, Tragically Hip, Goo Goo Dolls and more
  - Simultaneously have over 100+ apps across the various app stores
 
+## Personal
+
+On a more personal note, some of my (word here) that I enjoy outside of technology and work include:
+
+- camping
+- hiking
+- rock climbing (going to take on outdoor climbing this season!)
+- currently training for my first triathlon!
+- scuba diving
+- snowboarding
+- competitive volleyball
+- fishing (currently learning to fly fish)
+
+I really appreciate spending my time outside and connecting with nature. It helps me to relax and remember what's important in life.
 
  ## Social
 
