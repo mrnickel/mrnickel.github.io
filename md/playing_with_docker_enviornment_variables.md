@@ -47,7 +47,7 @@ ENV TEST_ENV_ITEM="this is my stuff"
 I then built and ran the container
 ```
 docker build -t experiments-dockerenvs .
-docker run experiments-dockerenvs
+docker run experiments-dockerenvs app
 ```
 
 The output for this will be:
@@ -70,7 +70,7 @@ the container.
 
 Run the docker container overriding the default env value:
 ```
-docker run -e 'TEST_ENV_ITEM=Override from run cmd' experiments-dockerenvs
+docker run -e 'TEST_ENV_ITEM=Override from run cmd' experiments-dockerenvs app
 ```
 
 The output for this will be:
@@ -86,17 +86,17 @@ two. The solution to this would be if we could have an override file that we can
 The docker run command has a `--env-file` flag that we can specify.
 
 ```
-docker run --env-file=main.env experiments-dockerenvs
+docker run --env-file=main.env experiments-dockerenvs app
 ```
 
 Result output:
 ```
-Override from file
+"Override from file"
 ```
- 
+
 Note that by reviewing the `main.env` file, it's not formatted the same way a bash file would be. Instead you have a
 simpler:
- 
+
 ```
 TEST_ENV_ITEM="Override from file"
 ```
@@ -129,7 +129,9 @@ docker-compose -f docker-compose.yml up
 
 Will return the output:
 ```
+envtest_1 | + exec app
 envtest_1 | "overridden from compose"
+experimentsdockerenvs_envtest_1 exited with code 0
 ```
 
 Great! But we're back in the same position we were earlier. We have the potential again for us to leak secret credentials
@@ -148,13 +150,15 @@ surprised that the great people at Docker have a solution for this as well. The 
 
 Running the following:
 ```
-docker-compose -f docker-compose.yml build
-docker-compose -f docker-compose.yml up
+docker-compose -f docker-compose-env.yml build
+docker-compose -f docker-compose-env.yml up
 ```
 
 Results in the following output:
 ```
+envtest_1 | + exec app
 envtest_1 | "Override from compose-main file"
+experimentsdockerenvs_envtest_1 exited with code 0
 ```
 
 Fantastic!
