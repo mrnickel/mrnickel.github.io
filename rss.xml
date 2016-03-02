@@ -9,6 +9,178 @@
     <description>Ryan Nickel's thought poops</description>
 
 	<item>
+		<title>Playing With Docker Enviornment Variables</title>
+		<link>http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</link>
+		<description>
+			<![CDATA[
+				<p>I recently read an article by Chris Stump titled <a href="http://chrisstump.online/2016/02/20/docker-existing-rails-application/">Docker for an Existing Rails Application</a>.</p>
+
+<p>Now I’m not a Ruby developer, but I am a docker enthusiast and I’m always interested in how people are using it for their
+various environments, which is why I found Chris&rsquo; post so intriguing.</p>
+
+<p>I found one point in Chris&rsquo; post that reminded me of Part III of writing a twelve-factor app.
+&gt; Docker strips out environment variables from its build process in order to keep builds consistent across all the different platforms it supports.</p>
+
+<p>I&rsquo;m currently exploring the various implementation details for utilizing docker with twelve-factor apps.</p>
+
+<p>Part III is concerned with storing configurations in the environment.</p>
+
+<blockquote>
+<p>Apps sometimes store config as constants in the code. This is a violation of twelve-factor, which requires strict
+separation of config from code. Config varies substantially across deploys, code does not.</p>
+</blockquote>
+
+<p>It also has the added benefit of ensuring your credentials aren&rsquo;t thrown into your repos.</p>
+
+<p>This post is more about wrapping my head around managing environments in docker, and hopefully help others with their
+options.</p>
+
+<p>The code for this experiment is posted on <a href="https://github.com/mrnickel/Experiments-DockerEnvs">GitHub</a></p>
+
+<p>Here, I am going to explore five different ways of managing environment vars.</p>
+
+<ul>
+<li>Managed in the Dockerfile</li>
+<li>Override Environment Vars When Starting The Container</li>
+<li>Override Environment Vars With a File</li>
+<li>Environment Vars with Docker Compose</li>
+<li>Environment File with Docker Compose</li>
+</ul>
+
+<h2>Managed in the Dockerfile</h2>
+
+<p>As I mentioned above, Chris&rsquo; post lead me to believe that hosting env vars in the dockerfile isn&rsquo;t a possibility, but I
+figured I&rsquo;d put this to the test. I added the following line to my dockerfile:</p>
+
+<pre><code>ENV TEST_ENV_ITEM=&quot;this is my stuff&quot;
+</code></pre>
+
+<p>I then built and ran the container</p>
+
+<pre><code>docker build -t experiments-dockerenvs .
+docker run experiments-dockerenvs app
+</code></pre>
+
+<p>The output for this will be:</p>
+
+<pre><code>this is my stuff
+</code></pre>
+
+<p>It seems as though Docker has changed their stance on this.</p>
+
+<p>The cons to this are obviously the possibility of your secret credentials leaking into your repos. A big no-no. It does however have the benefit of making things easier for new developers to get up and running.</p>
+
+<p>I&rsquo;d recommend <strong>not</strong> having any env vars in your Dockerfile. Don&rsquo;t give your developers the opportunity to make this very simple mistake. We&rsquo;re all lazy and will, in a moment of weakness, opt for the &ldquo;easy answer&rdquo;.</p>
+
+<h2>Override Environment Vars When Starting The Container</h2>
+
+<p>This is a nice way to play with different configurations quickly. Docker allows you to specify env vars when running the container.</p>
+
+<p>Run the docker container overriding the default env value:</p>
+
+<pre><code>docker run -e 'TEST_ENV_ITEM=Override from run cmd' experiments-dockerenvs app
+</code></pre>
+
+<p>The output for this will be:</p>
+
+<pre><code>Override from run cmd
+</code></pre>
+
+<p>The problem with this solution is that your run command can get unwieldly too long if you have more than one or two. The solution to this would be to have an override file that we can add to the run command.</p>
+
+<h2>Override Environment Vars With a File</h2>
+
+<p>The docker run command has a <code>--env-file</code> flag that we can specify.</p>
+
+<pre><code>docker run --env-file=main.env experiments-dockerenvs app
+</code></pre>
+
+<p>Result output:</p>
+
+<pre><code>&quot;Override from file&quot;
+</code></pre>
+
+<p>Note that by reviewing the <code>main.env</code> file, it&rsquo;s not formatted the same way a bash file would be.</p>
+
+<p>Instead you have a simpler:</p>
+
+<pre><code>TEST_ENV_ITEM=&quot;Override from file&quot;
+</code></pre>
+
+<p>As opposed to:</p>
+
+<pre><code>export TEST_ENV_ITEM=&quot;Override from file&quot;
+</code></pre>
+
+<p>Now this seems like a maintainable way to manage various environments cleanly and easily. This is a solution I will use going forward for my own docker containers.</p>
+
+<h2>Environment Vars with Docker Compose</h2>
+
+<p>Docker compose is a fantastic new utility offered by the docker team. It allows you to define your stack in a single file, thus making things more defined.</p>
+
+<p>You can specify environment variables in the <code>.yml</code> file in the same way you can in the dockerfile.</p>
+
+<pre><code>  environment:
+    - TEST_ENV_ITEM=&quot;overridden from compose&quot;
+</code></pre>
+
+<p>Running the following:</p>
+
+<pre><code>docker-compose -f docker-compose.yml build
+docker-compose -f docker-compose.yml up
+</code></pre>
+
+<p>Will return the output:</p>
+
+<pre><code>envtest_1 | + exec app
+envtest_1 | &quot;overridden from compose&quot;
+experimentsdockerenvs_envtest_1 exited with code 0
+</code></pre>
+
+<p>Great! But we&rsquo;re back in the same position we were earlier. We have the potential again for us to leak secret credentials in the repos. As I stated earlier, I don&rsquo;t recommend this as a solution.</p>
+
+<h2>Environment File with Docker Compose</h2>
+
+<p>The last piece I want to look at, is the possibility of forcing environmental file overrides in the <code>.yml</code> file. I&rsquo;m not surprised that the great people at Docker have a resolution for this as well. The property we&rsquo;re interested in is the <code>env_file</code> property.</p>
+
+<p>More specifically:</p>
+
+<pre><code>  env_file:
+    - ./compose-main.env
+</code></pre>
+
+<p>Running the following:</p>
+
+<pre><code>docker-compose -f docker-compose-env.yml build
+docker-compose -f docker-compose-env.yml up
+</code></pre>
+
+<p>Results in the following output:</p>
+
+<pre><code>envtest_1 | + exec app
+envtest_1 | &quot;Override from compose-main file&quot;
+experimentsdockerenvs_envtest_1 exited with code 0
+</code></pre>
+
+<p>Fantastic!</p>
+
+<h2>Conclusion</h2>
+
+<p>There are a lot of options for us using docker when it comes to managing enviornments. The most convenient option is to specify your docker environment vars directly into the Dockerfile, or docker-compose.yml file.</p>
+
+<p>Note: Using this allows the possibility of secure credentials leaking into your repos.</p>
+
+<p>Personally I&rsquo;m going to refrain from using that option. I&rsquo;d be more inclined to use the .env solutions outlined above (while remembering to add the .env files to your .gitignore file!)</p>
+
+<p>Feel free to reach me on twitter <a href="https://twitter.com/rnickel">@rnickel</a> for any input on the post!</p>
+
+			]]>
+		</description>
+		<pubDate>Wed, 02 Mar 2016 12:52:18 EST</pubDate>
+		<guid isPermaLink="false">http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</guid>
+	</item>
+
+	<item>
 		<title>My first go project</title>
 		<link>http://RyanNickel.com/html/my_first_go_project.html</link>
 		<description>
