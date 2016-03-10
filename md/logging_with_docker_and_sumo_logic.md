@@ -1,8 +1,10 @@
 ---
-date: 2016-02-18T16:55:07-05:00
-draft: true
+date: 2016-03-10T09:11:23-05:00
+draft: false
 title: Logging with Docker and Sumo Logic
 ---
+
+
 
 I was asked by Houston of [Sumo Logic](https://www.sumologic.com) to do a writeup about linking docker logging with their service.
 

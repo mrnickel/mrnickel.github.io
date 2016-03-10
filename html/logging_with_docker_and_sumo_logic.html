@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - Logging with Docker and Sumo Logic</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">Logging with Docker and Sumo Logic</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>I was asked by Houston of <a href="https://www.sumologic.com">Sumo Logic</a> to do a writeup about linking docker logging with their service.</p>
+
+<p>I take a peek at their website and it looks like a pretty solid product. The dashboard looks comprehensive, robust and professional.</p>
+
+<p>Again, my goal for these posts is to investigate logging aggregators with the twelve-factor app&rsquo;s idea of sending logs to STDOUT.</p>
+
+<p>At first blanche, it looks as though their docker offering is pretty straight forward. Check out their <a href="https://github.com/SumoLogic/sumologic-collector-docker">GitHub repo</a> for some basic information.</p>
+
+<p>I&rsquo;m following their <a href="https://www.sumologic.com/2015/04/16/new-docker-logging-drivers/">New Docker Logging Drivers</a> post on how to set this up.</p>
+
+<p>(Just so we&rsquo;re all on the same page, and no previous docker-machine modifications get in our way, I&rsquo;ll be working with a brand new clean machine titled <strong>syslogbox</strong>.)</p>
+
+<pre><code>docker-machine create -d virtualbox \
+ --engine-opt log-driver=syslog \
+ syslogbox
+</code></pre>
+
+<h2>Step 1: Enable <strong>syslogd</strong> on the docker-machine</h2>
+
+<p>It would seem logical that this would be enabled when specifying our log-driver during the machine creation process, but it isn&rsquo;t.</p>
+
+<pre><code>$ docker-machine ssh syslogbox
+$ sudo -i
+$ echo &quot;syslogd -n &amp;&quot; &gt;&gt; /var/lib/boot2docker/profile
+$ exit
+$ docker-machine stop syslogbox
+$ docker-machine start syslogbox
+$ eval $(docker-machine env syslogbox)
+</code></pre>
+
+<p>Now if you want to confirm that your STDOUT messages are in fact going to syslog on your docker-machine:</p>
+
+<p>In one terminal:</p>
+
+<pre><code>$ docker-machine ssh syslogbox
+$ sudu -i
+$ tail -f /var/log/messages
+</code></pre>
+
+<p>(Some blogs will tell you that the output is found at <code>/var/log/syslog</code>, this is not so as of <strong>docker v 1.9.1</strong> running in a virtualbox VM)</p>
+
+<p>In another terminal:</p>
+
+<pre><code>$ docker run -d --log-driver=syslog ubuntu echo &quot;Hello&quot;
+</code></pre>
+
+<p>(You may need to re-run <code>eval $(docker-machine env syslogbox)</code> in your second terminal to ensure both terminals are communicating with the same machine.)</p>
+
+<p>In the first terminal, you should see output similar to:</p>
+
+<pre><code>Mar  1 22:54:40 syslogbox daemon.info docker/9bbb8798f960[1373]: Hello
+</code></pre>
+
+<p>Where <strong>9bbb8798f960</strong> is the first 12 characters of the container ID.</p>
+
+<p>Great! Syslog is now running!</p>
+
+<h2>Step 2: Send syslog to sumo logic</h2>
+
+<p>It&rsquo;s time to send the syslog data up to Sumo Logic in order to actually work with it, as outlined in <em>Integrating the Sumo Logic Collector With the New Syslog Logging Driver</em>.</p>
+
+<p>Following along with the post, I should be able to fire up the sumologic collector container, and everything should pop on up to my account:</p>
+
+<pre><code>$ docker run -v /var/log/messages:/syslog -d \
+    --name=&quot;sumo-logic-collector5&quot; \
+    sumologic/collector:latest-logging-driver-syslog \
+    [Access ID] [Access Key]
+</code></pre>
+
+<p>I&rsquo;ll now start up a container that will add very basic content to the syslog every second:</p>
+
+<pre><code>$ CID=$(docker run -d --log-driver=syslog ubuntu \
+         /bin/bash -c 'while true; do echo &quot;Hello&quot;; sleep 1; done')
+</code></pre>
+
+<p>Okay, it&rsquo;s running, but how do we confirm that everything within the container is a-ok?</p>
+
+<pre><code>$ sudo docker exec -it $CID /bin/bash
+$ sudo tail -f /syslog
+</code></pre>
+
+<p>(If you&rsquo;re seeing <strong>Hello</strong> echo&rsquo;d out every second, then all is well!)</p>
+
+<p>Now log into your Sumu Logic account and see the logs come in!</p>
+
+<p>&hellip; wait&hellip; wait&hellip; wait&hellip; nothing&hellip; wait&hellip; still nothing&hellip; get a coffee (beer)&hellip; wait&hellip; drink coffee (beer)&hellip; wait&hellip; still nothing.</p>
+
+<p>I tried to see if there was any indication that the Sumo Logic container was running things properly, but outside of a few lines in the syslog saying that it was running, and a new collection showing up, I had nothing.</p>
+
+<p>No indication that anything was either wrong, or right.</p>
+
+<p>When things were at their darkest and all seemed lost, the lovely folks of Sumo Logic reached out to me to see if they could offer any help. Turns out they could!</p>
+
+<p>They pointed out an updated document in their official help section <a href="https://service.us2.sumologic.com/help/Default.htm#Collecting_Logs_for_Docker.htm?Highlight=docker">Collecting Events and Statistics for Docker</a>. This was considerably better and FAR more straight forward.</p>
+
+<pre><code>docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name=&quot;sumologic-docker&quot; sumologic/appcollector:latest [Access ID] [Access Key]
+</code></pre>
+
+<p>This is great. Simply mount the host machines docker.sock to the Sumo Logic container and go from there. When I checked my account, I had a beer in hand prepared for the prolonged wait. To my relief, what do you know?? My logs showed up!</p>
+
+<h2>Conclusion</h2>
+
+<p>Don&rsquo;t worry about setting up syslog and all the trouble that comes with it. Simply mount the .sock file and go on with life. This seems to be how most logging containers are going. It makes sense to use a dedicated container to aggregate and push logs to the respective platform, as opposed to modifying each container, or even managing the logging mechanisms of the host container.</p>
+
+<p>In my next post I&rsquo;ll write up my findings on using the Sumo Logic service.</p>
+</p>
+            <p class="published-date">Mar 10, 2016</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
