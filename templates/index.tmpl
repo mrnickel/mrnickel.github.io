@@ -1,4 +1,3 @@
-{{define "header"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,15 +29,21 @@
   	<div class="container">
   		<div class="row">
   			<div class="col-md-8 col-md-offset-2">
-{{end}}
-{{define "body"}}
-	  			<article>
-				<h1><a href="/{{ .HTMLPath }}">{{ .Title}}</a></h1>
-	  				{{ .HTMLContent }}
-		            <p class="published-date">{{ .Date.Format "Jan 02, 2006" }}</p>
-	  			</article>
-{{end}}
-{{define "footer"}}
+          {{ range .Posts }}
+            <article>
+              <h1><a href="/{{ .HTMLPath }}">{{ .Title}}</a></h1>
+              {{ .Summary }}
+              <p class="published-date">{{ .Date.Format "Jan 02, 2006" }}</p>
+            </article>
+          {{ end }}
+
+          {{ if .HasPrevious }}
+            <a href="/{{ .PreviousPage}}.html"> << Previous</a>
+          {{ end }}
+          {{ if .HasNext }}
+            <a href="/{{ .NextPage }}.html">Next >></a>
+          {{ end }}
+
   			</div>
   		</div>
   	</div>
@@ -72,4 +77,3 @@
 
 </script>
 </html>
-{{end}}
