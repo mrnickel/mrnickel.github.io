@@ -1,12 +1,12 @@
 ---
-date: 2016-03-02T12:52:18-05:00
+date: 2016-03-02T09:52:18-08:00
 draft: false
 title: Playing With Docker Enviornment Variables
 ---
 
+Managing various enviornments can always be a challenging task. Things have changed substantially over the years. With the introduction of AWS and other PaaS providers introducing their own solutions and the vast differences that can occur between developers own machines, staging, QA and production, we as developers and solution architects have to be ever vigilant in our quest to keep things simple, and stable.
 
-
-I recently read an article by Chris Stump titled [Docker for an Existing Rails Application](http://chrisstump.online/2016/02/20/docker-existing-rails-application/).
+I recently read an article by Chris Stump titled [Docker for an Existing Rails Application](http://chrisstump.online/2016/02/20/docker-existing-rails-application/) which is what got me thinking about this topic.
 
 Now I’m not a Ruby developer, but I am a docker enthusiast and I’m always interested in how people are using it for their
 various environments, which is why I found Chris' post so intriguing.

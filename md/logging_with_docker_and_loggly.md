@@ -1,16 +1,10 @@
 ---
-date: 2016-02-05T20:57:18-05:00
+date: 2016-02-05T17:57:18-08:00
 draft: false
 title: Logging with Docker and Loggly
 ---
 
-
-
-
-
-
-
-In part 2 of this series, I'm going to explore using Loggly to aggregate my Docker container logs.
+In part 2 of this series, I'm going to explore using Loggly to aggregate my Docker container logs. When designing scalable software, typically you'll end up with many instances of a single service. Signing into each instance to view logs can be very troublesome (and annoying!). Luckily there are ways to get around this annoyance. Enter Loggly.
 
 Now I'm partial to taking the path to least resistance, and as such I'm going to follow Loggly's own documentation on using the [Docker Logging Driver](https://www.loggly.com/docs/docker-logging-driver/).
 

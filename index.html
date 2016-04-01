@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,6 +7,8 @@
     <title>RyanNickel.com</title>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -31,523 +32,48 @@
   		<div class="row">
   			<div class="col-md-8 col-md-offset-2">
 
-	  			<article>
-				<h1><a href="/html/logging_with_docker_and_sumo_logic.html">Logging with Docker and Sumo Logic</a></h1>
-	  				<p>I was asked by Houston of <a href="https://www.sumologic.com">Sumo Logic</a> to do a writeup about linking docker logging with their service.</p>
+            <article>
+              <h1><a href="/html/logging_with_docker_and_sumo_logic.html">Logging with Docker and Sumo Logic</a></h1>
+              <p>SumoLogic is another player in the ever growing logging aggregator / log analytics service providers. In my quest to find the &ldquo;sweet spot&rdquo; of tools to use for my software solutions I thought I&rsquo;d give them a try. It also gave me the opportunity to dive deeper into Docker and explore my options.</p>
 
-<p>I take a peek at their website and it looks like a pretty solid product. The dashboard looks comprehensive, robust and professional.</p>
+              <p class="published-date">Mar 10, 2016</p>
+            </article>
 
-<p>Again, my goal for these posts is to investigate logging aggregators with the twelve-factor app&rsquo;s idea of sending logs to STDOUT.</p>
+            <article>
+              <h1><a href="/html/playing_with_docker_enviornment_variables.html">Playing With Docker Enviornment Variables</a></h1>
+              <p>Managing various enviornments can always be a challenging task. Things have changed substantially over the years. With the introduction of AWS and other PaaS providers introducing their own solutions and the vast differences that can occur between developers own machines, staging, QA and production, we as developers and solution architects have to be ever vigilant in our quest to keep things simple, and stable.</p>
 
-<p>At first blanche, it looks as though their docker offering is pretty straight forward. Check out their <a href="https://github.com/SumoLogic/sumologic-collector-docker">GitHub repo</a> for some basic information.</p>
+              <p class="published-date">Mar 02, 2016</p>
+            </article>
 
-<p>I&rsquo;m following their <a href="https://www.sumologic.com/2015/04/16/new-docker-logging-drivers/">New Docker Logging Drivers</a> post on how to set this up.</p>
+            <article>
+              <h1><a href="/html/my_first_go_project.html">My first go project</a></h1>
+              <p>It&rsquo;s no secret that I&rsquo;m currently enamoured with <a href="https://golang.org">Go</a>, as well as the projects it powers. (<a href="https://www.docker.com">Docker</a> I&rsquo;m looking at you). As such I recently started my first project with the lovely &ldquo;new&rdquo; language. I wanted a project that would be easy to start and equally something that I&rsquo;d get some utility out of. I thought I would get my feet wet by creating yet another <a href="https://github.com/mrnickel/StaticSiteGenerator">static site generator</a>. The very generator I use to build this site (because dogfooding is important!).</p>
 
-<p>(Just so we&rsquo;re all on the same page, and no previous docker-machine modifications get in our way, I&rsquo;ll be working with a brand new clean machine titled <strong>syslogbox</strong>.)</p>
+              <p class="published-date">Feb 18, 2016</p>
+            </article>
 
-<pre><code>docker-machine create -d virtualbox \
- --engine-opt log-driver=syslog \
- syslogbox
-</code></pre>
+            <article>
+              <h1><a href="/html/logging_with_docker_and_loggly.html">Logging with Docker and Loggly</a></h1>
+              <p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs. When designing scalable software, typically you&rsquo;ll end up with many instances of a single service. Signing into each instance to view logs can be very troublesome (and annoying!). Luckily there are ways to get around this annoyance. Enter Loggly.</p>
 
-<h2>Step 1: Enable <strong>syslogd</strong> on the docker-machine</h2>
+              <p class="published-date">Feb 05, 2016</p>
+            </article>
 
-<p>It would seem logical that this would be enabled when specifying our log-driver during the machine creation process, but it isn&rsquo;t.</p>
+            <article>
+              <h1><a href="/html/logging_with_docker.html">Logging with Docker</a></h1>
+              <p>As of late I&rsquo;ve been trying to learn <a href="https://www.docker.com">Docker</a>. I&rsquo;ve been using Ansible / Vagrant for quite some time now with great success. The only problem I have with this combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me. However, having many containers leads to many locations to look for logs. This is an annoyance I&rsquo;d wish to avoid.</p>
 
-<pre><code>$ docker-machine ssh syslogbox
-$ sudo -i
-$ echo &quot;syslogd -n &amp;&quot; &gt;&gt; /var/lib/boot2docker/profile
-$ exit
-$ docker-machine stop syslogbox
-$ docker-machine start syslogbox
-$ eval $(docker-machine env syslogbox)
-</code></pre>
+              <p class="published-date">Jan 18, 2016</p>
+            </article>
 
-<p>Now if you want to confirm that your STDOUT messages are in fact going to syslog on your docker-machine:</p>
+            <article>
+              <h1><a href="/html/hello_world.html">Hello world</a></h1>
+              <p>Welcome to my personal site. Here I will be posting my &ldquo;thought poops&rdquo;. It&rsquo;s mostly musings about development and design related stuff&hellip; I think. I likely won&rsquo;t be writing too much. The site is more of a place for me to experiment.</p>
 
-<p>In one terminal:</p>
+              <p class="published-date">Jan 04, 2016</p>
+            </article>
 
-<pre><code>$ docker-machine ssh syslogbox
-$ sudu -i
-$ tail -f /var/log/messages
-</code></pre>
-
-<p>(Some blogs will tell you that the output is found at <code>/var/log/syslog</code>, this is not so as of <strong>docker v 1.9.1</strong> running in a virtualbox VM)</p>
-
-<p>In another terminal:</p>
-
-<pre><code>$ docker run -d --log-driver=syslog ubuntu echo &quot;Hello&quot;
-</code></pre>
-
-<p>(You may need to re-run <code>eval $(docker-machine env syslogbox)</code> in your second terminal to ensure both terminals are communicating with the same machine.)</p>
-
-<p>In the first terminal, you should see output similar to:</p>
-
-<pre><code>Mar  1 22:54:40 syslogbox daemon.info docker/9bbb8798f960[1373]: Hello
-</code></pre>
-
-<p>Where <strong>9bbb8798f960</strong> is the first 12 characters of the container ID.</p>
-
-<p>Great! Syslog is now running!</p>
-
-<h2>Step 2: Send syslog to sumo logic</h2>
-
-<p>It&rsquo;s time to send the syslog data up to Sumo Logic in order to actually work with it, as outlined in <em>Integrating the Sumo Logic Collector With the New Syslog Logging Driver</em>.</p>
-
-<p>Following along with the post, I should be able to fire up the sumologic collector container, and everything should pop on up to my account:</p>
-
-<pre><code>$ docker run -v /var/log/messages:/syslog -d \
-    --name=&quot;sumo-logic-collector5&quot; \
-    sumologic/collector:latest-logging-driver-syslog \
-    [Access ID] [Access Key]
-</code></pre>
-
-<p>I&rsquo;ll now start up a container that will add very basic content to the syslog every second:</p>
-
-<pre><code>$ CID=$(docker run -d --log-driver=syslog ubuntu \
-         /bin/bash -c 'while true; do echo &quot;Hello&quot;; sleep 1; done')
-</code></pre>
-
-<p>Okay, it&rsquo;s running, but how do we confirm that everything within the container is a-ok?</p>
-
-<pre><code>$ sudo docker exec -it $CID /bin/bash
-$ sudo tail -f /syslog
-</code></pre>
-
-<p>(If you&rsquo;re seeing <strong>Hello</strong> echo&rsquo;d out every second, then all is well!)</p>
-
-<p>Now log into your Sumu Logic account and see the logs come in!</p>
-
-<p>&hellip; wait&hellip; wait&hellip; wait&hellip; nothing&hellip; wait&hellip; still nothing&hellip; get a coffee (beer)&hellip; wait&hellip; drink coffee (beer)&hellip; wait&hellip; still nothing.</p>
-
-<p>I tried to see if there was any indication that the Sumo Logic container was running things properly, but outside of a few lines in the syslog saying that it was running, and a new collection showing up, I had nothing.</p>
-
-<p>No indication that anything was either wrong, or right.</p>
-
-<p>When things were at their darkest and all seemed lost, the lovely folks of Sumo Logic reached out to me to see if they could offer any help. Turns out they could!</p>
-
-<p>They pointed out an updated document in their official help section <a href="https://service.us2.sumologic.com/help/Default.htm#Collecting_Logs_for_Docker.htm?Highlight=docker">Collecting Events and Statistics for Docker</a>. This was considerably better and FAR more straight forward.</p>
-
-<pre><code>docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name=&quot;sumologic-docker&quot; sumologic/appcollector:latest [Access ID] [Access Key]
-</code></pre>
-
-<p>This is great. Simply mount the host machines docker.sock to the Sumo Logic container and go from there. When I checked my account, I had a beer in hand prepared for the prolonged wait. To my relief, what do you know?? My logs showed up!</p>
-
-<h2>Conclusion</h2>
-
-<p>Don&rsquo;t worry about setting up syslog and all the trouble that comes with it. Simply mount the .sock file and go on with life. This seems to be how most logging containers are going. It makes sense to use a dedicated container to aggregate and push logs to the respective platform, as opposed to modifying each container, or even managing the logging mechanisms of the host container.</p>
-
-<p>In my next post I&rsquo;ll write up my findings on using the Sumo Logic service.</p>
-
-		            <p class="published-date">Mar 10, 2016</p>
-	  			</article>
-
-	  			<article>
-				<h1><a href="/html/playing_with_docker_enviornment_variables.html">Playing With Docker Enviornment Variables</a></h1>
-	  				<p>I recently read an article by Chris Stump titled <a href="http://chrisstump.online/2016/02/20/docker-existing-rails-application/">Docker for an Existing Rails Application</a>.</p>
-
-<p>Now I’m not a Ruby developer, but I am a docker enthusiast and I’m always interested in how people are using it for their
-various environments, which is why I found Chris&rsquo; post so intriguing.</p>
-
-<p>I found one point in Chris&rsquo; post that reminded me of Part III of writing a twelve-factor app.
-&gt; Docker strips out environment variables from its build process in order to keep builds consistent across all the different platforms it supports.</p>
-
-<p>I&rsquo;m currently exploring the various implementation details for utilizing docker with twelve-factor apps.</p>
-
-<p>Part III is concerned with storing configurations in the environment.</p>
-
-<blockquote>
-<p>Apps sometimes store config as constants in the code. This is a violation of twelve-factor, which requires strict
-separation of config from code. Config varies substantially across deploys, code does not.</p>
-</blockquote>
-
-<p>It also has the added benefit of ensuring your credentials aren&rsquo;t thrown into your repos.</p>
-
-<p>This post is more about wrapping my head around managing environments in docker, and hopefully help others with their
-options.</p>
-
-<p>The code for this experiment is posted on <a href="https://github.com/mrnickel/Experiments-DockerEnvs">GitHub</a></p>
-
-<p>Here, I am going to explore five different ways of managing environment vars.</p>
-
-<ul>
-<li>Managed in the Dockerfile</li>
-<li>Override Environment Vars When Starting The Container</li>
-<li>Override Environment Vars With a File</li>
-<li>Environment Vars with Docker Compose</li>
-<li>Environment File with Docker Compose</li>
-</ul>
-
-<h2>Managed in the Dockerfile</h2>
-
-<p>As I mentioned above, Chris&rsquo; post lead me to believe that hosting env vars in the dockerfile isn&rsquo;t a possibility, but I
-figured I&rsquo;d put this to the test. I added the following line to my dockerfile:</p>
-
-<pre><code>ENV TEST_ENV_ITEM=&quot;this is my stuff&quot;
-</code></pre>
-
-<p>I then built and ran the container</p>
-
-<pre><code>docker build -t experiments-dockerenvs .
-docker run experiments-dockerenvs app
-</code></pre>
-
-<p>The output for this will be:</p>
-
-<pre><code>this is my stuff
-</code></pre>
-
-<p>It seems as though Docker has changed their stance on this.</p>
-
-<p>The cons to this are obviously the possibility of your secret credentials leaking into your repos. A big no-no. It does however have the benefit of making things easier for new developers to get up and running.</p>
-
-<p>I&rsquo;d recommend <strong>not</strong> having any env vars in your Dockerfile. Don&rsquo;t give your developers the opportunity to make this very simple mistake. We&rsquo;re all lazy and will, in a moment of weakness, opt for the &ldquo;easy answer&rdquo;.</p>
-
-<h2>Override Environment Vars When Starting The Container</h2>
-
-<p>This is a nice way to play with different configurations quickly. Docker allows you to specify env vars when running the container.</p>
-
-<p>Run the docker container overriding the default env value:</p>
-
-<pre><code>docker run -e 'TEST_ENV_ITEM=Override from run cmd' experiments-dockerenvs app
-</code></pre>
-
-<p>The output for this will be:</p>
-
-<pre><code>Override from run cmd
-</code></pre>
-
-<p>The problem with this solution is that your run command can get unwieldly too long if you have more than one or two. The solution to this would be to have an override file that we can add to the run command.</p>
-
-<h2>Override Environment Vars With a File</h2>
-
-<p>The docker run command has a <code>--env-file</code> flag that we can specify.</p>
-
-<pre><code>docker run --env-file=main.env experiments-dockerenvs app
-</code></pre>
-
-<p>Result output:</p>
-
-<pre><code>&quot;Override from file&quot;
-</code></pre>
-
-<p>Note that by reviewing the <code>main.env</code> file, it&rsquo;s not formatted the same way a bash file would be.</p>
-
-<p>Instead you have a simpler:</p>
-
-<pre><code>TEST_ENV_ITEM=&quot;Override from file&quot;
-</code></pre>
-
-<p>As opposed to:</p>
-
-<pre><code>export TEST_ENV_ITEM=&quot;Override from file&quot;
-</code></pre>
-
-<p>Now this seems like a maintainable way to manage various environments cleanly and easily. This is a solution I will use going forward for my own docker containers.</p>
-
-<h2>Environment Vars with Docker Compose</h2>
-
-<p>Docker compose is a fantastic new utility offered by the docker team. It allows you to define your stack in a single file, thus making things more defined.</p>
-
-<p>You can specify environment variables in the <code>.yml</code> file in the same way you can in the dockerfile.</p>
-
-<pre><code>  environment:
-    - TEST_ENV_ITEM=&quot;overridden from compose&quot;
-</code></pre>
-
-<p>Running the following:</p>
-
-<pre><code>docker-compose -f docker-compose.yml build
-docker-compose -f docker-compose.yml up
-</code></pre>
-
-<p>Will return the output:</p>
-
-<pre><code>envtest_1 | + exec app
-envtest_1 | &quot;overridden from compose&quot;
-experimentsdockerenvs_envtest_1 exited with code 0
-</code></pre>
-
-<p>Great! But we&rsquo;re back in the same position we were earlier. We have the potential again for us to leak secret credentials in the repos. As I stated earlier, I don&rsquo;t recommend this as a solution.</p>
-
-<h2>Environment File with Docker Compose</h2>
-
-<p>The last piece I want to look at, is the possibility of forcing environmental file overrides in the <code>.yml</code> file. I&rsquo;m not surprised that the great people at Docker have a resolution for this as well. The property we&rsquo;re interested in is the <code>env_file</code> property.</p>
-
-<p>More specifically:</p>
-
-<pre><code>  env_file:
-    - ./compose-main.env
-</code></pre>
-
-<p>Running the following:</p>
-
-<pre><code>docker-compose -f docker-compose-env.yml build
-docker-compose -f docker-compose-env.yml up
-</code></pre>
-
-<p>Results in the following output:</p>
-
-<pre><code>envtest_1 | + exec app
-envtest_1 | &quot;Override from compose-main file&quot;
-experimentsdockerenvs_envtest_1 exited with code 0
-</code></pre>
-
-<p>Fantastic!</p>
-
-<h2>Conclusion</h2>
-
-<p>There are a lot of options for us using docker when it comes to managing enviornments. The most convenient option is to specify your docker environment vars directly into the Dockerfile, or docker-compose.yml file.</p>
-
-<p>Note: Using this allows the possibility of secure credentials leaking into your repos.</p>
-
-<p>Personally I&rsquo;m going to refrain from using that option. I&rsquo;d be more inclined to use the .env solutions outlined above (while remembering to add the .env files to your .gitignore file!)</p>
-
-<p>Feel free to reach me on twitter <a href="https://twitter.com/rnickel">@rnickel</a> for any input on the post!</p>
-
-		            <p class="published-date">Mar 02, 2016</p>
-	  			</article>
-
-	  			<article>
-				<h1><a href="/html/my_first_go_project.html">My first go project</a></h1>
-	  				<p>It&rsquo;s no secret that I&rsquo;m currently enamoured with <a href="https://golang.org">Go</a>, as well as the projects it powers. (<a href="https://www.docker.com">Docker</a> I&rsquo;m looking at you). As such I recently started my first project with the lovely &ldquo;new&rdquo; language.</p>
-
-<p>I thought I would get my feet wet by creating yet another <a href="https://github.com/mrnickel/StaticSiteGenerator">static site generator</a>. The very generator I use to build this site (because dogfooding is important!).</p>
-
-<p>This post is primarily about getting myself acquainted with Go and writing my first little Go app.</p>
-
-<p>Now, I come from a world of Java and (modern) PHP. A world where namespaces and packages abound - a world of classes. So as you can imagine, this transition made the leap to Go a little bit of a challenge. Don’t get me wrong, Go does have these attributes as well, but that&rsquo;s not what it stresses.</p>
-
-<p>Instead, Go emphasizes simplicity.</p>
-
-<p>As a proponent of simplicity, I decided to dive in head first!</p>
-
-<p>I read over the documentation and got to work.</p>
-
-<p>My <a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441">first version</a> of the app utilized four different packages (not including main):</p>
-
-<ul>
-<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/constants">constants</a></li>
-<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/post">post</a></li>
-<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/publish">publish</a></li>
-<li><a href="https://github.com/mrnickel/StaticSiteGenerator/tree/0dca8507eed53acd1ca1bd8e92139678f79f7441/stats">stats</a></li>
-</ul>
-
-<p>It worked, but that wasn&rsquo;t my primary goal. The ultimate goal was to educate myself with Go - to learn the right way to do things. From my past experience, in order to know how to do something correctly, you have to do a few wrongs things first.</p>
-
-<p>Now that the project was functional, it was time to take a step back and review.</p>
-
-<p>I sought feedback from the <a href="https://www.reddit.com/r/golang">golang subreddit</a>, and a few people were kind enough to give me some pointers.</p>
-
-<h2>My first mistake: Too Many Packages</h2>
-
-<p>It became apparent that my head was very much in the Java world. &ldquo;Namespace and package all the things&rdquo;, my brain thought.</p>
-
-<p>As outlined by Andrew Gerrand in Google&rsquo;s official Go blog <a href="http://blog.golang.org/organizing-go-code">Organizing Go Code</a>, this is a big no-no:</p>
-
-<blockquote>
-<p>On the other hand, it is also easy to go overboard in splitting your code into small packages, in which case you will likely become bogged down in interface design, rather than just getting the job done.</p>
-</blockquote>
-
-<p>This was me to a T. I had spent far too much time trying to &ldquo;design&rdquo; the interfaces than getting the job done (the job being to learn idiomatic Go).</p>
-
-<p>My main concern was that I would pollute my other packages with private functions that had no business being there. However upon further analysis, I found this would be true with any sort of application.</p>
-
-<p>The solution isn&rsquo;t packages, it&rsquo;s properly writing code (duh!)</p>
-
-<h2>My second mistake: Too Complicated</h2>
-
-<p>With too many packages comes increased dependencies and therefore a web of complexities. This is counter to what Go stresses (simplicity!).
-Peter Bourgon&rsquo;s post about <a href="http://peter.bourgon.org/go-in-production/">Go: Best Practices for Production Enviornments</a>, is a great read. I especially liked his section on <a href="http://peter.bourgon.org/go-in-production/#repository-structure">Repository Structure</a>:</p>
-
-<blockquote>
-<p>Our best practice is to keep things simple.</p>
-</blockquote>
-
-<p>That really struck a chord with me.</p>
-
-<p>This line even more so:</p>
-
-<blockquote>
-<p>Don’t create structure until you demonstrably need it.</p>
-</blockquote>
-
-<p>&ldquo;If it&rsquo;s good enough for SoundCloud&rdquo;, I thought, &ldquo;it&rsquo;s good enough for me!&rdquo; *1. So off I went, on a quest to simplify my application. My end result now has no packages (aside from main), and 3 files. It really doesn&rsquo;t get more straightforward than that.</p>
-
-<p>It wasn&rsquo;t as easy as simply removing packages and tossing everything inside of the root directory. I had my reservations! Primarily, my need to keep the number of lines of code in a file as low as logically possible.</p>
-
-<p>I typically try to keep the number of lines in a file as small as I can. To me, files with a large number of lines in it is a code smell. Obviously you should be able to refactor that, no? Well in Go that isn&rsquo;t necessarily the case. Go seems to lean towards writing code that revolves around adding functionality to structs; this rule isn&rsquo;t quite as set in stone.</p>
-
-<p>The Go sources <a href="https://golang.org/src/net/http/request.go">burst</a> <a href="https://golang.org/src/net/http/server.go">with</a> <a href="https://golang.org/src/net/http/transfer.go">files</a> <a href="https://golang.org/src/net/http/transport.go">having</a> <a href="https://golang.org/src/time/format.go">large</a> <a href="https://golang.org/src/time/time.go">lines of code</a>. It&rsquo;s definitely going to be some time before I get a feel for things, but I&rsquo;m quite comfortable with the size of the post struct (the obvious workhorse for a project such as this).</p>
-
-<p>There&rsquo;s only so much that one can learn in a small project, but schooling oneself is never the less the objective of this project. There&rsquo;s obviously much more I have left to grasp, but that&rsquo;s one of the best things about being a student of programming and life.</p>
-
-<p>There&rsquo;s always more to learn; then perhaps if I’m fortunate, master.</p>
-
-<p>If you have any feedback for me or want to chat further, hit me up on twitter <a href="https://twitter.com/rnickel">@rnickel</a></p>
-
-<p>*1. This is a tidbit I plan on implementing in all my projects going forward, regardless of which language it&rsquo;s written in.</p>
-
-		            <p class="published-date">Feb 18, 2016</p>
-	  			</article>
-
-	  			<article>
-				<h1><a href="/html/logging_with_docker_and_loggly.html">Logging with Docker and Loggly</a></h1>
-	  				<p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs.</p>
-
-<p>Now I&rsquo;m partial to taking the path to least resistance, and as such I&rsquo;m going to follow Loggly&rsquo;s own documentation on using the <a href="https://www.loggly.com/docs/docker-logging-driver/">Docker Logging Driver</a>.</p>
-
-<p>From what I understand about using Docker on a Mac, the docker-machine would be where I would have to SSH into in order to perform step 1 (Configure Syslog Daemon).</p>
-
-<p>SSH&rsquo;ing into my default docker-machine via <code>docker-machine ssh default</code> and attempting to execute <code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME</code> leaves me with an error informing me: <code>bash: command not found</code>. Okay, let&rsquo;s install bash then.</p>
-
-<p>The default docker machine flavour of linux on mac is <a href="http://www.tinycorelinux.net">Tiny Core Linux</a>, so we can use their <code>tcl</code> command to bring up their package installer.</p>
-
-<pre><code>$ tce
-$ s // to search
-$ bash // to search for bash
-$ 2 // to install bash.tcz
-$ i // to confirm installation
-</code></pre>
-
-<p>Now that bash is installed, let&rsquo;s try to execute the configuration script again:</p>
-
-<pre><code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME
-</code></pre>
-
-<p>And we get&hellip;</p>
-
-<pre><code>Loggly account or subdomain: XXX
-Username is set
-Please enter Loggly Password:
-</code></pre>
-
-<p>Great! It&rsquo;s asking me for more. Enter the password and&hellip;.</p>
-
-<pre><code>INFO: Initiating Configure Loggly for Linux.
-configure-linux.sh: line 626: base64: command not found
-configure-linux.sh: line 626: echo: write error: Broken pipe
-ERROR: Base64 decode is not supported on your Operating System. Please update your system to support Base64.
-</code></pre>
-
-<p>Well that&rsquo;s no good. After searching for WAY to long on how to install base64 on TCL I came up empty.</p>
-
-<p>Unfortunately it seems as though the Docker Logging Driver for Loggly just isn&rsquo;t an option for me.</p>
-
-<p>Next up I&rsquo;ll try to <a href="https://www.loggly.com/docs/rsyslog-manual-configuration/">manually configure rsyslog</a> instead of using the setup script.</p>
-
-		            <p class="published-date">Feb 05, 2016</p>
-	  			</article>
-
-	  			<article>
-				<h1><a href="/html/logging_with_docker.html">Logging with Docker</a></h1>
-	  				<p>As of late I&rsquo;ve been trying to learn <a href="https://www.docker.com">Docker</a>. I&rsquo;ve been using Ansible / Vagrant for quite some time now with great success. The only problem I have with the combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me.</p>
-
-<p>As such I&rsquo;ve been trying to move one of our smaller services over to running in a container. This service is a standalone Java application that runs all of the time and manages sending push notifications to all users.</p>
-
-<p>I&rsquo;ve created a small Java app to play with for this post over on <a href="https://github.com/mrnickel/DockerLogLearning">GitHub</a>.</p>
-
-<p>According to the holy rules passed down to us by <a href="https://www.heroku.com">Heroku</a> in the form of writing <a href="http://12factor.net">12 Factor Apps</a>, <a href="http://12factor.net/logs">Thou must treat logs as event streams</a>. Essentially what this means is that all logs need to be out via STDOUT, (I also use STDERR). Nice and easy to deal with when developping the apps, and ultimiately I agree that the application shouldn&rsquo;t worry itself with where logs should be output. I also appreciate that, as a developer, it puts any errors or info messages directly in my face as I&rsquo;m working on them.</p>
-
-<p>As you can see in my <a href="https://github.com/mrnickel/DockerLogLearning/blob/master/src/main/resources/log4j2.xml">log4j2.xml</a> config file, I do just that.</p>
-
-<p>Building and running the docker container will reveal the wealth of data that I am generating to the world.</p>
-
-<pre><code>testproj 2016-01-17T17:19:18,680 INFO Timer-0 HelloWorld.run - Timer task started at:Sun Jan 17 17:19:18 UTC 2016
-testproj 2016-01-17T17:19:18,678 INFO main HelloWorld.main - TimerTask started
-testproj 2016-01-17T17:19:20,683 INFO Timer-0 HelloWorld.run - Timer task finished at:Sun Jan 17 17:19:20 UTC 2016
-testproj 2016-01-17T17:19:20,684 ERROR Timer-0 HelloWorld.run - This is an error message...
-java.lang.Exception: This is my exception, dawg
-	at com.RyanNickel.TestDockerProj.App.run(App.java:16) [TestDockerProj.jar:?]
-	at java.util.TimerThread.mainLoop(Timer.java:555) [?:1.8.0_66-internal]
-	at java.util.TimerThread.run(Timer.java:505) [?:1.8.0_66-internal]
-testproj 2016-01-17T17:19:28,675 INFO Timer-0 HelloWorld.run - Timer task started at:Sun Jan 17 17:19:28 UTC 2016
-testproj 2016-01-17T17:19:28,683 INFO main HelloWorld.main - TimerTask cancelled
-testproj 2016-01-17T17:19:30,677 INFO Timer-0 HelloWorld.run - Timer task finished at:Sun Jan 17 17:19:30 UTC 2016
-testproj 2016-01-17T17:19:30,677 ERROR Timer-0 HelloWorld.run - This is an error message...
-java.lang.Exception: This is my exception, dawg
-	at com.RyanNickel.TestDockerProj.App.run(App.java:16) [TestDockerProj.jar:?]
-	at java.util.TimerThread.mainLoop(Timer.java:555) [?:1.8.0_66-internal]
-	at java.util.TimerThread.run(Timer.java:505) [?:1.8.0_66-internal]
-</code></pre>
-
-<p>As you can see I have 2 types of messages. INFO messages, and ERROR stack traces. Both crucial types of information that one would see in their own production apps.</p>
-
-<p>Great place to start. Obviously I don&rsquo;t want to be looking at each container individually, especailly as our service scales and we are running multiple instances of this container. It&rsquo;s just not a very efficient way to track down issues. Enter log aggregators!</p>
-
-<p>As far as I know, there are 3 main players in the log aggregation space:</p>
-
-<ol>
-<li><a href="https://aws.amazon.com/cloudwatch/">AWS Cloud Watch</a></li>
-<li><a href="https://www.loggly.com">Loggly</a></li>
-<li>[papertrail]](<a href="https://papertrailapp.com">https://papertrailapp.com</a>)</li>
-</ol>
-
-<p>It seemed to me as though the log drivers were the easiest way to go about this. Start the container with a log driver specified, and call it a day, right? They even offer an AWS CloudWatch driver. Awesome! Let&rsquo;s try to implement that shall we!</p>
-
-<p>Now, I&rsquo;m running a mac locally and prefer to have everything working on my own instances before popping them up to a more permanent location. So first step!</p>
-
-<blockquote>
-<p>configure the default logging driver by passing the &ndash;log-driver option to the Docker daemon:
-<code>docker daemon --log-driver=awslogs</code></p>
-</blockquote>
-
-<p>Wait&hellip; what? I can&rsquo;t do that on mac installation&hellip; the docker docs leave much to be desired here.</p>
-
-<p>The easiest way that I&rsquo;ve found to start playing with this logger is to create a new docker-machine with the appropriate log driver and enviornment variables set. Run the following command to create a new <em>awslogging</em> machine:</p>
-
-<pre><code>docker-machine create -d virtualbox \
- --engine-opt log-driver=awslogs \
- --engine-env AWS_ACCESS_KEY_ID=XXX \
- --engine-env AWS_SECRET_ACCESS_KEY=XXX \
- awslogging
-</code></pre>
-
-<p>Make sure that you enter your AWS creds in the above snippet.</p>
-
-<p>Once the machine has been created you must use it via:</p>
-
-<pre><code>docker-machine start awslogging
-eval $(docker-machine env awslogging)
-</code></pre>
-
-<p>Now we can build our container image</p>
-
-<pre><code>docker build -t test-docker-proj .
-</code></pre>
-
-<p>And finally we can run the container via:</p>
-
-<pre><code>docker run --log-driver=awslogs \
- --log-opt awslogs-region=us-west-2 \
- --log-opt awslogs-group=myLogGroup \
- --log-opt awslogs-stream=myContainerStream
- test-docker-proj
-</code></pre>
-
-<p>Again, ensure that you change the aws-logs* log options to match your AWS setting.</p>
-
-<p>Great! Now we&rsquo;re getting logs pushed up to CloudWatch Yay!</p>
-
-<p><img src="/images/aws_cloudwatch_event_stream.png" alt="AWS CloudWatch event stream" /></p>
-
-<p>So we&rsquo;re getting logs, the only problem is how they&rsquo;re stored. Each line of output is it&rsquo;s own Event. Well that&rsquo;s no good for our ERROR stack traces. That should be recongized as being a single event.</p>
-
-<p>Now I know that it&rsquo;s possible using Amazon&rsquo;s official <a href="https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py">log agent</a> to set some configuration options. The one I&rsquo;m after is the <em>Timestamp format</em>. There don&rsquo;t seem to be any options that the docker logging driver offers to allow me to specify anything outside of the region, group and stream. Even taking a peek at the <a href="https://github.com/docker/docker/blob/master/daemon/logger/awslogs/cloudwatchlogs.go">source file</a> led me to believe that there was nothing I could do.</p>
-
-<p>So it looks as though the awslogs driver is a pretty basic implementation.</p>
-
-<p>With the next blog post we&rsquo;ll look into popping logs up into Loggly and papertrail app to see if they offer anything a little more robust.</p>
-
-		            <p class="published-date">Jan 18, 2016</p>
-	  			</article>
-
-	  			<article>
-				<h1><a href="/html/hello_world.html">Hello world</a></h1>
-	  				<p>Welcome to my personal site. Here I will be posting my &ldquo;thought poops&rdquo;. It&rsquo;s mostly musings about development and design related stuff&hellip; I think. I likely won&rsquo;t be writing too much. The site is more of a place for me to experiment.</p>
-
-		            <p class="published-date">Jan 04, 2016</p>
-	  			</article>
 
   			</div>
   		</div>

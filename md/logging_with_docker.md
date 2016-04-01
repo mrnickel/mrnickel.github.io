@@ -1,10 +1,10 @@
 ---
-date: 2016-01-18T12:07:58-05:00
+date: 2016-01-18T09:07:58-08:00
 draft: false
 title: Logging with Docker
 ---
 
-As of late I've been trying to learn [Docker](https://www.docker.com). I've been using Ansible / Vagrant for quite some time now with great success. The only problem I have with the combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me.
+As of late I've been trying to learn [Docker](https://www.docker.com). I've been using Ansible / Vagrant for quite some time now with great success. The only problem I have with this combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me. However, having many containers leads to many locations to look for logs. This is an annoyance I'd wish to avoid.
 
 As such I've been trying to move one of our smaller services over to running in a container. This service is a standalone Java application that runs all of the time and manages sending push notifications to all users.
 

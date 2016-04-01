@@ -1,10 +1,10 @@
 ---
-date: 2016-03-10T09:11:23-05:00
+date: 2016-03-10T06:11:23-08:00
 draft: false
 title: Logging with Docker and Sumo Logic
 ---
 
-
+SumoLogic is another player in the ever growing logging aggregator / log analytics service providers. In my quest to find the "sweet spot" of tools to use for my software solutions I thought I'd give them a try. It also gave me the opportunity to dive deeper into Docker and explore my options.
 
 I was asked by Houston of [Sumo Logic](https://www.sumologic.com) to do a writeup about linking docker logging with their service.
 
