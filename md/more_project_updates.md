@@ -43,6 +43,10 @@ The problem that I wanted to solve was to learn Go. I had spent a lot of time re
 
 My second problem that I needed to solve was to have a platform that would allow me to generate posts in order to establish a small social presence. Admitidely this could have been easily done by using a solution like [Hugo](http://gohugo.io). I could simply `brew update && brew install hugo`, and be off to the races. However, this would go counter to my first goal. As this is really a secondary goal I found it to be a fair tradeoff.
 
+## What do I need going forward?
+
+At this point I'm not too sure what I'll need. I have a few ideas of course, as is evidenced in my todo list. However which ones are most important? That I'm still not sure of. I won't really know until the project matures a bit. I'll need more content, more visitors, more learnings in order to determine which feature is the most important. Is there any way for me to speed up my learning? Absolutely there is. I could formally promote the project. Get more developers and writers using it. That would give me more diverse feedback about the project. My main goal with this project however is learning Go, and to that end I'll likely choose to implement a feature that would be interesting to solve.
+
 ## Conclusion
 
 Overall I'm satisfied with where I've gotten with these projects. I've learned a little bit of Go, and I've got a website that proves it. The StaticSiteGenerator is evolving organically and is working quite well for my needs, although I still wouldn't recommend anyone else use it as it's not nearly up to par with the other solutions on the market. I've also started gathering some followers across the various social webs. I'll continue to write about the projects as the mature further.
