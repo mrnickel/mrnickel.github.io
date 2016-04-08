@@ -7,13 +7,77 @@
     <title>RyanNickel.com</title>
     <link>http://RyanNickel.com/</link>
     <description>Ryan Nickel's thought poops</description>
+    
+		<item>
+			<title>More Project Updates</title>
+			<link>http://RyanNickel.com/html/more_project_updates.html</link>
+			<description>
+				<![CDATA[
+					<p>As I write more posts I&rsquo;ve noticed more and more glaring holes in my site design / <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a> solution. A few pain points if you will. In an effort to reflect on my projects every so often I figured I&rsquo;d take a few notes on my blog / StaticSiteGenerator.</p>
 
-	<item>
-		<title>Logging with Docker and Sumo Logic</title>
-		<link>http://RyanNickel.com/html/logging_with_docker_and_sumo_logic.html</link>
-		<description>
-			<![CDATA[
-				<p>I was asked by Houston of <a href="https://www.sumologic.com">Sumo Logic</a> to do a writeup about linking docker logging with their service.</p>
+<h2>What&rsquo;s the goal?</h2>
+
+<p>I believe it&rsquo;s important for developers to take a step back and reflect on what their solutions original goals were. This allows us to put things into perspective. Did we veer way off course? Did our solution even solve our original problems? What do we need going forward?</p>
+
+<p>My goals for the StaticSiteGenerator was:</p>
+
+<ol>
+<li>Play with, and learn a new programming language (Go)</li>
+<li>Get a basic solution up that would allow me to periodically write blog posts</li>
+</ol>
+
+<p>The initial MVP (minimum viable product) certainly solved these 2 problems. I&rsquo;m a big fan of releasing MVP&rsquo;s early and often, as the benefits (which are evident even with this small project), are that you identify what is actually required earlier. As a result you don&rsquo;t waste valuable time developing unnecessary features.</p>
+
+<p>The first implementation allowed me to start generating content and establishing a (small) social presence; however as is also so often the case with MVP&rsquo;s, I was able to learn some things quickly, like my site&rsquo;s poor design.</p>
+
+<h3>Bad design</h3>
+
+<p>First off, the design just wasn&rsquo;t working for me. The initial visit would show a user a giant wall of text. A little intimidating. What I decided to do instead was display only the first paragraph of each post. This was a pretty easy implementation from the Go side, however it revealed another hole in my site.</p>
+
+<h3>Bad writing style</h3>
+
+<p>What I realized was that my posts didn&rsquo;t have a proper introduction. No real hook. This is just bad. Who&rsquo;s going to continue reading a post when they don&rsquo;t really know what it&rsquo;s about? Luckily I didn&rsquo;t have a lot of posts that needed to be addressed haha. As I was modifying my posts I realized another feature that should be implemented. The ability to preview posts.</p>
+
+<h3>Can&rsquo;t easily preview posts</h3>
+
+<p>This was more of an annoyance during the writing process than anything else. It&rsquo;s always nice to see how the markdown will be generated into the template. To that end I implemented a <code>preview</code> function. What I wanted was to issue a <code>preview</code> command, specifying which post, then automatically launch my web browser to the page. This lead me to the final hole: the inability to launch the website locally.</p>
+
+<h3>Built in webserver</h3>
+
+<p>In order for me to preview the post, I would have to start a local webserver. When I first started, I didn&rsquo;t want to go through all the trouble of setting up apache, so instead I would fire up the <a href="http://php.net/manual/en/features.commandline.webserver.php">built-in PHP webserver</a>. <code>php -S localhost:8080</code> from within the root directory, and visit <a href="http://localhost:8080/index.html">http://localhost:8080/index.html</a>. This was another minor annoyance, and I&rsquo;m ultimately curious about writing web apps and microservices in Go. Like everyone else I used the standard libraries <a href="https://golang.org/pkg/net/http/">net/http</a> package to serve up the site. It was amazingly easy to implement and I&rsquo;ve had no issues with it thus far.</p>
+
+<h2>Did I veer off course?</h2>
+
+<p>Because I&rsquo;m a major proponent for realeasing MVP&rsquo;s I didn&rsquo;t have the opportunity to veer off course. Not that I wasn&rsquo;t tempted to. If you look at my list of <a href="https://github.com/mrnickel/StaticSiteGenerator">todos</a> you&rsquo;ll see that I have a number of features that I am eager to implement. &ldquo;Well, this is only a hobby project&rdquo;, I would tell myself &ldquo;What harm would it do if I spent some time implementing a spell checker?&rdquo;. And honestly, it won&rsquo;t harm anything. I don&rsquo;t make any money from this site, and it would further my learning in Go (my first project goal). However I believe that like anything else, practice makes perfect. And forcing yourself to adhere to various processes is also important to practice.</p>
+
+<h2>Did my solution help me achieve my goals?</h2>
+
+<p>As mentioned earlier, my primary objective was to learn Go. I spent a lot of time reading other peoples blog posts (which is what intrigued me so much about this language), but I had no real first hand knowledge of it. This gave me the opportunity to learn a bit more about the language.</p>
+
+<p>My second objective was to own a platform that would allow me to generate posts in order to establish a small social presence. Admittedly this could have been easily done by using a solution like <a href="http://gohugo.io">Hugo</a>. I could simply <code>brew update &amp;&amp; brew install hugo</code>, and be off to the races. However, this would be counter to my first goal; As this is really a secondary goal I found it to be a fair tradeoff.</p>
+
+<h2>What do I need going forward?</h2>
+
+<p>At this point I&rsquo;m not too sure what I&rsquo;ll need. I have a few ideas of course, as is evidenced in my &ldquo;To-Do&rdquo; list. However, which ones are most important? <em>That</em> I&rsquo;m still not sure of. I won&rsquo;t really know until the project matures a bit. I&rsquo;ll need more content, more visitors, more learnings in order to determine which feature is the greatest importance. Is there any way for me to accelerate up my education? Absolutely there is. I could formally promote the project; Get more developers and writers using it. That would give me more diverse feedback about the project. My main goal with this project however is learning Go, and to that end I&rsquo;ll likely choose to implement a feature that would be interesting to solve.</p>
+
+<h2>Conclusion</h2>
+
+<p>Overall I&rsquo;m satisfied with where I&rsquo;ve gotten with these projects. I&rsquo;ve learned a little bit of Go, and I&rsquo;ve got a website that justifies it. The StaticSiteGenerator is evolving organically and is working quite well for my needs, although I still wouldn&rsquo;t recommend anyone else use it as it&rsquo;s not nearly up to par with the other solutions on the market. I&rsquo;ve also started gathering some followers across the various social webs. I&rsquo;ll continue to write about the projects as they mature further.</p>
+
+				]]>
+			</description>
+			<pubDate>Fri, 08 Apr 2016 08:43:47 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/more_project_updates.html</guid>
+		</item>
+	
+		<item>
+			<title>Logging with Docker and Sumo Logic</title>
+			<link>http://RyanNickel.com/html/logging_with_docker_and_sumo_logic.html</link>
+			<description>
+				<![CDATA[
+					<p>SumoLogic is another player in the ever growing logging aggregator / log analytics service providers. In my quest to find the &ldquo;sweet spot&rdquo; of tools to use for my software solutions I thought I&rsquo;d give them a try. It also gave me the opportunity to dive deeper into Docker and explore my options.</p>
+
+<p>I was asked by Houston of <a href="https://www.sumologic.com">Sumo Logic</a> to do a writeup about linking docker logging with their service.</p>
 
 <p>I take a peek at their website and it looks like a pretty solid product. The dashboard looks comprehensive, robust and professional.</p>
 
@@ -119,18 +183,20 @@ $ sudo tail -f /syslog
 
 <p>In my next post I&rsquo;ll write up my findings on using the Sumo Logic service.</p>
 
-			]]>
-		</description>
-		<pubDate>Thu, 10 Mar 2016 09:11:23 EST</pubDate>
-		<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_sumo_logic.html</guid>
-	</item>
+				]]>
+			</description>
+			<pubDate>Thu, 10 Mar 2016 06:11:23 -0800</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_sumo_logic.html</guid>
+		</item>
+	
+		<item>
+			<title>Playing With Docker Enviornment Variables</title>
+			<link>http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</link>
+			<description>
+				<![CDATA[
+					<p>Managing various enviornments can always be a challenging task. Things have changed substantially over the years. With the introduction of AWS and other PaaS providers introducing their own solutions and the vast differences that can occur between developers own machines, staging, QA and production, we as developers and solution architects have to be ever vigilant in our quest to keep things simple, and stable.</p>
 
-	<item>
-		<title>Playing With Docker Enviornment Variables</title>
-		<link>http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</link>
-		<description>
-			<![CDATA[
-				<p>I recently read an article by Chris Stump titled <a href="http://chrisstump.online/2016/02/20/docker-existing-rails-application/">Docker for an Existing Rails Application</a>.</p>
+<p>I recently read an article by Chris Stump titled <a href="http://chrisstump.online/2016/02/20/docker-existing-rails-application/">Docker for an Existing Rails Application</a> which is what got me thinking about this topic.</p>
 
 <p>Now I’m not a Ruby developer, but I am a docker enthusiast and I’m always interested in how people are using it for their
 various environments, which is why I found Chris&rsquo; post so intriguing.</p>
@@ -291,20 +357,18 @@ experimentsdockerenvs_envtest_1 exited with code 0
 
 <p>Feel free to reach me on twitter <a href="https://twitter.com/rnickel">@rnickel</a> for any input on the post!</p>
 
-			]]>
-		</description>
-		<pubDate>Wed, 02 Mar 2016 12:52:18 EST</pubDate>
-		<guid isPermaLink="false">http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</guid>
-	</item>
-
-	<item>
-		<title>My first go project</title>
-		<link>http://RyanNickel.com/html/my_first_go_project.html</link>
-		<description>
-			<![CDATA[
-				<p>It&rsquo;s no secret that I&rsquo;m currently enamoured with <a href="https://golang.org">Go</a>, as well as the projects it powers. (<a href="https://www.docker.com">Docker</a> I&rsquo;m looking at you). As such I recently started my first project with the lovely &ldquo;new&rdquo; language.</p>
-
-<p>I thought I would get my feet wet by creating yet another <a href="https://github.com/mrnickel/StaticSiteGenerator">static site generator</a>. The very generator I use to build this site (because dogfooding is important!).</p>
+				]]>
+			</description>
+			<pubDate>Wed, 02 Mar 2016 09:52:18 -0800</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</guid>
+		</item>
+	
+		<item>
+			<title>My first go project</title>
+			<link>http://RyanNickel.com/html/my_first_go_project.html</link>
+			<description>
+				<![CDATA[
+					<p>It&rsquo;s no secret that I&rsquo;m currently enamoured with <a href="https://golang.org">Go</a>, as well as the projects it powers. (<a href="https://www.docker.com">Docker</a> I&rsquo;m looking at you). As such I recently started my first project with the lovely &ldquo;new&rdquo; language. I wanted a project that would be easy to start and equally something that I&rsquo;d get some utility out of. I thought I would get my feet wet by creating yet another <a href="https://github.com/mrnickel/StaticSiteGenerator">static site generator</a>. The very generator I use to build this site (because dogfooding is important!).</p>
 
 <p>This post is primarily about getting myself acquainted with Go and writing my first little Go app.</p>
 
@@ -380,18 +444,18 @@ Peter Bourgon&rsquo;s post about <a href="http://peter.bourgon.org/go-in-product
 
 <p>*1. This is a tidbit I plan on implementing in all my projects going forward, regardless of which language it&rsquo;s written in.</p>
 
-			]]>
-		</description>
-		<pubDate>Thu, 18 Feb 2016 08:46:24 EST</pubDate>
-		<guid isPermaLink="false">http://RyanNickel.com/html/my_first_go_project.html</guid>
-	</item>
-
-	<item>
-		<title>Logging with Docker and Loggly</title>
-		<link>http://RyanNickel.com/html/logging_with_docker_and_loggly.html</link>
-		<description>
-			<![CDATA[
-				<p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs.</p>
+				]]>
+			</description>
+			<pubDate>Thu, 18 Feb 2016 05:46:24 -0800</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/my_first_go_project.html</guid>
+		</item>
+	
+		<item>
+			<title>Logging with Docker and Loggly</title>
+			<link>http://RyanNickel.com/html/logging_with_docker_and_loggly.html</link>
+			<description>
+				<![CDATA[
+					<p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs. When designing scalable software, typically you&rsquo;ll end up with many instances of a single service. Signing into each instance to view logs can be very troublesome (and annoying!). Luckily there are ways to get around this annoyance. Enter Loggly.</p>
 
 <p>Now I&rsquo;m partial to taking the path to least resistance, and as such I&rsquo;m going to follow Loggly&rsquo;s own documentation on using the <a href="https://www.loggly.com/docs/docker-logging-driver/">Docker Logging Driver</a>.</p>
 
@@ -434,18 +498,18 @@ ERROR: Base64 decode is not supported on your Operating System. Please update yo
 
 <p>Next up I&rsquo;ll try to <a href="https://www.loggly.com/docs/rsyslog-manual-configuration/">manually configure rsyslog</a> instead of using the setup script.</p>
 
-			]]>
-		</description>
-		<pubDate>Fri, 05 Feb 2016 20:57:18 EST</pubDate>
-		<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_loggly.html</guid>
-	</item>
-
-	<item>
-		<title>Logging with Docker</title>
-		<link>http://RyanNickel.com/html/logging_with_docker.html</link>
-		<description>
-			<![CDATA[
-				<p>As of late I&rsquo;ve been trying to learn <a href="https://www.docker.com">Docker</a>. I&rsquo;ve been using Ansible / Vagrant for quite some time now with great success. The only problem I have with the combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me.</p>
+				]]>
+			</description>
+			<pubDate>Fri, 05 Feb 2016 17:57:18 -0800</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_loggly.html</guid>
+		</item>
+	
+		<item>
+			<title>Logging with Docker</title>
+			<link>http://RyanNickel.com/html/logging_with_docker.html</link>
+			<description>
+				<![CDATA[
+					<p>As of late I&rsquo;ve been trying to learn <a href="https://www.docker.com">Docker</a>. I&rsquo;ve been using Ansible / Vagrant for quite some time now with great success. The only problem I have with this combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me. However, having many containers leads to many locations to look for logs. This is an annoyance I&rsquo;d wish to avoid.</p>
 
 <p>As such I&rsquo;ve been trying to move one of our smaller services over to running in a container. This service is a standalone Java application that runs all of the time and manages sending push notifications to all users.</p>
 
@@ -543,24 +607,12 @@ eval $(docker-machine env awslogging)
 
 <p>With the next blog post we&rsquo;ll look into popping logs up into Loggly and papertrail app to see if they offer anything a little more robust.</p>
 
-			]]>
-		</description>
-		<pubDate>Mon, 18 Jan 2016 12:07:58 EST</pubDate>
-		<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker.html</guid>
-	</item>
-
-	<item>
-		<title>Hello world</title>
-		<link>http://RyanNickel.com/html/hello_world.html</link>
-		<description>
-			<![CDATA[
-				<p>Welcome to my personal site. Here I will be posting my &ldquo;thought poops&rdquo;. It&rsquo;s mostly musings about development and design related stuff&hellip; I think. I likely won&rsquo;t be writing too much. The site is more of a place for me to experiment.</p>
-
-			]]>
-		</description>
-		<pubDate>Mon, 04 Jan 2016 14:33:21 EST</pubDate>
-		<guid isPermaLink="false">http://RyanNickel.com/html/hello_world.html</guid>
-	</item>
+				]]>
+			</description>
+			<pubDate>Mon, 18 Jan 2016 09:07:58 -0800</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker.html</guid>
+		</item>
+	
 
 </channel>
 </rss>
