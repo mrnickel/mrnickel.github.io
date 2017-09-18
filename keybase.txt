@@ -1,0 +1,66 @@
+==================================================================
+https://keybase.io/mrnickel
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.ryannickel.com
+  * I am mrnickel (https://keybase.io/mrnickel) on keybase.
+  * I have a public key with fingerprint BD82 99B4 8CA5 D4B9 E7C5  213A 64B7 4033 8504 14B8
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01012d9ea19bf6e29bdbfa75d117ddbc0ffe59f54264ce0b913c5cdf54a234a1c1aa0a",
+      "fingerprint": "bd8299b48ca5d4b9e7c5213a64b74033850414b8",
+      "host": "keybase.io",
+      "key_id": "64b74033850414b8",
+      "kid": "01012d9ea19bf6e29bdbfa75d117ddbc0ffe59f54264ce0b913c5cdf54a234a1c1aa0a",
+      "uid": "bf26e17a013b16b659fa5f0b086fe919",
+      "username": "mrnickel"
+    },
+    "service": {
+      "hostname": "www.ryannickel.com",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1505766263,
+  "expire_in": 157680000,
+  "prev": "4bfdf669cb73e4b684b438859ea0f834a9151821378b0ad5440258d4770b370f",
+  "seqno": 6,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owGtUllIVUEYvtqNLGlfTEvKQ7SKzZwzZ7uSCYFPLURgactt5swcPannXM85eq+Z
+0R5SDxUWhSH1EEViRbbYQ7ZhD23QRgQtIkXacoNIqCBqjuVbj83LMN983zff/8+/
+b+SQUFoKvVwo7QxP6Ei520dCJdfnbawXiEPrhEi9UMEGNlZJmedHKywqRAQAARSp
+zjDUiakwUSeUmFiVKYQqpcQApslk3ZSRqCCDAaJDyZANygEsSghDA2IMsJArmJZd
+xtyYa9k+tyVUE3WdIM3AMkVEZ6ohi1DCCiIqApKkyQBBRDQuLHe8QMHDEeyxPMvh
+GD9EB+L9g/+fc9cM2BFTVBhUMYASgQpRuBTLJiBAU0ymQz0gesy1cRXj7CrXtowK
+Vik05AocrbUMFjQ2qOQvIx6P57l12P7DyzOcKu4Qcx3fMZxKfl/u+7FIIPfrYgN8
+RqJ/naLEsilvJhfUMtezHFuIQM40fCuwhjKQVUURFSlXYImY5bKoFTA4qAG+gmdY
+LbdEZK1JTUXRDaJKDBFFQwRJmibzpgFT403QoQw1/iuqRgCmMkJAlDWKVBUQSQWm
+EBRXbTtCROE5cRn39KwyG/s1LhMaRjSmSOFQSlooe1JO+Oq2Ixf2nnhy5V1XTmRw
+AIemBtMXGjF8zCAyuj8tdPR5+/yW3p/vU6/7TcbmklNvf41+Hz9T39r94UGj8ZAm
+iq9e2Z4f3jy8dVxN6uSWO11bNi4Nx99uOpB58ty1EySdPsseVuzt/t61a39hM8xD
+xRnNWYkl+aEzhyc23Z+zbVZSOD5n7/o9BW8OXVzdWVx0rPT12R+Fx9qEafqrNU+s
+zMf28lcrcx4VXepsn3u7p7env907kpE+LDlv9rIFL46HTrXKz0q7C7LOJ9I+NHza
+vur+vewVLW1PG0utg+Kk5MfytoKivvr9+dNPtz7O2JFZu/vzF7ipaV1X2eKtN2/s
+zBq1waMr7amJ5OsFzd/GvkhOWbTwTvbXw6M6ozM6Zr5Ub4Vj1XPH/wY=
+=wQJy
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mrnickel
+
+==================================================================
