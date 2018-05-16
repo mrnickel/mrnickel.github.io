@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - Docker and Charles</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">Docker and Charles</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>Ah, <a href="https://www.charlesproxy.com/">Charles</a>. Every mobile developers&rsquo; best friend. When logging fails and you just can&rsquo;t figure it out, it&rsquo;s time to go deep into the system and see the raw data.</p>
+
+<p>This is a post I&rsquo;ve been meaning to write for a long time.</p>
+
+<p>It&rsquo;s my go-to tool when I&rsquo;m debugging network calls in my Swift code.</p>
+
+<p>My preferred development process is to run services locally via <code>docker-compose up</code>. This ensures I do not step on anyone&rsquo;s toes (amongst other benefits on which I&rsquo;ll write later)</p>
+
+<p>You may have noticed, however, that starting up Charles causes your docker container to shut down! Oh no! What&rsquo;s a dev to do?!</p>
+
+<p>Why does this happen? I&rsquo;m not sure! I wish I could tell you that I knew enough about the inner workings of Docker to give you an idea as to why this happens, but I can&rsquo;t (for now).</p>
+
+<p>I do however have a solution that works for me. Simply go into your docker menu &gt; proxies &gt; enable <strong>Manual Proxy configuration</strong>. I leave all other fields blank (default values). Now Apply &amp; Restart, start your Docker containers and all is well with the world!</p>
+
+<p>This solution has proven useful to me, and I hope it does the same for you.</p>
+</p>
+            <p class="published-date">May 15, 2018</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
