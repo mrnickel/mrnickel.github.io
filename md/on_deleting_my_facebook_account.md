@@ -1,10 +1,10 @@
 ---
-date: 2018-10-31T14:00:14-04:00
+date: 2018-10-31T14:20:23-04:00
 draft: false
 title: On Deleting My Facebook Account
 ---
 
-I've joined the ranks of those deleting their Facebook accounts.
+I'm deleting my Facebook account.
 
 The last straw for me was the revelation that they [use your 2FA phone number to target you with ads](https://techcrunch.com/2018/09/27/yes-facebook-is-using-your-2fa-phone-number-to-target-you-with-ads/).
 
