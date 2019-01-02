@@ -9,6 +9,71 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Migrating from 1Password to KeePassXC</title>
+			<link>http://RyanNickel.com/html/migrating_from_1password_to_keepassxc.html</link>
+			<description>
+				<![CDATA[
+					<p>I&rsquo;m a big proponent of password managers, and I&rsquo;ve been a heavy user of 1Password for a long time now. Several years ago, I purchased it for Mac, Windows, iOS and Android.</p>
+
+<p>Fast forward to today and they&rsquo;ve updated to a subscription model, and they host the passwords online.</p>
+
+<p>I completely understand their need to continue to generate revenue from existing customers in order to improve the product and as a software developer myself I sympathize with them. However I don&rsquo;t want to add yet another monthly subscription to my wallet.</p>
+
+<p>On a security note, I&rsquo;m not so inclined to host my passwords on a 3rd party platform. I feel it&rsquo;s too big of a honey pot. I prefer to keep my important files offline. (I also don&rsquo;t support services like Dropbox for anything important). Especially seeing as services like LastPass <a href="https://www.pcworld.com/article/2936621/the-lastpass-security-breach-what-you-need-to-know-do-and-watch-out-for.html">have already been breached</a>.</p>
+
+<p>While my current version of 1Password continues to work just fine across my devices, they&rsquo;re not actively improving the software, so I&rsquo;ve decided to try to find an open source alternative which hopefully I can help contribute to.</p>
+
+<p>After some research, I stumbled across <a href="https://keepassxc.org/">KeePassXC</a> as recommended by <a href="https://ssd.eff.org/en/module/how-use-keepassxc">EFF</a> and thought I&rsquo;d give it a try.</p>
+
+<p>The first hurdle I wanted to jump was getting my 1Password content into KeePassXC.</p>
+
+<p>To do that:</p>
+
+<ol>
+<li>Open 1Password, log in, and select the vault (if on Mac).</li>
+<li>File &gt; Export &gt; All Items. Enter your password.</li>
+<li>Change the File Format to <strong>CSV</strong>. Leave everything else the same and press <strong>Save</strong></li>
+<li>Open KeePassXC</li>
+<li>Select <strong>Import from CSV</strong> and select the file you exported from 1Password</li>
+<li>Create a password to unlock and select <strong>OK</strong></li>
+<li>In the top section, select <strong>Consider &lsquo;\&rsquo; an escape character</strong></li>
+
+<li><p>Set the following columns:</p>
+
+<p>Group: <strong>Not present</strong></p>
+
+<p>Title: <strong>Column 3</strong></p>
+
+<p>Username: <strong>Column 6</strong></p>
+
+<p>Password: <strong>Column 2</strong></p>
+
+<p>URL: <strong>Column 5</strong></p>
+
+<p>Notes: <strong>Column 1</strong></p>
+
+<p>Last Modified: <strong>Not present</strong></p>
+
+<p>Created: <strong>Not present</strong></p></li>
+
+<li><p>Press <strong>OK</strong></p></li>
+</ol>
+
+<p>If your 1Password is like mine (littered with temporary passwords), you&rsquo;re definitely going to want to go through and clean up a bunch of entries after the import.</p>
+
+<p>I&rsquo;m going to try to use this as my main password manager for the time being, but one shortcoming I&rsquo;ve come across so far is that it&rsquo;s difficult to enter credit card information for safe keeping.</p>
+
+<p>KeePass has a template plugin system that can handle this, so hopefully KeePassXC can implement something similar.</p>
+
+<p>Another good article worth mentioning to better acquaint you with the ins and outs of the software is posted by <a href="http://samschlinkert.com/">Sam Schlinkert</a> <a href="https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html">Getting Started With KeePassXC</a></p>
+
+				]]>
+			</description>
+			<pubDate>Wed, 02 Jan 2019 14:41:54 PST</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/migrating_from_1password_to_keepassxc.html</guid>
+		</item>
+	
+		<item>
 			<title>On Deleting My Facebook Account</title>
 			<link>http://RyanNickel.com/html/on_deleting_my_facebook_account.html</link>
 			<description>
@@ -61,7 +126,7 @@ c) minimize the emotional importance and personal excitement of our baby announc
 
 				]]>
 			</description>
-			<pubDate>Wed, 31 Oct 2018 14:20:23 EDT</pubDate>
+			<pubDate>Wed, 31 Oct 2018 14:20:23 -0400</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/on_deleting_my_facebook_account.html</guid>
 		</item>
 	
@@ -88,7 +153,7 @@ c) minimize the emotional importance and personal excitement of our baby announc
 
 				]]>
 			</description>
-			<pubDate>Tue, 15 May 2018 22:16:48 EDT</pubDate>
+			<pubDate>Tue, 15 May 2018 22:16:48 -0400</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/docker_and_charles.html</guid>
 		</item>
 	
@@ -150,7 +215,7 @@ c) minimize the emotional importance and personal excitement of our baby announc
 
 				]]>
 			</description>
-			<pubDate>Fri, 08 Apr 2016 08:43:47 EDT</pubDate>
+			<pubDate>Fri, 08 Apr 2016 08:43:47 -0400</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/more_project_updates.html</guid>
 		</item>
 	
@@ -269,7 +334,7 @@ $ sudo tail -f /syslog
 
 				]]>
 			</description>
-			<pubDate>Thu, 10 Mar 2016 06:11:23 -0800</pubDate>
+			<pubDate>Thu, 10 Mar 2016 06:11:23 PST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_sumo_logic.html</guid>
 		</item>
 	
@@ -443,7 +508,7 @@ experimentsdockerenvs_envtest_1 exited with code 0
 
 				]]>
 			</description>
-			<pubDate>Wed, 02 Mar 2016 09:52:18 -0800</pubDate>
+			<pubDate>Wed, 02 Mar 2016 09:52:18 PST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</guid>
 		</item>
 	
@@ -530,7 +595,7 @@ Peter Bourgon&rsquo;s post about <a href="http://peter.bourgon.org/go-in-product
 
 				]]>
 			</description>
-			<pubDate>Thu, 18 Feb 2016 05:46:24 -0800</pubDate>
+			<pubDate>Thu, 18 Feb 2016 05:46:24 PST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/my_first_go_project.html</guid>
 		</item>
 	
@@ -584,7 +649,7 @@ ERROR: Base64 decode is not supported on your Operating System. Please update yo
 
 				]]>
 			</description>
-			<pubDate>Fri, 05 Feb 2016 17:57:18 -0800</pubDate>
+			<pubDate>Fri, 05 Feb 2016 17:57:18 PST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_loggly.html</guid>
 		</item>
 	
@@ -693,8 +758,21 @@ eval $(docker-machine env awslogging)
 
 				]]>
 			</description>
-			<pubDate>Mon, 18 Jan 2016 09:07:58 -0800</pubDate>
+			<pubDate>Mon, 18 Jan 2016 09:07:58 PST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker.html</guid>
+		</item>
+	
+		<item>
+			<title>Hello world</title>
+			<link>http://RyanNickel.com/html/hello_world.html</link>
+			<description>
+				<![CDATA[
+					<p>Welcome to my personal site. Here I will be posting my &ldquo;thought poops&rdquo;. It&rsquo;s mostly musings about development and design related stuff&hellip; I think. I likely won&rsquo;t be writing too much. The site is more of a place for me to experiment.</p>
+
+				]]>
+			</description>
+			<pubDate>Mon, 04 Jan 2016 11:33:21 PST</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/hello_world.html</guid>
 		</item>
 	
 
