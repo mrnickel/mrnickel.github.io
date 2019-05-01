@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - Rendering dynamic components with React Native and the performance implications</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">Rendering dynamic components with React Native and the performance implications</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>I am currently working on a project that needs to be very flexible and very dynamic. Different builds require slightly different UI. Thankfully
+the same actions and business logic apply. My concern with this requirement was for upstream git merges. I wanted to ensure, as much as possible
+that any updates wouldn&rsquo;t overwrite the custom UI.</p>
+
+<p>In an effort to accomplish this task, I wanted to ensure that the UI was void of as much logic as possible. Because my React Native app runs on Redux I could leverage the container / dumb component design pattern to accomplish that task.</p>
+
+<p>i.e. The container would <code>connect</code> all the appropriate props and dispatch actions, then <code>render</code> the appropriate component for the build.</p>
+
+<p>First I wanted to verify that it was possible to import a component outside of the standard <code>import component from ...</code> syntax with the
+<code>require</code> syntax, so that I could then verify that my desired pattern was even a possibility.</p>
+
+<pre><code>render() {
+  const listItemRowComponent = require('src/components/ListItemRowComponent1.tsx')
+  return (&lt;listItemRowComponent prop1={'value1'} prop2={'value2} /&gt;)
+}
+</code></pre>
+
+<p>I refreshed my screen, and success! It worked!</p>
+
+<p>Whenever implementing a new pattern I always want to try to measure the performance implications. So the question I wanted to answer was what are the performance
+implications of requiring this component every time instead of simply importing it at the top of my class component.</p>
+
+<p>The first thing I wanted to do was to establish a baseline. How many milliseconds on average would it take to render my component when
+doing a standard <code>import</code>?</p>
+
+<p>So I fired up Google Chrome&rsquo;s peformance tool, started the recording, navigated to the screen, waited for the load and scrolled down a bit.
+I then investigated the results.</p>
+
+<p><img src="/images/base_line.png" alt="Baseline" title="Baseline" /></p>
+
+<p>At a glance it looks as though the average rendering time is about 7ish ms. Fantastic! Under that desired 16ms we aim for.</p>
+
+<p>I wonder what the <a href="https://facebook.github.io/react-native/docs/performance#what-you-need-to-know-about-frames">React Native Perf Monitor</a> showed as well with regards to RAM usage and UI vs JS frames per second.</p>
+
+<p>Before loading the list: 137ish MB, with 60 / 60 FPS.</p>
+
+<p>Navigate to the List, load the 500 rows:</p>
+
+<ul>
+<li>Ram goes up to: 158ish MB</li>
+<li>with scrolling I see the UI thread go down to 58, but the JS stays consistent at 60. Great!</li>
+</ul>
+
+<p>I then implemented the above <code>render()</code> function to see what, if any, performance implications</p>
+
+<p>Assumption: I won&rsquo;t see any dramatic differences.</p>
+
+<p><img src="/images/require_all_the_time.png" alt="Require All The Time" title="Require all the time" /></p>
+
+<p>There was a slight increase with this new method, but not dramatically so. I would say that it&rsquo;s in the area of acceptability.</p>
+
+<p>One thing that I did notice however was that the Perf Monitor showed that the RAM usage went from about 158ish MB to 172ish MB. Not substantial, but not insigificant either.</p>
+
+<p>Now I have two questions:</p>
+
+<ol>
+<li>Obviously just requiring from a static string is no more flexible than doing an <code>import</code> from the top of the file. Can I use a variable?</li>
+<li>Can I get that memory usage back down?</li>
+</ol>
+
+<p>The answer to the first question seems pretty obvious at first blush. Simply add a configuration property and reference it.</p>
+
+<pre><code>// config.ts
+export default {
+  listItemRowComponent: 'src/components/ListItemRowComponent1.tsx'
+}
+
+// component.ts
+render() {
+  const listItemRowComponent = require(config.listItemRowComponent)
+  return (&lt;listItemRowComponent prop1={'value1'} prop2={'value2'} /&gt;)
+}
+</code></pre>
+
+<p>Turns out RN isn&rsquo;t a big fan of this approach, and I got the Red Screen of Death.</p>
+
+<p>Okay&hellip; I definitely wanted to be able to define which component to use in my config file&hellip; what to do?</p>
+
+<p>At this point I did what all developers do in this situation. I went to Google, which then pointed me to this wonderful <a href="https://stackoverflow.com/questions/33907218/react-native-use-variable-for-image-file">StackOverflow</a> post.</p>
+
+<p>Of course! Just <code>require</code> it directly into my config value:</p>
+
+<pre><code class="language-config.ts">export default {
+  listItemRowComponent: require('src/components/ListItemRowComponent1.tsx').default
+}
+</code></pre>
+
+<p>Then simply render the <code>config.listItemRowComponent</code> as such:</p>
+
+<pre><code class="language-component.ts">render() {
+  return (&lt;config.listItemRowComponent prop1={'value1'} prop2={'value2'} /&gt;)
+}
+</code></pre>
+
+<p>And it works! Awesome. This makes me happy. It&rsquo;s configurable, extendable and manageable. Great &lsquo;ables&rsquo; all around. And it&rsquo;s performant.</p>
+
+<p>Taking a quick view of the performance snapshop I&rsquo;m seeing render times of roughly 9ms for the component when referenced as such.</p>
+
+<p><img src="/images/require_config.png" alt="Require in config" title="Require in config" /></p>
+
+<p>Perf Monitor is also reporting that my RAM usage is comparable to the standard <code>import component from ...</code> syntax. Fantastic!</p>
+
+<p>One big downside to this pattern is that you lose the ability to quickly navigate to a components implementation within VS code, directly linking between
+props and implementations, and you also lose the ability to refactor property types. Linters aren&rsquo;t going to catch any issues with the props either.
+This could be a big issue if you lean on such tools heavily. I know that I rely heavily on the refactor abilities (naming things is hard!).</p>
+
+<p>Note that perf monitor, and the Google Chrome Performance recording isn&rsquo;t exact. The app was tested while in DEV mode, which means that the performance
+will be worse than in prodiction, however my thoughts are that if I can get the app running well without any React optimizations, when those are in place
+the app will run even smoother.</p>
+</p>
+            <p class="published-date">Apr 30, 2019</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
