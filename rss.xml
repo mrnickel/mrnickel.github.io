@@ -9,6 +9,154 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Rendering dynamic components with React Native and the performance implications</title>
+			<link>http://RyanNickel.com/html/rendering_dynamic_components_with_react_native_and_the_performance_implications.html</link>
+			<description>
+				<![CDATA[
+					<p>I am currently working on a project that cries out for flexibility and dynamic functionality. Different builds require slightly different UI.
+Thankfully the same actions and business logic apply.</p>
+
+<p>My concern:</p>
+
+<p>Because all builds are branched off of the same master branch, and each build could have slightly different UI any upstream bug fixes could
+potentially overwrite existing UI or cause conflicts. Both issues I would like to try to avoid.</p>
+
+<p>I wanted to accomplish the above for developer frendliness while alsp keeping the app as performant as possible.</p>
+
+<p>Aside: Generally when creating an app you want to aim for 60 frames per second. This means that the render time goal is 16ms or less.</p>
+
+<p>My solution:
+Because my React Native app runs on Redux I could leverage the container / dumb component design pattern to ensure that no potential business
+logic was lost. I could also use this to potentially swap out the UI component based on a builds configuration.</p>
+
+<p>i.e. The container would <code>connect</code> all the appropriate props and dispatch actions, then <code>render</code> the appropriate component for the build.</p>
+
+<p>Step 1:
+First I wanted to verify that it was possible to import a component outside of the standard <code>import component from ...</code> syntax with the
+<code>require</code> syntax, so that I could then verify that my desired pattern was even a possibility.</p>
+
+<p>Assumption: Totally possible</p>
+
+<pre><code>render() {
+  const listItemRowComponent = require('src/components/ListItemRowComponent1.tsx')
+  return (&lt;listItemRowComponent prop1={'value1'} prop2={'value2} /&gt;)
+}
+</code></pre>
+
+<p>Step 2:
+I refreshed my screen, and success! It worked! Whenever implementing a new pattern I always try to measure the performance implications.</p>
+
+<p>Now what?
+The question I wanted to answer was what are the performance implications of requiring this component every time instead of simply importing
+it at the top of my class component.</p>
+
+<p>Step 3:
+Now I wanted to do was establish a performance baseline. How many milliseconds on average would it take to render my component when doing
+a standard <code>import</code>?</p>
+
+<p>Step 4:
+So I fired up Google Chrome&rsquo;s peformance tool, started the recording, navigated to the screen, waited for the load and scrolled down a bit.</p>
+
+<p>I then investigated the results:</p>
+
+<p><img src="/images/base_line.png" alt="Baseline" title="Baseline" /></p>
+
+<p>At a glance, it looks as though the average rendering time is about 7ish ms. Fantastic! Under that desired 16ms we aim for.</p>
+
+<p>I wonder what the <a href="https://facebook.github.io/react-native/docs/performance#what-you-need-to-know-about-frames">React Native Perf Monitor</a> showed as well with regards to RAM usage and UI vs JS frames per second.</p>
+
+<p>Before loading the list: 137ish MB, with 60 / 60 FPS.</p>
+
+<p>Navigate to the List, load the 500 rows:</p>
+
+<ul>
+<li>Ram goes up to: 158ish MB</li>
+<li>with scrolling, I see the UI thread go down to 58, but the JS stays consistent at 60. Great!</li>
+</ul>
+
+<p>Step 5:
+I then implemented the above <code>render()</code> function to see what, if any, performance implications</p>
+
+<p>Assumption: I won&rsquo;t see any dramatic differences.</p>
+
+<p><img src="/images/require_all_the_time.png" alt="Require All The Time" title="Require all the time" /></p>
+
+<p>There was a slight increase with this new method, but not dramatically so. I would say that it&rsquo;s acceptable.</p>
+
+<p>One thing that I did notice however was that the Perf Monitor showed that the RAM usage went from about 158ish MB to 172ish MB. Not substantial, but not insigificant either.</p>
+
+<p>Now I have two questions:</p>
+
+<ol>
+<li>Obviously just requiring from a static string is no more flexible than doing an <code>import</code> from the top of the file. Can I use a variable?</li>
+<li>Can I get that memory usage back down?</li>
+</ol>
+
+<p>The answer to the first question seems pretty obvious at first blush.</p>
+
+<p>Simply add a configuration property and reference it.</p>
+
+<pre><code>// config.ts
+export default {
+  listItemRowComponent: 'src/components/ListItemRowComponent1.tsx'
+}
+
+// component.ts
+render() {
+  const listItemRowComponent = require(config.listItemRowComponent)
+  return (&lt;listItemRowComponent prop1={'value1'} prop2={'value2'} /&gt;)
+}
+</code></pre>
+
+<p>Turns out RN isn&rsquo;t a big fan of this approach, and I got the Red Screen of Death.</p>
+
+<p>Okay. I definitely wanted to be able to define which component to use in my config file. What do I do?</p>
+
+<p>Step 6:
+At this point I did what all developers do in this situation &ndash; I Googled. It then pointed me to this wonderful <a href="https://stackoverflow.com/questions/33907218/react-native-use-variable-for-image-file">StackOverflow</a> post.</p>
+
+<p>Of course! Just <code>require</code> it directly into my config value:</p>
+
+<pre><code class="language-config.ts">export default {
+  listItemRowComponent: require('src/components/ListItemRowComponent1.tsx').default
+}
+</code></pre>
+
+<p>Step 7:
+Then simply render the <code>config.listItemRowComponent</code> as such:</p>
+
+<pre><code class="language-component.ts">render() {
+  return (&lt;config.listItemRowComponent prop1={'value1'} prop2={'value2'} /&gt;)
+}
+</code></pre>
+
+<p>And it works! Awesome. This makes me happy. It&rsquo;s configurable, extendable and manageable. Great &lsquo;ables&rsquo; all around. And it&rsquo;s performant.</p>
+
+<p>Taking a quick view of the performance snapshop I&rsquo;m seeing render times of roughly 9ms for the component when referenced as such.</p>
+
+<p><img src="/images/require_config.png" alt="Require in config" title="Require in config" /></p>
+
+<p>Perf Monitor is also reporting that my RAM usage is comparable to the standard <code>import component from ...</code> syntax.</p>
+
+<p>Fantastic!</p>
+
+<p>My conclusion:</p>
+
+<p>One big downside to this pattern is that you lose the ability to quickly navigate to a UI components implementation within VS code, directly linking between
+props and implementations.  You also lose the ability to refactor property types. Linters aren&rsquo;t going to catch any issues with the props either.
+This could be an issue if you use these tools as crutches. I know that I rely heavily on the refactor abilities (naming things is not easy).</p>
+
+<p>Note that perf monitor, and the Google Chrome Performance recording isn&rsquo;t exact. The app was tested while in DEV mode, which means that the performance
+will be worse than in prodiction, however my thoughts are that if I can get the app running well without any React optimizations, when those are in place
+the app will run even smoother.</p>
+
+				]]>
+			</description>
+			<pubDate>Wed, 08 May 2019 09:59:01 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/rendering_dynamic_components_with_react_native_and_the_performance_implications.html</guid>
+		</item>
+	
+		<item>
 			<title>Migrating from 1Password to KeePassXC</title>
 			<link>http://RyanNickel.com/html/migrating_from_1password_to_keepassxc.html</link>
 			<description>
@@ -69,7 +217,7 @@
 
 				]]>
 			</description>
-			<pubDate>Wed, 02 Jan 2019 14:41:54 PST</pubDate>
+			<pubDate>Wed, 02 Jan 2019 14:41:54 -0800</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/migrating_from_1password_to_keepassxc.html</guid>
 		</item>
 	
@@ -126,7 +274,7 @@ c) minimize the emotional importance and personal excitement of our baby announc
 
 				]]>
 			</description>
-			<pubDate>Wed, 31 Oct 2018 14:20:23 -0400</pubDate>
+			<pubDate>Wed, 31 Oct 2018 14:20:23 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/on_deleting_my_facebook_account.html</guid>
 		</item>
 	
@@ -153,7 +301,7 @@ c) minimize the emotional importance and personal excitement of our baby announc
 
 				]]>
 			</description>
-			<pubDate>Tue, 15 May 2018 22:16:48 -0400</pubDate>
+			<pubDate>Tue, 15 May 2018 22:16:48 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/docker_and_charles.html</guid>
 		</item>
 	
@@ -215,7 +363,7 @@ c) minimize the emotional importance and personal excitement of our baby announc
 
 				]]>
 			</description>
-			<pubDate>Fri, 08 Apr 2016 08:43:47 -0400</pubDate>
+			<pubDate>Fri, 08 Apr 2016 08:43:47 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/more_project_updates.html</guid>
 		</item>
 	
@@ -334,7 +482,7 @@ $ sudo tail -f /syslog
 
 				]]>
 			</description>
-			<pubDate>Thu, 10 Mar 2016 06:11:23 PST</pubDate>
+			<pubDate>Thu, 10 Mar 2016 06:11:23 -0800</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_sumo_logic.html</guid>
 		</item>
 	
@@ -508,7 +656,7 @@ experimentsdockerenvs_envtest_1 exited with code 0
 
 				]]>
 			</description>
-			<pubDate>Wed, 02 Mar 2016 09:52:18 PST</pubDate>
+			<pubDate>Wed, 02 Mar 2016 09:52:18 -0800</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/playing_with_docker_enviornment_variables.html</guid>
 		</item>
 	
@@ -595,7 +743,7 @@ Peter Bourgon&rsquo;s post about <a href="http://peter.bourgon.org/go-in-product
 
 				]]>
 			</description>
-			<pubDate>Thu, 18 Feb 2016 05:46:24 PST</pubDate>
+			<pubDate>Thu, 18 Feb 2016 05:46:24 -0800</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/my_first_go_project.html</guid>
 		</item>
 	
@@ -649,7 +797,7 @@ ERROR: Base64 decode is not supported on your Operating System. Please update yo
 
 				]]>
 			</description>
-			<pubDate>Fri, 05 Feb 2016 17:57:18 PST</pubDate>
+			<pubDate>Fri, 05 Feb 2016 17:57:18 -0800</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_loggly.html</guid>
 		</item>
 	
@@ -758,21 +906,8 @@ eval $(docker-machine env awslogging)
 
 				]]>
 			</description>
-			<pubDate>Mon, 18 Jan 2016 09:07:58 PST</pubDate>
+			<pubDate>Mon, 18 Jan 2016 09:07:58 -0800</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker.html</guid>
-		</item>
-	
-		<item>
-			<title>Hello world</title>
-			<link>http://RyanNickel.com/html/hello_world.html</link>
-			<description>
-				<![CDATA[
-					<p>Welcome to my personal site. Here I will be posting my &ldquo;thought poops&rdquo;. It&rsquo;s mostly musings about development and design related stuff&hellip; I think. I likely won&rsquo;t be writing too much. The site is more of a place for me to experiment.</p>
-
-				]]>
-			</description>
-			<pubDate>Mon, 04 Jan 2016 11:33:21 PST</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/hello_world.html</guid>
 		</item>
 	
 

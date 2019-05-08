@@ -32,16 +32,29 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <article>
-            <p><p>I am currently working on a project that needs to be very flexible and very dynamic. Different builds require slightly different UI. Thankfully
-the same actions and business logic apply. My concern with this requirement was for upstream git merges. I wanted to ensure, as much as possible
-that any updates wouldn&rsquo;t overwrite the custom UI.</p>
+            <p><p>I am currently working on a project that cries out for flexibility and dynamic functionality. Different builds require slightly different UI.
+Thankfully the same actions and business logic apply.</p>
 
-<p>In an effort to accomplish this task, I wanted to ensure that the UI was void of as much logic as possible. Because my React Native app runs on Redux I could leverage the container / dumb component design pattern to accomplish that task.</p>
+<p>My concern:</p>
+
+<p>Because all builds are branched off of the same master branch, and each build could have slightly different UI any upstream bug fixes could
+potentially overwrite existing UI or cause conflicts. Both issues I would like to try to avoid.</p>
+
+<p>I wanted to accomplish the above for developer frendliness while alsp keeping the app as performant as possible.</p>
+
+<p>Aside: Generally when creating an app you want to aim for 60 frames per second. This means that the render time goal is 16ms or less.</p>
+
+<p>My solution:
+Because my React Native app runs on Redux I could leverage the container / dumb component design pattern to ensure that no potential business
+logic was lost. I could also use this to potentially swap out the UI component based on a builds configuration.</p>
 
 <p>i.e. The container would <code>connect</code> all the appropriate props and dispatch actions, then <code>render</code> the appropriate component for the build.</p>
 
-<p>First I wanted to verify that it was possible to import a component outside of the standard <code>import component from ...</code> syntax with the
+<p>Step 1:
+First I wanted to verify that it was possible to import a component outside of the standard <code>import component from ...</code> syntax with the
 <code>require</code> syntax, so that I could then verify that my desired pattern was even a possibility.</p>
+
+<p>Assumption: Totally possible</p>
 
 <pre><code>render() {
   const listItemRowComponent = require('src/components/ListItemRowComponent1.tsx')
@@ -49,20 +62,25 @@ that any updates wouldn&rsquo;t overwrite the custom UI.</p>
 }
 </code></pre>
 
-<p>I refreshed my screen, and success! It worked!</p>
+<p>Step 2:
+I refreshed my screen, and success! It worked! Whenever implementing a new pattern I always try to measure the performance implications.</p>
 
-<p>Whenever implementing a new pattern I always want to try to measure the performance implications. So the question I wanted to answer was what are the performance
-implications of requiring this component every time instead of simply importing it at the top of my class component.</p>
+<p>Now what?
+The question I wanted to answer was what are the performance implications of requiring this component every time instead of simply importing
+it at the top of my class component.</p>
 
-<p>The first thing I wanted to do was to establish a baseline. How many milliseconds on average would it take to render my component when
-doing a standard <code>import</code>?</p>
+<p>Step 3:
+Now I wanted to do was establish a performance baseline. How many milliseconds on average would it take to render my component when doing
+a standard <code>import</code>?</p>
 
-<p>So I fired up Google Chrome&rsquo;s peformance tool, started the recording, navigated to the screen, waited for the load and scrolled down a bit.
-I then investigated the results.</p>
+<p>Step 4:
+So I fired up Google Chrome&rsquo;s peformance tool, started the recording, navigated to the screen, waited for the load and scrolled down a bit.</p>
+
+<p>I then investigated the results:</p>
 
 <p><img src="/images/base_line.png" alt="Baseline" title="Baseline" /></p>
 
-<p>At a glance it looks as though the average rendering time is about 7ish ms. Fantastic! Under that desired 16ms we aim for.</p>
+<p>At a glance, it looks as though the average rendering time is about 7ish ms. Fantastic! Under that desired 16ms we aim for.</p>
 
 <p>I wonder what the <a href="https://facebook.github.io/react-native/docs/performance#what-you-need-to-know-about-frames">React Native Perf Monitor</a> showed as well with regards to RAM usage and UI vs JS frames per second.</p>
 
@@ -72,16 +90,17 @@ I then investigated the results.</p>
 
 <ul>
 <li>Ram goes up to: 158ish MB</li>
-<li>with scrolling I see the UI thread go down to 58, but the JS stays consistent at 60. Great!</li>
+<li>with scrolling, I see the UI thread go down to 58, but the JS stays consistent at 60. Great!</li>
 </ul>
 
-<p>I then implemented the above <code>render()</code> function to see what, if any, performance implications</p>
+<p>Step 5:
+I then implemented the above <code>render()</code> function to see what, if any, performance implications</p>
 
 <p>Assumption: I won&rsquo;t see any dramatic differences.</p>
 
 <p><img src="/images/require_all_the_time.png" alt="Require All The Time" title="Require all the time" /></p>
 
-<p>There was a slight increase with this new method, but not dramatically so. I would say that it&rsquo;s in the area of acceptability.</p>
+<p>There was a slight increase with this new method, but not dramatically so. I would say that it&rsquo;s acceptable.</p>
 
 <p>One thing that I did notice however was that the Perf Monitor showed that the RAM usage went from about 158ish MB to 172ish MB. Not substantial, but not insigificant either.</p>
 
@@ -92,7 +111,9 @@ I then investigated the results.</p>
 <li>Can I get that memory usage back down?</li>
 </ol>
 
-<p>The answer to the first question seems pretty obvious at first blush. Simply add a configuration property and reference it.</p>
+<p>The answer to the first question seems pretty obvious at first blush.</p>
+
+<p>Simply add a configuration property and reference it.</p>
 
 <pre><code>// config.ts
 export default {
@@ -108,9 +129,10 @@ render() {
 
 <p>Turns out RN isn&rsquo;t a big fan of this approach, and I got the Red Screen of Death.</p>
 
-<p>Okay&hellip; I definitely wanted to be able to define which component to use in my config file&hellip; what to do?</p>
+<p>Okay. I definitely wanted to be able to define which component to use in my config file. What do I do?</p>
 
-<p>At this point I did what all developers do in this situation. I went to Google, which then pointed me to this wonderful <a href="https://stackoverflow.com/questions/33907218/react-native-use-variable-for-image-file">StackOverflow</a> post.</p>
+<p>Step 6:
+At this point I did what all developers do in this situation &ndash; I Googled. It then pointed me to this wonderful <a href="https://stackoverflow.com/questions/33907218/react-native-use-variable-for-image-file">StackOverflow</a> post.</p>
 
 <p>Of course! Just <code>require</code> it directly into my config value:</p>
 
@@ -119,7 +141,8 @@ render() {
 }
 </code></pre>
 
-<p>Then simply render the <code>config.listItemRowComponent</code> as such:</p>
+<p>Step 7:
+Then simply render the <code>config.listItemRowComponent</code> as such:</p>
 
 <pre><code class="language-component.ts">render() {
   return (&lt;config.listItemRowComponent prop1={'value1'} prop2={'value2'} /&gt;)
@@ -132,17 +155,21 @@ render() {
 
 <p><img src="/images/require_config.png" alt="Require in config" title="Require in config" /></p>
 
-<p>Perf Monitor is also reporting that my RAM usage is comparable to the standard <code>import component from ...</code> syntax. Fantastic!</p>
+<p>Perf Monitor is also reporting that my RAM usage is comparable to the standard <code>import component from ...</code> syntax.</p>
 
-<p>One big downside to this pattern is that you lose the ability to quickly navigate to a components implementation within VS code, directly linking between
-props and implementations, and you also lose the ability to refactor property types. Linters aren&rsquo;t going to catch any issues with the props either.
-This could be a big issue if you lean on such tools heavily. I know that I rely heavily on the refactor abilities (naming things is hard!).</p>
+<p>Fantastic!</p>
+
+<p>My conclusion:</p>
+
+<p>One big downside to this pattern is that you lose the ability to quickly navigate to a UI components implementation within VS code, directly linking between
+props and implementations.  You also lose the ability to refactor property types. Linters aren&rsquo;t going to catch any issues with the props either.
+This could be an issue if you use these tools as crutches. I know that I rely heavily on the refactor abilities (naming things is not easy).</p>
 
 <p>Note that perf monitor, and the Google Chrome Performance recording isn&rsquo;t exact. The app was tested while in DEV mode, which means that the performance
 will be worse than in prodiction, however my thoughts are that if I can get the app running well without any React optimizations, when those are in place
 the app will run even smoother.</p>
 </p>
-            <p class="published-date">Apr 30, 2019</p>
+            <p class="published-date">May 08, 2019</p>
           </article>
         </div>
       </div>
