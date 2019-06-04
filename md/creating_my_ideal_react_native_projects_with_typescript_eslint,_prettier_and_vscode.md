@@ -112,7 +112,7 @@ $ yarn add --dev     @typescript-eslint/eslint-plugin \
 
 Phew! That's a lot of dependencies. Welcome to JavaScript I guess!
 
-Note: I prefer to use the default Airbnb rules. (side note: Want to learn more about JavaScript excenticities? Read the [Airbnb JavaScript style guide](https://github.com/airbnb/javascript))
+Note: I prefer to use the default Airbnb rules. (side note: Want to learn more about JavaScript eccentricities? Read the [Airbnb JavaScript style guide](https://github.com/airbnb/javascript))
 
 Finally, let's modify a few config files.
 
