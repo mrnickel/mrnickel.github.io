@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - Creating My Ideal React Native Projects With TypeScript ESLint, Prettier and VSCode</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">Creating My Ideal React Native Projects With TypeScript ESLint, Prettier and VSCode</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>With the <a href="https://medium.com/palantir/tslint-in-2019-1a144c2317a9">announcement of TSLint being deprecated in favour of using ESLint</a>
+I thought it was a good opportunity to set up a template project with my five required features on any React Native project I start. Namely:</p>
+
+<ol>
+<li>Writing in TypeScript with proper linting</li>
+<li>Utilize Prettier to automatically fix code styles</li>
+<li>Set up VSCode for live linting</li>
+<li>Set up VSCode to properly format using Prettier config on save</li>
+<li>Resolve imports from the root instead of relatively (i.e. no <code>import x from '../../../x';</code>)</li>
+</ol>
+
+<p>This post is really more for myself as a reminder on what is required to meet the above conditions. As I learn more I&rsquo;ll update this post.</p>
+
+<p>This took me <em>far</em> longer than I had originally anticipated. Although I&rsquo;m not new to React Native, I am new to some of the more advanced
+JavaScript tooling.</p>
+
+<p>I won&rsquo;t go through all of the things that I tried and <em>didn&rsquo;t</em> work, as there were far too many of them and I can&rsquo;t fully recall the number of hoops
+I tried to jump through before realizing they were the wrong hoop to begin with. (note to self: I should document my processes <em>as</em> they&rsquo;re happening,
+instead of after the fact).</p>
+
+<p>Let&rsquo;s walk through the process of creating an entirely new React Native TypeScript project, then set up the project to address the 5 requirements outlined
+above.</p>
+
+<p>Thankfully the process of adding TypeScript to the RN projects has been greatly simplified. Let&rsquo;s stick with the React Native convention and create a new
+project <strong>MyAwesomeProject</strong></p>
+
+<pre><code>$ react-native init MyAwesomeProject --template typescript
+</code></pre>
+
+<p>Done. We&rsquo;re running on TypeScript. Huzzah!</p>
+
+<p>Now let&rsquo;s set up the recommended VSCode extensions so we can verify the linting rules as we do everything:</p>
+
+<pre><code>$ cd MyAwesomeProject
+$ mkdir .vscode &amp;&amp; cd .vscode
+$ touch extensions.json
+$ touch settings.json
+$ cd ..
+$ mkdir src
+$ code .
+</code></pre>
+
+<p>This will create the .vscode project folder and open up the project.</p>
+
+<p>I prefer to keep my folder structure as follows:</p>
+
+<pre><code>MyAwesomeProject
+|____tests__/
+|__.vscode/
+|__android/
+|__ios/
+|__src/
+|  |__components/ // general components shared throughout the codebase
+|  |__scenes/ // full screen sections
+|  |  App.tsx
+|
+|  .bablerc.js
+|  ...
+|  etc
+|  ...
+</code></pre>
+
+<p>This will become important when specifying the root paths in <code>tsconfig.json</code> and <code>.babelrc.js</code>.</p>
+
+<p>Let&rsquo;s update the <code>extensions.json</code> file as below:</p>
+
+<h2>./vscode/extensions.json</h2>
+
+<pre><code>{
+  &quot;recommendations&quot;: [
+    &quot;dbaeumer.vscode-eslint&quot;,
+    &quot;esbenp.prettier-vscode&quot;
+  ]
+}
+</code></pre>
+
+<p>Now we can make sure that everyone opening this project will use the same default extensions and have the same consistent tooling.</p>
+
+<p>Now it&rsquo;s time to start adding the various dependencies:</p>
+
+<p>Open up the VSCode terminal by pressing <code>CTRL +</code>`.</p>
+
+<p>Let&rsquo;s start adding some dependencies:</p>
+
+<pre><code>$ yarn add --dev     @typescript-eslint/eslint-plugin \
+  @typescript-eslint/parser \
+  babel-eslint \
+  babel-plugin-module-resolver \
+  eslint \
+  eslint-config-airbnb \
+  eslint-config-prettier \
+  eslint-config-react \
+  eslint-import-resolver-babel-module \
+  eslint-import-resolver-typescript \
+  eslint-plugin-import \
+  eslint-plugin-jsx-a11y \
+  eslint-plugin-module-resolver \
+  eslint-plugin-prettier \
+  eslint-plugin-react \
+  prettier \
+  react-native-typescript-transformer \
+</code></pre>
+
+<p>Phew! That&rsquo;s a lot of dependencies. Welcome to JavaScript I guess!</p>
+
+<p>Note: I prefer to use the default Airbnb rules. (side note: Want to learn more about JavaScript eccentricities? Read the <a href="https://github.com/airbnb/javascript">Airbnb JavaScript style guide</a>)</p>
+
+<p>Finally, let&rsquo;s modify a few config files.</p>
+
+<h2>./vscode/settings.json</h2>
+
+<pre><code>{
+  &quot;search.exclude&quot;: {
+    &quot;ios/build&quot;: true,
+    &quot;android/app/build&quot;: true,
+  },
+  &quot;editor.formatOnSave&quot;: false,
+  &quot;editor.trimAutoWhitespace&quot;: true,
+  &quot;editor.tabSize&quot;: 2,
+  &quot;editor.rulers&quot;: [
+    150
+  ],
+  &quot;eslint.autoFixOnSave&quot;: true,
+  &quot;eslint.validate&quot;: [
+    {
+      &quot;language&quot;: &quot;javascript&quot;,
+      &quot;autoFix&quot;: true
+    },
+    {
+      &quot;language&quot;: &quot;javascriptreact&quot;,
+      &quot;autoFix&quot;: true
+    },
+    {
+      &quot;language&quot;: &quot;typescript&quot;,
+      &quot;autoFix&quot;: true
+    },
+    {
+      &quot;language&quot;: &quot;typescriptreact&quot;,
+      &quot;autoFix&quot;: true
+    }
+  ],
+  &quot;files.exclude&quot;: {
+    &quot;**/node_modules&quot;: true,
+    &quot;**/android/app/build&quot;: true,
+    &quot;**/ios/build&quot;: true
+  },
+  &quot;files.insertFinalNewline&quot;: true,
+}
+</code></pre>
+
+<h2>.eslintignore</h2>
+
+<pre><code>src/registerServiceWorker.js
+src/**/__tests__/**
+babel.config.js
+index.js
+node_modules/**
+ios/**
+android/**
+</code></pre>
+
+<h2>.eslint.js</h2>
+
+<pre><code>module.exports = {
+  &quot;parser&quot;: &quot;@typescript-eslint/parser&quot;,
+  &quot;plugins&quot;: [
+    &quot;@typescript-eslint&quot;,
+    &quot;prettier&quot;,
+    &quot;import&quot;,
+    &quot;module-resolver&quot;
+  ],
+  &quot;extends&quot;: [
+    &quot;airbnb&quot;,
+    &quot;plugin:@typescript-eslint/recommended&quot;,
+    &quot;plugin:import/typescript&quot;,
+    &quot;plugin:react/recommended&quot;,
+    &quot;plugin:import/recommended&quot;,
+    &quot;prettier&quot;,
+    &quot;prettier/@typescript-eslint&quot;,
+    &quot;prettier/react&quot;
+  ],
+  &quot;env&quot;: {
+    &quot;browser&quot;: true,
+    &quot;jasmine&quot;: true,
+    &quot;jest&quot;: true
+  },
+  &quot;rules&quot;: {
+    &quot;prettier/prettier&quot;: [&quot;error&quot;],
+    &quot;@typescript-eslint/explicit-member-accessibility&quot;: 0,
+    &quot;@typescript-eslint/no-empty-interface&quot;: 0,
+    &quot;@typescript-eslint/explicit-function-return-type&quot;: 0,
+    &quot;@typescript-eslint/no-non-null-assertion&quot;: 0,
+    &quot;@typescript-eslint/no-use-before-define&quot;: 0,
+    &quot;no-use-before-define&quot;: 0,
+    &quot;@typescript-eslint/indent&quot;: [&quot;error&quot;, 2],
+    &quot;max-len&quot;: [&quot;error&quot;, 150],
+    &quot;react/jsx-filename-extension&quot;: [1, { &quot;extensions&quot;: [&quot;.jsx&quot;, &quot;.tsx&quot;] }],
+    &quot;object-curly-newline&quot;: [&quot;error&quot;, { &quot;ImportDeclaration&quot;: &quot;never&quot; }],
+    &quot;@typescript-eslint/interface-name-prefix&quot;: 0,
+    &quot;class-methods-use-this&quot;: 0,
+    &quot;no-unused-vars&quot;: 0,
+    &quot;@typescript-eslint/no-unused-vars&quot;: [&quot;error&quot;, { &quot;argsIgnorePattern&quot;: &quot;^_[0-9]?&quot; }],
+    &quot;react/display-name&quot;: 0,
+    &quot;react/prop-types&quot;: 0, // not necessary as we use typescript
+    &quot;object-curly-newline&quot;: 0,
+
+  },
+  &quot;settings&quot;: {
+    &quot;import/resolver&quot;: {
+      &quot;babel-module&quot;: {},
+      &quot;typescript&quot;: {}
+    }
+  },
+  &quot;globals&quot;: {
+    &quot;__DEV__&quot;: true
+  }
+}
+</code></pre>
+
+<p>Note I prefer the js extension so I can add inline comments.</p>
+
+<h2>.prettierrc.js</h2>
+
+<pre><code>module.exports = {
+  &quot;tabWidth&quot;: 2,
+  &quot;semi&quot;: true,
+  &quot;singleQuote&quot;: true,
+  &quot;trailingComma&quot;: &quot;all&quot;,
+  &quot;printWidth&quot;: 150,
+  &quot;bracketSpacing&quot;: true
+};
+</code></pre>
+
+<h2>.babelrc.js</h2>
+
+<pre><code>module.exports = {
+  presets: [
+    'module:metro-react-native-babel-preset'
+  ],
+  plugins: [
+    ['module-resolver',
+      {
+        extensions: [
+          '.js',
+          '.jsx',
+          '.ts',
+          '.tsx'
+        ],
+        root: [&quot;./src&quot;],
+        alias: {
+          &quot;resources&quot;: &quot;./resources&quot;
+        }
+      }
+    ]
+  ]
+};
+</code></pre>
+
+<p>Note: I prefer to use the name <code>.bablerc.js</code> to stick with the other config file naming conventions.</p>
+
+<h2>tsconfig.json</h2>
+
+<pre><code>{
+  &quot;compilerOptions&quot;: {
+    &quot;allowJs&quot;: true,
+    &quot;allowSyntheticDefaultImports&quot;: true,
+    &quot;esModuleInterop&quot;: true,
+    &quot;isolatedModules&quot;: true,
+    &quot;jsx&quot;: &quot;react&quot;,
+    &quot;lib&quot;: [
+      &quot;es6&quot;
+    ],
+    &quot;module&quot;: &quot;es2015&quot;,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    &quot;noEmit&quot;: true,
+    &quot;strict&quot;: true,
+    &quot;target&quot;: &quot;esnext&quot;,
+    &quot;baseUrl&quot;: &quot;./src&quot;,
+    &quot;rootDir&quot;: &quot;./src&quot;,
+    &quot;resolveJsonModule&quot;: true
+  },
+  &quot;exclude&quot;: [
+    &quot;node_modules&quot;,
+    &quot;babel.config.js&quot;,
+    &quot;metro.config.js&quot;,
+    &quot;jest.config.js&quot;
+  ]
+}
+</code></pre>
+
+<p>That&rsquo;s about it. Now get started writing your next world-changing app with sane defaults.</p>
+
+<p>I&rsquo;ve created a <a href="https://github.com/mrnickel/ReactNativeTypeScriptConfigDemo">demo project on GitHub</a>. If you have any recommendations on how I can make this better please feel free to submit a PR!</p>
+</p>
+            <p class="published-date">Jun 04, 2019</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
