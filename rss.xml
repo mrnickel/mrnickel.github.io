@@ -9,6 +9,89 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>My Thoughts on WWDC 2019</title>
+			<link>http://RyanNickel.com/html/my_thoughts_on_wwdc_2019.html</link>
+			<description>
+				<![CDATA[
+					<p>WWDC is an event I&rsquo;ve been watching every year since I think 2007, the year they announced the iPhone. At the time I was a big Apple fanboy.</p>
+
+<p>I bought my first iBook which I believe was the 2002 model. I can&rsquo;t be sure. I was in University and it cost me more money than I had, but I had
+never been so satisfied with a computer in my life. As Marie Kondo would say, it sparked joy. Our computer lab had macs, but they were running
+Mac OS 9. The OS made no sense to me. I came from a Windows world, and although I was very comfortable with that, OS 9 to me always felt clunky
+and unintuitive.</p>
+
+<p>Never would I buy a Mac, I told myself&hellip; even though the hardware was fun and always boasted more up-to-date technology, I just couldn&rsquo;t get
+past the OS.</p>
+
+<p>Then a friend of mine brought his Powerbook over running OS X. It immediately changed my mind. That machine was a revelation to me. &ldquo;Holy shit!&rdquo; I said,
+&ldquo;This is a Mac??&rdquo;. &ldquo;Yes&rdquo;, he replied. &ldquo;This is a Mac.&rdquo;.</p>
+
+<p>I went out a few weeks later and bought the iBook. Every device they released after that I felt the same reverence for:</p>
+
+<ul>
+<li>iPod</li>
+<li>iPod video</li>
+<li>iPhone</li>
+<li>iPad</li>
+<li>Apple TV</li>
+</ul>
+
+<p>All of them brought joy to my life. I dutifully upgraded my Apple devices throughout the years.</p>
+
+<p>I&rsquo;ve owned iBooks, MacMini&rsquo;s, MacBooks, MacBook Airs and now MacBook Pros. I&rsquo;ve been running the Pro series for the last 5+ years. I&rsquo;ve owned basically every
+generation of iPhone to date (I <em>am</em> an iOS developer after all), and various iPads. You name it, I&rsquo;ve bought it.</p>
+
+<p>I also continued to watch WWDC year after year soaking up all the SDK updates for OS X, then for iOS. Objective C was never my language of choice, but
+I used it, and grew to appreciate all the square brackets. It wasn&rsquo;t until the announcement of Swift that I realized my appreciation for the spacing
+in ObjC was more stokcholme syndrome.</p>
+
+<p>Over the years, I must admit I became more and more discouraged with the direction Apple was taking for their products.</p>
+
+<p>The hardware wasn&rsquo;t really pushing the envelope, the build quality of both the hardware and software seemed to be suffering. All the new features brought
+to iOS seemed a lot like &ldquo;me too&rdquo; features, years after Android (or even BlackBerry) had released them.</p>
+
+<p>Not to mention the plethora of issues with their latest keyboard.</p>
+
+<p>WWDC 2019 however has me excited for the first time in years. They announced a number of things that have me excited.</p>
+
+<h2>SwiftUI</h2>
+
+<p>Using swift within UIKit has always seemed a bit clunky.</p>
+
+<p>The introduction of SwiftUI seems to address this in a big way, and I&rsquo;m sure it&rsquo;s the direction Apple will be moving in going into the future.</p>
+
+<p>A quick glance at the declaritive style of reminds me very much of how you go about declaring your UI in React Native. A style that is very easy to understand.</p>
+
+<p>And the new design tools look incredible as well. No longer having to recompile the app in order to see if moving your component 3 points to the left is what you want
+is going to be a big game changer for a lot of developers. This is going to get XCode one step closer to the design experience of Anroid Studio, or StoryBooks in RN.</p>
+
+<h2>iPad OS</h2>
+
+<p>With regards to the iPad, it always felt to me like a missed opportunity. It was always treated as just a big iPhone. The device turned into a convenient
+way for me to watch Netflix on the go.</p>
+
+<p>I&rsquo;ve always wanted to use it to write my notes, but the lag on any of the 3rd party stylus&rsquo; have always been too long. The Pencil is much better, but still not quite fast enough for me to jot down a small note while working.</p>
+
+<p>However this year they are finally starting to use the plethora of screen realestate. Allowing multiple apps to move around, decreased the Pencil lag to 9ms!
+That&rsquo;s crazy! At 9ms I think I&rsquo;ll be able to finally realize my dream of going fully paperless!</p>
+
+<p>And my most anticipated feature: Sidecar. Yes! Finally allowing me to extend my MacBook Pro&rsquo;s screen to a second monitor when I&rsquo;m on the go (I&rsquo;m on the go a lot).</p>
+
+<h2>Catalina</h2>
+
+<p>No more iTunes. I mean I don&rsquo;t think I can add any more to this.</p>
+
+<p>Sidecar (again)</p>
+
+<p>More security. I really appreciate the stance Apple is making on security. Bringing it front and centre, and making it secure by default.</p>
+
+				]]>
+			</description>
+			<pubDate>Sat, 20 Jul 2019 18:06:25 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/my_thoughts_on_wwdc_2019.html</guid>
+		</item>
+	
+		<item>
 			<title>Creating My Ideal React Native Projects With TypeScript ESLint, Prettier and VSCode</title>
 			<link>http://RyanNickel.com/html/creating_my_ideal_react_native_projects_with_typescript_eslint,_prettier_and_vscode.html</link>
 			<description>
@@ -1050,60 +1133,6 @@ Peter Bourgon&rsquo;s post about <a href="http://peter.bourgon.org/go-in-product
 			</description>
 			<pubDate>Thu, 18 Feb 2016 05:46:24 -0800</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/my_first_go_project.html</guid>
-		</item>
-	
-		<item>
-			<title>Logging with Docker and Loggly</title>
-			<link>http://RyanNickel.com/html/logging_with_docker_and_loggly.html</link>
-			<description>
-				<![CDATA[
-					<p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs. When designing scalable software, typically you&rsquo;ll end up with many instances of a single service. Signing into each instance to view logs can be very troublesome (and annoying!). Luckily there are ways to get around this annoyance. Enter Loggly.</p>
-
-<p>Now I&rsquo;m partial to taking the path to least resistance, and as such I&rsquo;m going to follow Loggly&rsquo;s own documentation on using the <a href="https://www.loggly.com/docs/docker-logging-driver/">Docker Logging Driver</a>.</p>
-
-<p>From what I understand about using Docker on a Mac, the docker-machine would be where I would have to SSH into in order to perform step 1 (Configure Syslog Daemon).</p>
-
-<p>SSH&rsquo;ing into my default docker-machine via <code>docker-machine ssh default</code> and attempting to execute <code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME</code> leaves me with an error informing me: <code>bash: command not found</code>. Okay, let&rsquo;s install bash then.</p>
-
-<p>The default docker machine flavour of linux on mac is <a href="http://www.tinycorelinux.net">Tiny Core Linux</a>, so we can use their <code>tcl</code> command to bring up their package installer.</p>
-
-<pre><code>$ tce
-$ s // to search
-$ bash // to search for bash
-$ 2 // to install bash.tcz
-$ i // to confirm installation
-</code></pre>
-
-<p>Now that bash is installed, let&rsquo;s try to execute the configuration script again:</p>
-
-<pre><code>sudo bash configure-linux.sh -a SUBDOMAIN -u USERNAME
-</code></pre>
-
-<p>And we get&hellip;</p>
-
-<pre><code>Loggly account or subdomain: XXX
-Username is set
-Please enter Loggly Password:
-</code></pre>
-
-<p>Great! It&rsquo;s asking me for more. Enter the password and&hellip;.</p>
-
-<pre><code>INFO: Initiating Configure Loggly for Linux.
-configure-linux.sh: line 626: base64: command not found
-configure-linux.sh: line 626: echo: write error: Broken pipe
-ERROR: Base64 decode is not supported on your Operating System. Please update your system to support Base64.
-</code></pre>
-
-<p>Well that&rsquo;s no good. After searching for WAY to long on how to install base64 on TCL I came up empty.</p>
-
-<p>Unfortunately it seems as though the Docker Logging Driver for Loggly just isn&rsquo;t an option for me.</p>
-
-<p>Next up I&rsquo;ll try to <a href="https://www.loggly.com/docs/rsyslog-manual-configuration/">manually configure rsyslog</a> instead of using the setup script.</p>
-
-				]]>
-			</description>
-			<pubDate>Fri, 05 Feb 2016 17:57:18 -0800</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/logging_with_docker_and_loggly.html</guid>
 		</item>
 	
 
