@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - On Getting AWS Solutions Architect Certified</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">On Getting AWS Solutions Architect Certified</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>Having accomplished my personal challenge of completing an olympic triathlon (while simultaneously rediscovering my love of cycling), I decided to tackle a professional challenge.</p>
+
+<p>So I went in search of something new.</p>
+
+<p>At the time, my team was  knee-deep in a lift and shift of our platform from MediaTemple to AWS. The process was going very smoothly and I found myself  intrigued by the number of overwhelming-yet-fascinating services they offer.</p>
+
+<p>An abundance of shiny new tools to  take our platform to the next level. I was hooked!  The search was over.  My professional challenge was to get my Solutions Architect Certification on AWS.</p>
+
+<h2>THE PREPARATION</h2>
+
+<h3>Online Course</h3>
+
+<p>Just like anything new, I had to do my research and gather learning resources.</p>
+
+<p>Amazon offered a number of white papers on the subject, but I found them to be too dry for my liking. I generally prefer to get my hands dirty and at least see some live examples.</p>
+
+<p>This led me to Pluralsight’s <a href="https://www.pluralsight.com/courses/aws-certified-solutions-architect-associate">AWS Certified Solutions Architect - Associate</a> course by <a href="https://twitter.com/ekhnaser">Elias Khnaser</a>. Other than the disappointment of marginally dated content, it was an overall solid course that allowed me to wrap my head around the networking and IAM concepts to help me improve the overall security of our platform.</p>
+
+<h3>Linux Academy</h3>
+
+<p>I also played around with <a href="https://linuxacademy.com/">Linux Academy</a> as I was captivated  by the prospect of working through exercises on a live AWS account and having my solution verified. However, at the time the platform was quite new and the results were inconsistent and quite often incorrect.</p>
+
+<p>I wish I could recall more details as to what my issues were but this was a long time ago and I&rsquo;m certain the platform has gotten much better. I&rsquo;d be curious to try it again when I decide to get another certification.</p>
+
+<h3>Study Guide</h3>
+
+<p>The final piece of learning material I picked up was the official <a href="https://www.amazon.ca/Certified-Solutions-Architect-Study-Guide/dp/111950421X/ref=sr_1_1?keywords=solutions+architect+study+guide&amp;qid=1580314684&amp;sr=8-1">AWS Certified Solutions Architect Study Guide</a>. It should come as no surprise that this book covered everything that one would be tested on. It was  valuable at presenting the various concepts and topics and offered some  fundamental study materials.</p>
+
+<h3>Practical Application</h3>
+
+<p>Now that I had the learning materials, I wanted to apply best practices and gain practical experience before I wrote the exam.</p>
+
+<p>Some of the goals I wanted to achieve with this were:</p>
+
+<ul>
+<li>Secure networking</li>
+<li>Secure IAM roles and security groups</li>
+<li>Autoscaling</li>
+<li>Reduce costs</li>
+</ul>
+
+<p>As I don&rsquo;t have a background in networking, that was the part I struggled with the most (Well&hellip; that and IAM). At the beginning I was excited just to get things up and running so my security groups weren&rsquo;t exactly up to snuff. Open to too many services and external network attacks. RDS was the biggest culprit for this as I was used to opening up my SQL app and connecting directly to it in order to debug any issues. I had contemplated setting up a VPN but considering one of my goals was to reduce costs I settled on locking down requests to my own IP address. As our platform was quite stable this was acceptable. If I or my team were connecting regularly I would have set up the VPN.</p>
+
+<p>Setting up proper networking was a hurdle for me. As the <a href="https://Volu.me">Volu.me</a> back end grew organically into a monolith, networking was never a thing I had to think about. It&rsquo;s easy to build and deploy a single codebase to a single server when everything is synchronous and request based. However as soon as your platform needs to scale you need to start thinking about being more reactive and asynchronous. This means at the very least running on difference processes, which quickly leads to overburdening a single machine. In the short term this can be mitigated by increasing the size of your EC2 instance, but this is obviously not sustainable. Best practice dictates to use multiple smaller EC2 instances which means putting more thought into networking. My goal was to only have two services publically available: S3 and our ELB. Our system was essentially a monolith with a number of cron jobs running as services so networking was pretty straight forward. I could go into more technical detail about our solution, but that would be better left to another blog post.</p>
+
+<p>My next hurdle was properly setting up IAM across our system. Again, because our system was essentially a monolith that was now distributed it gave me a good opportunity to ideally have services split up. I created the appropriate IAM accounts with the ideal microservice setup that we were aiming for and after some stressful afternoons we got everything running.</p>
+
+<h2>THE DEEP BREATH</h2>
+
+<p>Now that I had some practical experience setting up a non-trivial system on AWS following best practice I had one last hurdle to jump: My negative internal dialog constantly telling me that I wasn&rsquo;t ready.</p>
+
+<p>I hadn&rsquo;t written any tests in 10+ years! How would I know if I&rsquo;ve prepared enough? How do I know if I&rsquo;m really ready? I spent far too much time procrastinating by convincing myself that I wasn&rsquo;t prepared.</p>
+
+<p>After months of putting it off I dug my heels in, logged into the portal and booked a date.  There was no turning back. I told myself that I wasn&rsquo;t going to reschedule no matter what. I then did what I always do just before tests and crammed the entire week prior. Ran through all of the practice exams, exercises and anything else I could find.</p>
+
+<p>The night before the exam, I couldn’t focus on anything else.  My palms were sweaty, knees weak, arms were heavy…</p>
+
+<h2>THE EXAM</h2>
+
+<p>The day of the exam came and that familiar fluttering feeling in my stomach returned.</p>
+
+<p>I went through the test and I realized that as per usual I had over-prepared. In retrospect If it wasn’t for my fear,  I could have written the test months earlier.</p>
+
+<p>To my relief, I passed the test and was very thankful that I got the results instantly.</p>
+
+<h2>THE CONCLUSION</h2>
+
+<p>Although the <a href="https://Volu.me">Volu.me</a> (my company) platform has since been taken down, I am still an avid user of AWS and always recommend it to clients.</p>
+
+<p>I am concerned about vendor lockin, and to some extent it is unavoidable, but it can be mitigated with some effort&hellip; but again that is another blog post for another day.</p>
+
+<p>There it is; I tackled my professional challenge. I think my next personal (physical) challenge this year will either be learning to fly-fish, or run a full marathon Maybe both!</p>
+</p>
+            <p class="published-date">Mar 25, 2020</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
