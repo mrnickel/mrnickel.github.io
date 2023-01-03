@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - On Adding GitHub Actions To My StaticSiteGenerator</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">On Adding GitHub Actions To My StaticSiteGenerator</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>A number of years ago I started toying with <a href="https://go.dev">Go</a>. At the same time I was building this website you&rsquo;re reading right now. I wanted to join these two desires, so I thought I&rsquo;d take advantage of the, new to me, static site hosting of github for my personal website.</p>
+
+<p>I love learning new programming languages. I find that even if I don&rsquo;t use them in my day-to-day there&rsquo;s always a new paradigm that can be applied to whatever language I use as my daily driver.</p>
+
+<p>My big takeaway from Go was to <em>always</em> handle your errors, and to <em>always</em> make your errors explicit. Handling errors appropriately is a difficult thing to do. Do you retry? How many times? Does it make sense to simply retry? In what context do you retry? Do you simply bubble the error up to the user and have them address the errors? How many different kinds of errors can be returned? Errors and edge cases are the Hard Part of programming, and handling these appropriately separates a Good Developer from a Bad Developer.</p>
+
+<p>As an aside, when working with clients, I spend an inordinate amount of time trying to highlight and solution all of the possible edge cases. Somtimes they&rsquo;re edge cases that are incredibly unlikely to happen, however it&rsquo;s always good to highlight everything that could pontentially go wrong and how to deal with said issues.</p>
+
+<p>I build the <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a> as a way to play with Go, and to also tie that in with my attempt to statically host a site on <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+
+<p>I maintain enough servers daily, so the idea of maintaining another one for my personal site didn&rsquo;t appeal to me. Also, static site generators were all the rage, so why not jump on that band wagon?</p>
+
+<p>Anyway, I built the <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a>, which has been meeting my needs. The application has been running for me just fine, and my last commit was in 2018. If it ain&rsquo;t broke don&rsquo;t fix it.</p>
+
+<p>More recently I thought to myself, why not set up some CI/CD to automatically publish this software as a release to GitHub so I can easily pull it down to any of my machines to author a new post. No longer will I have to download the github repo, build it locally and set up aliases in my <code>.zprofile</code>. I can simply install the Go module and be on my way.</p>
+
+<p>I originally thought all I&rsquo;d have to do is create a github workflow to build and release it, however this is when I discovered that my app was a little outdated. Go had moved on from where I was. I had to quickly sort out their new module interfaces.</p>
+
+<p>Thankfully it wasn&rsquo;t too arduous.</p>
+
+<p>Previously I&rsquo;d simply <code>go build</code> and take the generated binary and be off to the races.</p>
+
+<p>Now it seems that go has these <em>modules</em>, which is Go&rsquo;s new way of managing Dependencies.</p>
+
+<p>I added the <code>go.mod</code> file which is sort of like <code>npm</code>&rsquo;s <code>package.json</code> file. Outlining all 3rd party dependencies, and I was back to building again.</p>
+
+<h2>Publish Binary To GitHub Release</h2>
+
+<p>Setting up the GitHub Action to publish the SimpleSiteGenerator was pretty straight forwrd.</p>
+
+<ol>
+<li>Add a <code>build.yml</code> file to the <code>.github/workflows</code> directory</li>
+</ol>
+
+<h2>Build.yml</h2>
+
+<pre><code>name: Go
+
+on:
+  push:
+    branches:
+      - &quot;!*&quot;
+    tags:
+      - &quot;v*.*.*&quot;
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19
+
+    - name: Run GoReleaser
+      uses: goreleaser/goreleaser-action@v4
+      with:
+        args: release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+</code></pre>
+
+<p>Fairly minimal. Whenever a tag is created in the format of <strong>vX.X.X</strong> the action will kick off, build the binary and upload it as a release.</p>
+
+<p>Alright, now that we have a package that we can <code>go install</code>, I can get to running things locally.</p>
+
+<h2>Install StaticSiteGenerator Locally</h2>
+
+<p>I want to do this in order to ensure that it will work remotely.</p>
+
+<p><code>go install github.com/mrnickel/StaticSiteGenerator@latest</code>
+<code>echo alias ssg='StaticSiteGenerator &gt;&gt; ~/.zprofile</code>
+<code>ssg</code></p>
+
+<p>This should now print out the actions of the StaticSiteGenerator.</p>
+
+<h1>Conclusion</h1>
+
+<p>Lately I&rsquo;ve been working primarily with TypeScript/JavaScript. Jumping back into Go is a nice breath of fresh air. It&rsquo;s so lightweight, doesn&rsquo;t require all sorts of build systems and bundlers. It <strong>just works</strong>.</p>
+
+<p>Next up I think I&rsquo;ll look into adding this as a <a href="https://brew.sh/">HomeBrew</a> package.</p>
+</p>
+            <p class="published-date">Jan 02, 2023</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
