@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - On Adding GZip Compression To StaticSiteGenerator</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/icons.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- <script src="/js/site.js"> -->
+  </head>
+  <body>
+  <div id="wrapper">
+    <div class="jumbotron" id="header">
+      <h1 class="text-center">On Adding GZip Compression To StaticSiteGenerator</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <article>
+            <p><p>In an attempt to be a Good Web Citizen, I thought I&rsquo;d try to add some GZip compression to the responses served up by the <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a>.</p>
+
+<p>What kind of performance increases will I get from this? Likely very little as my site is incredibly basic.</p>
+
+<p>Who&rsquo;s asking for this update? Absolutely no one.</p>
+
+<p>Why am I doing it? Curiosity.</p>
+
+<h2>Question 1: Performance Increase?</h2>
+
+<p>I&rsquo;m assuming there will be little to none. The site is essentially 99% text based. The other 1% would be the few images served up.</p>
+
+<ul>
+<li>Non GZipped: 169kb transfered</li>
+<li>GZipped: 54.8kb transferred</li>
+</ul>
+
+<p>Roughly a third less transferred to the client. I guess my assumption above was incorrect!</p>
+
+<h2>Question 2: How Complicated Would This Be?</h2>
+
+<p>Go is a very well thought out language purpose built for creating web applications. My assumption here is that it would be very straight forward.</p>
+
+<p>As I&rsquo;m by no means an effective Go programmer, and my experience is very limited with the language, I did what any developer would do: Google it.</p>
+
+<p>I found a few examples that relied on 3rd party packages to solve the problem, but as I always try to limit my reliance on others packages, I continued until I found something that relied solely on the <a href="https://pkg.go.dev/std">Go stdlib</a>. I found <a href="https://gist.github.com/bryfry/09a650eb8aac0fb76c24">this example</a> by <a href="https://github.com/bryfry">bryfry</a>, plugged it in and it worked instantly.</p>
+
+<h1>Conclusion</h1>
+
+<p>This was a fun little experiment. It was refreshing to dip my toes back into Go again, and dust off the knowledge a bit.</p>
+
+<p>Go&rsquo;s middleware design pattern is incredibly effective allowing for an elegant plug-n-play solution.</p>
+
+<p>I was suitably impressed with the performance gains of adding just a few lines of code. A third of the file size is enough to ensure that I definitely use this on all my other projects.</p>
+
+<p>I also always find it satisfying to work towards being a Good Web Citizen. No sense in adding more unnecessary bandwidth to the internet.</p>
+</p>
+            <p class="published-date">Jan 04, 2023</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 socials">
+          <p>
+            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
+          </p>
+          <p>Made with &hearts; in Toronto, Canada</p>
+          <img src="/img/toronto-icon-sm.png" height="70px" />
+          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35684132-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

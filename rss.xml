@@ -9,6 +9,54 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>On Adding GZip Compression To StaticSiteGenerator</title>
+			<link>http://RyanNickel.com/html/on_adding_gzip_compression_to_staticsitegenerator.html</link>
+			<description>
+				<![CDATA[
+					<p>In an attempt to be a Good Web Citizen, I thought I&rsquo;d try to add some GZip compression to the responses served up by the <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a>.</p>
+
+<p>What kind of performance increases will I get from this? Likely very little as my site is incredibly basic.</p>
+
+<p>Who&rsquo;s asking for this update? Absolutely no one.</p>
+
+<p>Why am I doing it? Curiosity.</p>
+
+<h2>Question 1: Performance Increase?</h2>
+
+<p>I&rsquo;m assuming there will be little to none. The site is essentially 99% text based. The other 1% would be the few images served up.</p>
+
+<ul>
+<li>Non GZipped: 169kb transfered</li>
+<li>GZipped: 54.8kb transferred</li>
+</ul>
+
+<p>Roughly a third less transferred to the client. I guess my assumption above was incorrect!</p>
+
+<h2>Question 2: How Complicated Would This Be?</h2>
+
+<p>Go is a very well thought out language purpose built for creating web applications. My assumption here is that it would be very straight forward.</p>
+
+<p>As I&rsquo;m by no means an effective Go programmer, and my experience is very limited with the language, I did what any developer would do: Google it.</p>
+
+<p>I found a few examples that relied on 3rd party packages to solve the problem, but as I always try to limit my reliance on others packages, I continued until I found something that relied solely on the <a href="https://pkg.go.dev/std">Go stdlib</a>. I found <a href="https://gist.github.com/bryfry/09a650eb8aac0fb76c24">this example</a> by <a href="https://github.com/bryfry">bryfry</a>, plugged it in and it worked instantly.</p>
+
+<h1>Conclusion</h1>
+
+<p>This was a fun little experiment. It was refreshing to dip my toes back into Go again, and dust off the knowledge a bit.</p>
+
+<p>Go&rsquo;s middleware design pattern is incredibly effective allowing for an elegant plug-n-play solution.</p>
+
+<p>I was suitably impressed with the performance gains of adding just a few lines of code. A third of the file size is enough to ensure that I definitely use this on all my other projects.</p>
+
+<p>I also always find it satisfying to work towards being a Good Web Citizen. No sense in adding more unnecessary bandwidth to the internet.</p>
+
+				]]>
+			</description>
+			<pubDate>Wed, 04 Jan 2023 10:42:53 EST</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/on_adding_gzip_compression_to_staticsitegenerator.html</guid>
+		</item>
+	
+		<item>
 			<title>On Adding GitHub Actions To My StaticSiteGenerator</title>
 			<link>http://RyanNickel.com/html/on_adding_github_actions_to_my_staticsitegenerator.html</link>
 			<description>
@@ -924,68 +972,6 @@ c) minimize the emotional importance and personal excitement of our baby announc
 			</description>
 			<pubDate>Tue, 15 May 2018 22:16:48 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/docker_and_charles.html</guid>
-		</item>
-	
-		<item>
-			<title>More Project Updates</title>
-			<link>http://RyanNickel.com/html/more_project_updates.html</link>
-			<description>
-				<![CDATA[
-					<p>As I write more posts I&rsquo;ve noticed more and more glaring holes in my site design / <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a> solution. A few pain points if you will. In an effort to reflect on my projects every so often I figured I&rsquo;d take a few notes on my blog / StaticSiteGenerator.</p>
-
-<h2>What&rsquo;s the goal?</h2>
-
-<p>I believe it&rsquo;s important for developers to take a step back and reflect on what their solutions original goals were. This allows us to put things into perspective. Did we veer way off course? Did our solution even solve our original problems? What do we need going forward?</p>
-
-<p>My goals for the StaticSiteGenerator was:</p>
-
-<ol>
-<li>Play with, and learn a new programming language (Go)</li>
-<li>Get a basic solution up that would allow me to periodically write blog posts</li>
-</ol>
-
-<p>The initial MVP (minimum viable product) certainly solved these 2 problems. I&rsquo;m a big fan of releasing MVP&rsquo;s early and often, as the benefits (which are evident even with this small project), are that you identify what is actually required earlier. As a result you don&rsquo;t waste valuable time developing unnecessary features.</p>
-
-<p>The first implementation allowed me to start generating content and establishing a (small) social presence; however as is also so often the case with MVP&rsquo;s, I was able to learn some things quickly, like my site&rsquo;s poor design.</p>
-
-<h3>Bad design</h3>
-
-<p>First off, the design just wasn&rsquo;t working for me. The initial visit would show a user a giant wall of text. A little intimidating. What I decided to do instead was display only the first paragraph of each post. This was a pretty easy implementation from the Go side, however it revealed another hole in my site.</p>
-
-<h3>Bad writing style</h3>
-
-<p>What I realized was that my posts didn&rsquo;t have a proper introduction. No real hook. This is just bad. Who&rsquo;s going to continue reading a post when they don&rsquo;t really know what it&rsquo;s about? Luckily I didn&rsquo;t have a lot of posts that needed to be addressed haha. As I was modifying my posts I realized another feature that should be implemented. The ability to preview posts.</p>
-
-<h3>Can&rsquo;t easily preview posts</h3>
-
-<p>This was more of an annoyance during the writing process than anything else. It&rsquo;s always nice to see how the markdown will be generated into the template. To that end I implemented a <code>preview</code> function. What I wanted was to issue a <code>preview</code> command, specifying which post, then automatically launch my web browser to the page. This lead me to the final hole: the inability to launch the website locally.</p>
-
-<h3>Built in webserver</h3>
-
-<p>In order for me to preview the post, I would have to start a local webserver. When I first started, I didn&rsquo;t want to go through all the trouble of setting up apache, so instead I would fire up the <a href="http://php.net/manual/en/features.commandline.webserver.php">built-in PHP webserver</a>. <code>php -S localhost:8080</code> from within the root directory, and visit <a href="http://localhost:8080/index.html">http://localhost:8080/index.html</a>. This was another minor annoyance, and I&rsquo;m ultimately curious about writing web apps and microservices in Go. Like everyone else I used the standard libraries <a href="https://golang.org/pkg/net/http/">net/http</a> package to serve up the site. It was amazingly easy to implement and I&rsquo;ve had no issues with it thus far.</p>
-
-<h2>Did I veer off course?</h2>
-
-<p>Because I&rsquo;m a major proponent for realeasing MVP&rsquo;s I didn&rsquo;t have the opportunity to veer off course. Not that I wasn&rsquo;t tempted to. If you look at my list of <a href="https://github.com/mrnickel/StaticSiteGenerator">todos</a> you&rsquo;ll see that I have a number of features that I am eager to implement. &ldquo;Well, this is only a hobby project&rdquo;, I would tell myself &ldquo;What harm would it do if I spent some time implementing a spell checker?&rdquo;. And honestly, it won&rsquo;t harm anything. I don&rsquo;t make any money from this site, and it would further my learning in Go (my first project goal). However I believe that like anything else, practice makes perfect. And forcing yourself to adhere to various processes is also important to practice.</p>
-
-<h2>Did my solution help me achieve my goals?</h2>
-
-<p>As mentioned earlier, my primary objective was to learn Go. I spent a lot of time reading other peoples blog posts (which is what intrigued me so much about this language), but I had no real first hand knowledge of it. This gave me the opportunity to learn a bit more about the language.</p>
-
-<p>My second objective was to own a platform that would allow me to generate posts in order to establish a small social presence. Admittedly this could have been easily done by using a solution like <a href="http://gohugo.io">Hugo</a>. I could simply <code>brew update &amp;&amp; brew install hugo</code>, and be off to the races. However, this would be counter to my first goal; As this is really a secondary goal I found it to be a fair tradeoff.</p>
-
-<h2>What do I need going forward?</h2>
-
-<p>At this point I&rsquo;m not too sure what I&rsquo;ll need. I have a few ideas of course, as is evidenced in my &ldquo;To-Do&rdquo; list. However, which ones are most important? <em>That</em> I&rsquo;m still not sure of. I won&rsquo;t really know until the project matures a bit. I&rsquo;ll need more content, more visitors, more learnings in order to determine which feature is the greatest importance. Is there any way for me to accelerate up my education? Absolutely there is. I could formally promote the project; Get more developers and writers using it. That would give me more diverse feedback about the project. My main goal with this project however is learning Go, and to that end I&rsquo;ll likely choose to implement a feature that would be interesting to solve.</p>
-
-<h2>Conclusion</h2>
-
-<p>Overall I&rsquo;m satisfied with where I&rsquo;ve gotten with these projects. I&rsquo;ve learned a little bit of Go, and I&rsquo;ve got a website that justifies it. The StaticSiteGenerator is evolving organically and is working quite well for my needs, although I still wouldn&rsquo;t recommend anyone else use it as it&rsquo;s not nearly up to par with the other solutions on the market. I&rsquo;ve also started gathering some followers across the various social webs. I&rsquo;ll continue to write about the projects as they mature further.</p>
-
-				]]>
-			</description>
-			<pubDate>Fri, 08 Apr 2016 08:43:47 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/more_project_updates.html</guid>
 		</item>
 	
 
