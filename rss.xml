@@ -9,6 +9,84 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Creating Homebrew Package For StaticSiteGenerator Distribution</title>
+			<link>http://RyanNickel.com/html/creating_homebrew_package_for_staticsitegenerator_distribution.html</link>
+			<description>
+				<![CDATA[
+					<p>In a previous post playing with <a href="./on_adding_github_actions_to_my_staticsitegenerator.html">GitHub Actions</a> I thought it might be interseting to figure out how to distribute the binary via Homebrew.</p>
+
+<p>While reading through the <a href="https://docs.brew.sh/Acceptable-Formulae">Acceptable Formulae</a> documentation, my dreams of being accepted into the Homebrew-core packages were dashed. (end sarcasm)</p>
+
+<p>The primary rule that would be broken by this software are:</p>
+
+<blockquote>
+<h2>Niche (or self-submitted) stuff</h2>
+</blockquote>
+
+<p>Namely:</p>
+
+<blockquote>
+<p>be maintained (i.e. the last release wasn’t ages ago, it works without patching on all Homebrew-supported OS versions and has no outstanding, unpatched security vulnerabilities)</p>
+</blockquote>
+
+<p>The software <em>has</em> had an update in the past few weeks (at time of this writing), however previous to that was 4 years ago. Not exactly actively maintained.</p>
+
+<blockquote>
+<p>be known</p>
+</blockquote>
+
+<p>Nobody knows this software exists except for myself</p>
+
+<blockquote>
+<p>be used</p>
+</blockquote>
+
+<p>As far as I know, I&rsquo;m the only user of it</p>
+
+<blockquote>
+<p>have a homepage</p>
+</blockquote>
+
+<p>&hellip; not yet, however perhaps a quick github self hosted page that&rsquo;s essentially the readme file.</p>
+
+<p>The next question to answer is how can I self host this formula? Seeing as I highly doubt Homebrew would accept my PR (and for good reason. Please continue your processes).</p>
+
+<p>In Homebrew parlance, what I want to create is a <a href="https://docs.brew.sh/Taps">tap</a>. By default this relies on GitHub, which is perfect for this series of events.</p>
+
+<p>I&rsquo;m going to partially re-hash the official Homebrew documentation here for my own convenience:</p>
+
+<ol>
+<li>Create a github repo <strong>/mrnickel/homebrew-mrnickel</strong>
+This is the convention that Homebrew uses in order to tap properly.</li>
+<li>Create the <strong>Go</strong> formula using:
+ <code>brew create https://github.com/mrnickel/StaticSiteGenerator/archive/refs/tags/{RELEASE_VERSION_HERE}.tar.gz --go</code>
+This will create a formula definition file that will be committed to the <strong>mrnickel/homebrew-mrnickel</strong> repo.</li>
+<li>Edit the information as appropriate in the definition. Setting the <strong>desc, homepage, url</strong></li>
+<li>Copy the file from <code>$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula</code> directory,  to the <strong>homebrew-mrnickel</strong> git directory.</li>
+<li>Commit and push to the <strong>mrnickel/homebrew-mrnickel</strong> repository</li>
+<li>Run <code>brew tap mrnickel/mrnickel</code></li>
+<li>Run <code>brew install StaticSiteGenerator</code></li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>After some trial and error I came up with a suitable <a href="https://github.com/mrnickel/homebrew-mrnickel/blob/main/staticsitegenerator.rb">homebrew formula</a>.</p>
+
+<p>I&rsquo;ve used Homebrew for many many years now. I&rsquo;ve never fully understood how it works, just that it works. It was interesting to dive into it a bit deeper. They&rsquo;ve done an excellent job with their documentation, and it&rsquo;s a well thought out package manager. I suppose that&rsquo;s why it&rsquo;s essentially the default package manager for MacOS.</p>
+
+<p>I spent far too much time googling for ways to create the formula file, and I should have instead have just relied on the <code>brew help</code> and <code>brew create help</code> documentation as it&rsquo;s well represented. If only more software took as much pride in their docs as Homebrew does.</p>
+
+<p>One thing I wish they would add would be a way to specify the path of the generated .rb file.</p>
+
+<p>Now that I&rsquo;ve set up this homebrew tap, I can add this to some machine provisioning scripts I&rsquo;ve been meaning to write. Perhaps an article for another day. That along with some dotfiles that I should persist.</p>
+
+				]]>
+			</description>
+			<pubDate>Fri, 13 Jan 2023 12:19:42 EST</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/creating_homebrew_package_for_staticsitegenerator_distribution.html</guid>
+		</item>
+	
+		<item>
 			<title>On Adding GZip Compression To StaticSiteGenerator</title>
 			<link>http://RyanNickel.com/html/on_adding_gzip_compression_to_staticsitegenerator.html</link>
 			<description>
@@ -945,33 +1023,6 @@ c) minimize the emotional importance and personal excitement of our baby announc
 			</description>
 			<pubDate>Wed, 31 Oct 2018 14:20:23 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/on_deleting_my_facebook_account.html</guid>
-		</item>
-	
-		<item>
-			<title>Docker and Charles</title>
-			<link>http://RyanNickel.com/html/docker_and_charles.html</link>
-			<description>
-				<![CDATA[
-					<p>Ah, <a href="https://www.charlesproxy.com/">Charles</a>. Every mobile developers&rsquo; best friend. When logging fails and you just can&rsquo;t figure it out, it&rsquo;s time to go deep into the system and see the raw data.</p>
-
-<p>This is a post I&rsquo;ve been meaning to write for a long time.</p>
-
-<p>It&rsquo;s my go-to tool when I&rsquo;m debugging network calls in my Swift code.</p>
-
-<p>My preferred development process is to run services locally via <code>docker-compose up</code>. This ensures I do not step on anyone&rsquo;s toes (amongst other benefits on which I&rsquo;ll write later)</p>
-
-<p>You may have noticed, however, that starting up Charles causes your docker container to shut down! Oh no! What&rsquo;s a dev to do?!</p>
-
-<p>Why does this happen? I&rsquo;m not sure! I wish I could tell you that I knew enough about the inner workings of Docker to give you an idea as to why this happens, but I can&rsquo;t (for now).</p>
-
-<p>I do however have a solution that works for me. Simply go into your docker menu &gt; proxies &gt; enable <strong>Manual Proxy configuration</strong>. I leave all other fields blank (default values). Now Apply &amp; Restart, start your Docker containers and all is well with the world!</p>
-
-<p>This solution has proven useful to me, and I hope it does the same for you.</p>
-
-				]]>
-			</description>
-			<pubDate>Tue, 15 May 2018 22:16:48 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/docker_and_charles.html</guid>
 		</item>
 	
 

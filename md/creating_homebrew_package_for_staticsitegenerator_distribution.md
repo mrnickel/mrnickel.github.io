@@ -1,6 +1,6 @@
 ---
-date: 2023-01-13T11:57:29-05:00
-draft: true
+date: 2023-01-13T12:19:42-05:00
+draft: false
 title: Creating Homebrew Package For StaticSiteGenerator Distribution
 ---
 
