@@ -1,26 +1,12 @@
-@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 200px;
   background-color: #fbfaee;
   color: #000;
 }
 
-.jumbotron {
-  background-color:#7A9CA1;
-  font-weight: normal;
-  color: #382A2A;
+header {
+  background-color: #7a9ca1;
+  color: #382a2a;
   text-shadow: 1px 1px 2px #000;
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: 'Oswald', sans-serif;
 }
 
 h1 a {
@@ -31,26 +17,13 @@ h1 a:hover {
   text-decoration: underline;
 }
 
-.entry {
-  border-bottom: thin solid #000000;
-}
-
-.date {
-	font-size: 1.5rem;
-	color: #7A9CA1;
-	margin-top: -.5rem;
-	margin-bottom: 1rem;
-}
-
-article {
-	border-bottom: 1px solid #ccc;
-	margin-bottom: 1em;
-	padding-right: -15px;
-	padding-left: -15px;
+article .content {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1em;
 }
 
 a {
-  color: #382A2A;
+  color: #382a2a;
   text-decoration: underline;
 }
 
@@ -58,26 +31,46 @@ a:hover {
   color: #000;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  height: 200px; /* Must match the margin-bottom specified in the body */
-  width: 100%;
-  background-color: #382A2A;
+footer {
+  background-color: #382a2a;
   padding: 20px;
-  color: #FBFAEE;
+  color: #fbfaee;
   text-align: center;
 }
 
-.footer a {
-  color: #FBFAEE;
+footer a {
+  color: #fbfaee;
 }
 
 .published-date {
-  color: #5BC1B2;
+  color: #5bc1b2;
   font-weight: lighter;
 }
 
 article img {
   width: 100%;
+}
+
+.u-photo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 2px 0 black;
+  border-radius: 50%;
+}
+
+.p-name {
+  display: none;
+}
+
+.name {
+  display: inline-block;
+}
+
+.hidden {
+  display:none;
+}
+
+.cityicon {
+  height: 70px;
 }

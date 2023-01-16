@@ -7,32 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>RyanNickel.com  - My Thoughts on WWDC 2019</title>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/markdown.css">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//unpkg.com/sanitize.css">
     <link rel="stylesheet" href="/css/icons.css">
-
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/typography.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <!-- <script src="/js/site.js"> -->
+
   </head>
   <body>
-  <div id="wrapper">
-    <div class="jumbotron" id="header">
-      <h1 class="text-center">My Thoughts on WWDC 2019</h1>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <article>
-            <p><p>WWDC is an event I&rsquo;ve been watching every year since I think 2007, the year they announced the iPhone. At the time I was a big Apple fanboy.</p>
+    <header>
+      <div class="content">
+        <h1>My Thoughts on WWDC 2019</h1>
+      </div>
+    </header>
+    <article>
+      <div class="content">
+        <p><p>WWDC is an event I&rsquo;ve been watching every year since I think 2007, the year they announced the iPhone. At the time I was a big Apple fanboy.</p>
 
 <p>I bought my first iBook which I believe was the 2002 model. I can&rsquo;t be sure. I was in University and it cost me more money than I had, but I had
 never been so satisfied with a computer in my life. As Marie Kondo would say, it sparked joy. Our computer lab had macs, but they were running
@@ -104,37 +96,34 @@ That&rsquo;s crazy! At 9ms I think I&rsquo;ll be able to finally realize my drea
 
 <p>More security. I really appreciate the stance Apple is making on security. Bringing it front and centre, and making it secure by default.</p>
 </p>
-            <p class="published-date">Jul 20, 2019</p>
-          </article>
-        </div>
+        <p class="published-date">Jul 20, 2019</p>
+
       </div>
-    </div>
+    </article>
 
-  </div>
-
-  <div class="footer container">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2 socials">
-          <p>
-            <a href="https://twitter.com/rnickel">Twitter</a> &#x26AC <a href="https://github.com/mrnickel">GitHub</a> &#x26AC <a href="/about.html">About</a> &#x26AC <a href="/rss.xml">RSS</a>
-          </p>
-          <p>Made with &hearts; in Toronto, Canada</p>
-          <img src="/img/toronto-icon-sm.png" height="70px" />
-          <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
-        </div>
+    <footer class="h-card">
+      <div class="content">      
+        <img src="/img/headshot.png" class="img-circle u-photo center-block" alt="headshot">
+        <span class="p-name">Ryan Nickel</span>
+        <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
+        <p>
+          <a rel="me" href="https://twitter.com/rnickel" class="url">Twitter</a> &#x26AC; <a rel="me" href="https://github.com/mrnickel" class="url">GitHub</a> &#x26AC; <a href="/about.html">About</a> &#x26AC; <a href="/rss.xml">RSS</a> &#x26AC; <a rel="me" href="https://techhub.social/@mrnickel">Mastodon</a>
+        </p>
+        <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
+        <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+        <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
       </div>
-    </div>
-  </div>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    </footer>
 
-  ga('create', 'UA-35684132-1', 'auto');
-  ga('send', 'pageview');
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-</script>
+      ga('create', 'UA-35684132-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
   </body>
 </html>

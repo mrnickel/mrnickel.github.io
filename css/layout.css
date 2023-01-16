@@ -1,0 +1,73 @@
+/* Default layouts */
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+header .content {
+  width: 68vw;
+}
+
+/* The article fills all the space between header & footer */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+article {
+  flex: 1;
+  margin-bottom: 2em;
+  /* display: flex; */
+}
+
+header,
+footer,
+nav,
+article {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+article .content {
+  width: 45vw;
+}   
+
+@media screen and (max-width: 991px) {
+  /* start of large tablet styles */
+  header .content {
+    width: 90vw;
+  }
+
+  article .content {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  /* start of medium tablet styles */
+  header .content {
+    width: 90vw;
+  }
+
+  article .content {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  /* start of phone styles */
+  header .content {
+    width: 98vw;
+  }
+
+  article .content {
+    width: 80vw;
+  }
+}
