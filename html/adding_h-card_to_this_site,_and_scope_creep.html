@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - Adding H-Card To This Site, and Scope Creep</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/sanitize.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+  <body>
+    <header>
+      <div class="content">
+        <h1>Adding H-Card To This Site, and Scope Creep</h1>
+      </div>
+    </header>
+    <article>
+      <div class="content">
+        <p><p>I was recently inspired by <a href="https://indieweb.social/@tbeseda">@tbeseda@indieweb.social</a> to add some <a href="http://microformats.org/wiki/h-card">h-card</a> formatting to my site.</p>
+
+<p>The requirement was to simply add the appropriate classes to the footer of the site. Simple. But as so often happens with software, the scope crept.</p>
+
+<h2>Creep 1: Research a New Proxy Service</h2>
+
+<p>I needed to send the page through a parser, but do so without publishing it to the server.</p>
+
+<p>In the past I had used <a href="https://ngrok.com/">ngrok</a>, however now it seems like it&rsquo;s clamped down and requires an account in order to run it. I don&rsquo;t have an ngrok account, and didn&rsquo;t really feel like signing up for yet another account. Not my cup-o-tea.</p>
+
+<p>I then looked at <a href="https://github.com/localtunnel/localtunnel">localtunnel</a> which looked promising. A simple <code>npx</code> command to assign the running port and you&rsquo;re off to the races. However, this service has a confirmation page (with an ad to support their service) which requires a user to confirm when accessing. This won&rsquo;t work for a scraper such as <a href="https://microformats.io/">https://microformats.io/</a>.</p>
+
+<p>I then found <a href="https://localhost.run/">localhost.run</a> to serve up the site running on my local machine, then parsed it through <a href="https://microformats.io/">https://microformats.io/</a>, which leverages the existing SSH tools already found on my machine. This was <em>exactly</em> what I was looking for. Brilliant usage of SSH to provide me what I was looking for.</p>
+
+<h2>Creep 2: Update The SataticSiteGenerator to Rebuild All Pages</h2>
+
+<p>This was when I realized a deficiency in my <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a>: The inability to regenerate each page with the updated template.</p>
+
+<p>This was a fun little exercise in revisiting some of my older code. The last git commit for this project was on Oct 31, 2018. Four years of dust sitting on this particular codebase. And four years since I&rsquo;ve even looked at any Go code.</p>
+
+<p>I could have left the older statically generated HTML pages as the older format. A way to see how the site progresses over the years, however I can&rsquo;t stomach inconsistencies, so I needed to write the appropriate procedure to clean everything up. Besides, that&rsquo;s what git is all about right? Preserving histories.</p>
+
+<h2>Creep 3: Remove Bootstrap 3 Dependency</h2>
+
+<p>When adding the bio photo to the footer, it threw off the styles of the site and required fixing css.</p>
+
+<p>It&rsquo;s currently 2 full point versions behind the Bootstrap framework, which would likely mean almost an entire re-write anyway. So I&rsquo;m going to take the opportunity to make the site even lighter and use simple CSS. It&rsquo;s a simple site anyway. No sense in adding extra load to download CSS that I only use 1% of. (post on this to forthcoming)</p>
+
+<h2>Creep 4: Add More Microformats</h2>
+
+<p>Further inspired by <a href="https://indieweb.org/">The IndieWeb</a>, there are a few more simple microformats that fit in nicely. Namely <a href="http://microformats.org/wiki/h-feed">h-feed</a>, and <a href="http://microformats.org/wiki/h-entry">h-entry</a>.</p>
+
+<h2>Conclusion</h2>
+
+<p>It always seems to happen that a seeming innocuous change snowballs into more and more feature requests. In this case the desire to simply add a basic h-card implementation to the footer turned into updating a dependency, updating some deprecated dependencies (in this case removing the dependency entirely)</p>
+
+<p>It&rsquo;s always interesting to see how software takes on a life of it&rsquo;s own as it&rsquo;s used more and more.</p>
+</p>
+        <p class="published-date">Jan 16, 2023</p>
+
+      </div>
+    </article>
+
+    <footer class="h-card">
+      <div class="content">      
+        <img src="/img/headshot.png" class="img-circle u-photo center-block" alt="headshot">
+        <span class="p-name">Ryan Nickel</span>
+        <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
+        <p>
+          <a rel="me" href="https://twitter.com/rnickel" class="url">Twitter</a> &#x26AC; <a rel="me" href="https://github.com/mrnickel" class="url">GitHub</a> &#x26AC; <a href="/about.html">About</a> &#x26AC; <a href="/rss.xml">RSS</a> &#x26AC; <a rel="me" href="https://techhub.social/@mrnickel">Mastodon</a>
+        </p>
+        <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
+        <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+        <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-35684132-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
