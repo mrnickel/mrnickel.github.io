@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RyanNickel.com  - On Removing Bootstrap Dependency</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/sanitize.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+  <body>
+    <header>
+      <div class="content">
+        <h1>On Removing Bootstrap Dependency</h1>
+      </div>
+    </header>
+    <article>
+      <div class="content">
+        <p><p>As part of my ongoing blog update, I&rsquo;m working on removing my dependency on <a href="https://getbootstrap.com">Bootstrap</a>.</p>
+
+<p>As a caveat, I am by no means a CSS expert. I know enough to get into trouble, and I plan on using this as an effort to better understand CSS, in specific the flex properties (which I <em>always</em> forget).</p>
+
+<p>As I was adding some <a href="adding_h-card_to_this_site,_and_scope_creep.html">innocuous changes</a>, it ended up breaking the layout of the site. This site was originally developed off of Bootstrap 3, and is (at the time of this writing) 2 major points behind the latest version.</p>
+
+<p>While taking a quick peek at the upgrade path from Bootstrap 3 to 5, I decided it would be an interesting exercise to remove the dependency entirely.</p>
+
+<p>The layout of the site is very basic and really doesn&rsquo;t need all of the overhead that Bootstrap brings long with it. I mean, how hard could it be?</p>
+
+<p>In an effort to ensure consistent usability across all browsers, one should generally check browser compatability at <a href="https://caniuse.com">Can I Use</a> for various CSS properties.</p>
+
+<p>The primary CSS properties I use to manage this site&rsquo;s layout are:
+ - <a href="https://caniuse.com/?search=vh">vh</a>
+ - <a href="https://caniuse.com/?search=vw">vw</a>
+ - <a href="https://caniuse.com/?search=flex">flex</a>
+ - <a href="https://caniuse.com/?search=%40media">@media</a></p>
+
+<h2>VH - Vertical Height</h2>
+
+<p>Used to ensure that the footer of the site is always aligned at the bottom regardless of the height of the content.</p>
+
+<p>If the height of the content happens to be very short, I still desire the footer to be properly aligned on the bottom.</p>
+
+<p>Previously I used some CSS hacks that relied on having some known static heights set for the body&rsquo;s <code>margin-bottom</code> and the footer classes <code>height</code> properties.</p>
+
+<p>These had to be the same. This was the major reason for my layout breaking while trying to add some h-card properties.</p>
+
+<h2>VW - Width</h2>
+
+<p>Used to ensure that the content of the site only takes up a certain percentage of the browsers width.</p>
+
+<h2>Flex</h2>
+
+<p>Primarily used for layout out the elements in the footer.</p>
+
+<h2>@Media</h2>
+
+<p>Used for responsivenes. For something as simple as this blog I really have two formats: desktop and mobile.</p>
+
+<h2>Discoveries</h2>
+
+<p>When I started building this site I was using Bootstrap with many of my other projects and it was an easy way for me to get started. I was comfortable with using it, and could put the site together quickly in order to focus on writing (for all the writing I&rsquo;ve actually done).</p>
+
+<p>Outside of the media property being supported way back since roughly 2010, all of the other properties listed above have been supported by the major browsers since roughly 2015. A full year before this blogs innogural <a href="hello_world.html">Hello World</a> post. As browsers become more and more powerful, and implement better tooling, it becomes so much easier to simply roll your own CSS.</p>
+
+<h2>Typography</h2>
+
+<p>One of the other benefits to Bootstrap is having some sane typography defaults. Having each of the h1, h2, p tags etc be an elegant ratio to one another was something I didn&rsquo;t have to think about before. I went searching around the web for something that could teach me a little more about making this and came across <a href="https://type-scale.com/">Type Scale</a>. A tool that would allow me to play with a few toggles to achieve a ratio I found to be pleasing. Perfect!</p>
+
+<h2>Responsiveness</h2>
+
+<p>The major reason for Bootstraps existance at the beggining was to make developers lives <em>much</em> easier for dealing with responsiveness. This was the advent of users beginning the switch from primarily surfing the web on their computers to consuming via mobile devices. Add to that the discrepancies of various browsers and you have a recipe for unmanageable spaghetti CSS. Bootstrap allowed developers to do away with this completely and just use their CSS and move on with developing the product.</p>
+
+<p>This isn&rsquo;t the case anymore, and rolling your own media queries is much more manageable. If I were building a more complex application or working with a team I&rsquo;d still use something like Bootstrap or Tailwind in order to ensure easier onboarding and consistent language. Seeing as the goal with this update is to better understand CSS a bit more I&rsquo;ll see what I can do to implement this myself.</p>
+
+<h3>Layout Updates</h3>
+
+<p>My first naieve layout had a single CSS selection for all devices. The header would take up <code>68vw</code> of the viewport, and the content would take up <code>45vw</code>. This looked acceptable on desktop. Quickly fell apart on mobile.</p>
+
+<p>A quick <code>@media</code> definition solved that by setting the headers width to <code>90vw</code> and the content to <code>80vw</code></p>
+
+<p>The other item that quickly fell apart was the typography. Again it looked fine on desktop, but on mobile the header took up 90% of the visual height, not giving even a glimpse at the content.</p>
+
+<p>I then used <a href="https://type-scale.com">Type Scale</a> to give me some sane defaults for smaller resolutions.</p>
+
+<p>That was all that was required in this realm. Thankfully this is such a basic site and basic content.</p>
+
+<h3>Keep My Name Always Together</h3>
+
+<p>On various resolutions my name would be split across multiple lines. I wanted my name to always be on the same line regardless of the resolution. I wanted to control how and where the line break happened.</p>
+
+<p>This one was as simple as adding <code>display: inline-block</code> to a <code>&lt;span&gt;</code> around <strong>Ryan Nickel</strong></p>
+
+<h3>Footer</h3>
+
+<p>The footer is the most complicated element in the site, which isn&rsquo;t really saying much as it&rsquo;s essentially a number of block elements aligned.</p>
+
+<h2>Tools Used</h2>
+
+<ul>
+<li><a href="https://caniuse.com/">Can I Use</a></li>
+<li><a href="https://type-scale.com/">Type Scale</a></li>
+<li><a href="https://csstools.github.io/sanitize.css/">Sanitize.css</a></li>
+<li><a href="https://validator.w3.org/">W3C Validator</a></li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>By removing the Bootstrap dependency I was able to greatly simplify the markup and CSS used. I was able to reduce the download size from 350kb to 177kb.</p>
+
+<p>Would I recommend this route for everyone? If you&rsquo;re working on a passion project, then sure. However if you&rsquo;re working on a client product then absolutely not. Stick with something like Bootstrap or Tailwind.</p>
+</p>
+        <p class="published-date">Jan 17, 2023</p>
+
+      </div>
+    </article>
+
+    <footer class="h-card">
+      <div class="content">      
+        <img src="/img/headshot.png" class="img-circle u-photo center-block" alt="headshot">
+        <span class="p-name">Ryan Nickel</span>
+        <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
+        <p>
+          <a rel="me" href="https://twitter.com/rnickel" class="url">Twitter</a> &#x26AC; <a rel="me" href="https://github.com/mrnickel" class="url">GitHub</a> &#x26AC; <a href="/about.html">About</a> &#x26AC; <a href="/rss.xml">RSS</a> &#x26AC; <a rel="me" href="https://techhub.social/@mrnickel">Mastodon</a>
+        </p>
+        <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
+        <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+        <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+      </div>
+    </footer>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-35684132-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

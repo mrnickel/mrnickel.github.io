@@ -9,6 +9,110 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>On Removing Bootstrap Dependency</title>
+			<link>http://RyanNickel.com/html/on_removing_bootstrap_dependency.html</link>
+			<description>
+				<![CDATA[
+					<p>As part of my ongoing blog update, I&rsquo;m working on removing my dependency on <a href="https://getbootstrap.com">Bootstrap</a>.</p>
+
+<p>As a caveat, I am by no means a CSS expert. I know enough to get into trouble, and I plan on using this as an effort to better understand CSS, in specific the flex properties (which I <em>always</em> forget).</p>
+
+<p>As I was adding some <a href="adding_h-card_to_this_site,_and_scope_creep.html">innocuous changes</a>, it ended up breaking the layout of the site. This site was originally developed off of Bootstrap 3, and is (at the time of this writing) 2 major points behind the latest version.</p>
+
+<p>While taking a quick peek at the upgrade path from Bootstrap 3 to 5, I decided it would be an interesting exercise to remove the dependency entirely.</p>
+
+<p>The layout of the site is very basic and really doesn&rsquo;t need all of the overhead that Bootstrap brings long with it. I mean, how hard could it be?</p>
+
+<p>In an effort to ensure consistent usability across all browsers, one should generally check browser compatability at <a href="https://caniuse.com">Can I Use</a> for various CSS properties.</p>
+
+<p>The primary CSS properties I use to manage this site&rsquo;s layout are:
+ - <a href="https://caniuse.com/?search=vh">vh</a>
+ - <a href="https://caniuse.com/?search=vw">vw</a>
+ - <a href="https://caniuse.com/?search=flex">flex</a>
+ - <a href="https://caniuse.com/?search=%40media">@media</a></p>
+
+<h2>VH - Vertical Height</h2>
+
+<p>Used to ensure that the footer of the site is always aligned at the bottom regardless of the height of the content.</p>
+
+<p>If the height of the content happens to be very short, I still desire the footer to be properly aligned on the bottom.</p>
+
+<p>Previously I used some CSS hacks that relied on having some known static heights set for the body&rsquo;s <code>margin-bottom</code> and the footer classes <code>height</code> properties.</p>
+
+<p>These had to be the same. This was the major reason for my layout breaking while trying to add some h-card properties.</p>
+
+<h2>VW - Width</h2>
+
+<p>Used to ensure that the content of the site only takes up a certain percentage of the browsers width.</p>
+
+<h2>Flex</h2>
+
+<p>Primarily used for layout out the elements in the footer.</p>
+
+<h2>@Media</h2>
+
+<p>Used for responsivenes. For something as simple as this blog I really have two formats: desktop and mobile.</p>
+
+<h2>Discoveries</h2>
+
+<p>When I started building this site I was using Bootstrap with many of my other projects and it was an easy way for me to get started. I was comfortable with using it, and could put the site together quickly in order to focus on writing (for all the writing I&rsquo;ve actually done).</p>
+
+<p>Outside of the media property being supported way back since roughly 2010, all of the other properties listed above have been supported by the major browsers since roughly 2015. A full year before this blogs innogural <a href="hello_world.html">Hello World</a> post. As browsers become more and more powerful, and implement better tooling, it becomes so much easier to simply roll your own CSS.</p>
+
+<h2>Typography</h2>
+
+<p>One of the other benefits to Bootstrap is having some sane typography defaults. Having each of the h1, h2, p tags etc be an elegant ratio to one another was something I didn&rsquo;t have to think about before. I went searching around the web for something that could teach me a little more about making this and came across <a href="https://type-scale.com/">Type Scale</a>. A tool that would allow me to play with a few toggles to achieve a ratio I found to be pleasing. Perfect!</p>
+
+<h2>Responsiveness</h2>
+
+<p>The major reason for Bootstraps existance at the beggining was to make developers lives <em>much</em> easier for dealing with responsiveness. This was the advent of users beginning the switch from primarily surfing the web on their computers to consuming via mobile devices. Add to that the discrepancies of various browsers and you have a recipe for unmanageable spaghetti CSS. Bootstrap allowed developers to do away with this completely and just use their CSS and move on with developing the product.</p>
+
+<p>This isn&rsquo;t the case anymore, and rolling your own media queries is much more manageable. If I were building a more complex application or working with a team I&rsquo;d still use something like Bootstrap or Tailwind in order to ensure easier onboarding and consistent language. Seeing as the goal with this update is to better understand CSS a bit more I&rsquo;ll see what I can do to implement this myself.</p>
+
+<h3>Layout Updates</h3>
+
+<p>My first naieve layout had a single CSS selection for all devices. The header would take up <code>68vw</code> of the viewport, and the content would take up <code>45vw</code>. This looked acceptable on desktop. Quickly fell apart on mobile.</p>
+
+<p>A quick <code>@media</code> definition solved that by setting the headers width to <code>90vw</code> and the content to <code>80vw</code></p>
+
+<p>The other item that quickly fell apart was the typography. Again it looked fine on desktop, but on mobile the header took up 90% of the visual height, not giving even a glimpse at the content.</p>
+
+<p>I then used <a href="https://type-scale.com">Type Scale</a> to give me some sane defaults for smaller resolutions.</p>
+
+<p>That was all that was required in this realm. Thankfully this is such a basic site and basic content.</p>
+
+<h3>Keep My Name Always Together</h3>
+
+<p>On various resolutions my name would be split across multiple lines. I wanted my name to always be on the same line regardless of the resolution. I wanted to control how and where the line break happened.</p>
+
+<p>This one was as simple as adding <code>display: inline-block</code> to a <code>&lt;span&gt;</code> around <strong>Ryan Nickel</strong></p>
+
+<h3>Footer</h3>
+
+<p>The footer is the most complicated element in the site, which isn&rsquo;t really saying much as it&rsquo;s essentially a number of block elements aligned.</p>
+
+<h2>Tools Used</h2>
+
+<ul>
+<li><a href="https://caniuse.com/">Can I Use</a></li>
+<li><a href="https://type-scale.com/">Type Scale</a></li>
+<li><a href="https://csstools.github.io/sanitize.css/">Sanitize.css</a></li>
+<li><a href="https://validator.w3.org/">W3C Validator</a></li>
+</ul>
+
+<h2>Conclusion</h2>
+
+<p>By removing the Bootstrap dependency I was able to greatly simplify the markup and CSS used. I was able to reduce the download size from 350kb to 177kb.</p>
+
+<p>Would I recommend this route for everyone? If you&rsquo;re working on a passion project, then sure. However if you&rsquo;re working on a client product then absolutely not. Stick with something like Bootstrap or Tailwind.</p>
+
+				]]>
+			</description>
+			<pubDate>Tue, 17 Jan 2023 20:14:23 EST</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/on_removing_bootstrap_dependency.html</guid>
+		</item>
+	
+		<item>
 			<title>Adding H-Card To This Site, and Scope Creep</title>
 			<link>http://RyanNickel.com/html/adding_h-card_to_this_site,_and_scope_creep.html</link>
 			<description>
@@ -950,71 +1054,6 @@ the app will run even smoother.</p>
 			</description>
 			<pubDate>Wed, 08 May 2019 09:59:01 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/rendering_dynamic_components_with_react_native_and_the_performance_implications.html</guid>
-		</item>
-	
-		<item>
-			<title>Migrating from 1Password to KeePassXC</title>
-			<link>http://RyanNickel.com/html/migrating_from_1password_to_keepassxc.html</link>
-			<description>
-				<![CDATA[
-					<p>I&rsquo;m a big proponent of password managers, and I&rsquo;ve been a heavy user of 1Password for a long time now. Several years ago, I purchased it for Mac, Windows, iOS and Android.</p>
-
-<p>Fast forward to today and they&rsquo;ve updated to a subscription model, and they host the passwords online.</p>
-
-<p>I completely understand their need to continue to generate revenue from existing customers in order to improve the product and as a software developer myself I sympathize with them. However I don&rsquo;t want to add yet another monthly subscription to my wallet.</p>
-
-<p>On a security note, I&rsquo;m not so inclined to host my passwords on a 3rd party platform. I feel it&rsquo;s too big of a honey pot. I prefer to keep my important files offline. (I also don&rsquo;t support services like Dropbox for anything important). Especially seeing as services like LastPass <a href="https://www.pcworld.com/article/2936621/the-lastpass-security-breach-what-you-need-to-know-do-and-watch-out-for.html">have already been breached</a>.</p>
-
-<p>While my current version of 1Password continues to work just fine across my devices, they&rsquo;re not actively improving the software, so I&rsquo;ve decided to try to find an open source alternative which hopefully I can help contribute to.</p>
-
-<p>After some research, I stumbled across <a href="https://keepassxc.org/">KeePassXC</a> as recommended by <a href="https://ssd.eff.org/en/module/how-use-keepassxc">EFF</a> and thought I&rsquo;d give it a try.</p>
-
-<p>The first hurdle I wanted to jump was getting my 1Password content into KeePassXC.</p>
-
-<p>To do that:</p>
-
-<ol>
-<li>Open 1Password, log in, and select the vault (if on Mac).</li>
-<li>File &gt; Export &gt; All Items. Enter your password.</li>
-<li>Change the File Format to <strong>CSV</strong>. Leave everything else the same and press <strong>Save</strong></li>
-<li>Open KeePassXC</li>
-<li>Select <strong>Import from CSV</strong> and select the file you exported from 1Password</li>
-<li>Create a password to unlock and select <strong>OK</strong></li>
-<li>In the top section, select <strong>Consider &lsquo;\&rsquo; an escape character</strong></li>
-
-<li><p>Set the following columns:</p>
-
-<p>Group: <strong>Not present</strong></p>
-
-<p>Title: <strong>Column 3</strong></p>
-
-<p>Username: <strong>Column 6</strong></p>
-
-<p>Password: <strong>Column 2</strong></p>
-
-<p>URL: <strong>Column 5</strong></p>
-
-<p>Notes: <strong>Column 1</strong></p>
-
-<p>Last Modified: <strong>Not present</strong></p>
-
-<p>Created: <strong>Not present</strong></p></li>
-
-<li><p>Press <strong>OK</strong></p></li>
-</ol>
-
-<p>If your 1Password is like mine (littered with temporary passwords), you&rsquo;re definitely going to want to go through and clean up a bunch of entries after the import.</p>
-
-<p>I&rsquo;m going to try to use this as my main password manager for the time being, but one shortcoming I&rsquo;ve come across so far is that it&rsquo;s difficult to enter credit card information for safe keeping.</p>
-
-<p>KeePass has a template plugin system that can handle this, so hopefully KeePassXC can implement something similar.</p>
-
-<p>Another good article worth mentioning to better acquaint you with the ins and outs of the software is posted by <a href="http://samschlinkert.com/">Sam Schlinkert</a> <a href="https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html">Getting Started With KeePassXC</a></p>
-
-				]]>
-			</description>
-			<pubDate>Wed, 02 Jan 2019 14:41:54 -0800</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/migrating_from_1password_to_keepassxc.html</guid>
 		</item>
 	
 
