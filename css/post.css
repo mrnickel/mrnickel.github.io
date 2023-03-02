@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+header h1 {
+  text-transform: capitalize;
+}
+
+article {
+  flex: 1;
+}
+
+main {
+  padding-bottom: var(--largeSpacing);
+}

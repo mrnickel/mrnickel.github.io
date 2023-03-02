@@ -1,30 +1,27 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>RyanNickel.com  - Creating Homebrew Package For StaticSiteGenerator Distribution</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/sanitize.css">
-    <link rel="stylesheet" href="/css/icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
     <link rel="stylesheet" href="/css/markdown.css">
-    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/icons.css">
     <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/vars.css">
     <link rel="stylesheet" href="/css/styles.css">
-
+    <link rel="stylesheet" href="/css/post.css">    
   </head>
   <body>
-    <header>
-      <div class="content">
-        <h1>Creating Homebrew Package For StaticSiteGenerator Distribution</h1>
-      </div>
-    </header>
     <article>
-      <div class="content">
-        <p><p>In a previous post playing with <a href="./on_adding_github_actions_to_my_staticsitegenerator.html">GitHub Actions</a> I thought it might be interseting to figure out how to distribute the binary via Homebrew.</p>
+      <header>
+        <h1 class="p-name">Creating Homebrew Package For StaticSiteGenerator Distribution</h1>
+      </header>
+
+      <main>
+        <p>In a previous post playing with <a href="./on_adding_github_actions_to_my_staticsitegenerator.html">GitHub Actions</a> I thought it might be interseting to figure out how to distribute the binary via Homebrew.</p>
 
 <p>While reading through the <a href="https://docs.brew.sh/Acceptable-Formulae">Acceptable Formulae</a> documentation, my dreams of being accepted into the Homebrew-core packages were dashed. (end sarcasm)</p>
 
@@ -90,35 +87,45 @@ This will create a formula definition file that will be committed to the <strong
 <p>One thing I wish they would add would be a way to specify the path of the generated .rb file.</p>
 
 <p>Now that I&rsquo;ve set up this homebrew tap, I can add this to some machine provisioning scripts I&rsquo;ve been meaning to write. Perhaps an article for another day. That along with some dotfiles that I should persist.</p>
-</p>
-        <p class="published-date">Jan 13, 2023</p>
 
-      </div>
+        <time class="published-date dt-published" datetime="2023-01-13 12:19:42 -0500 EST">Jan 13, 2023</time>
+        <a rel="permalink" href="/html/creating_homebrew_package_for_staticsitegenerator_distribution.html" class="u-url">Permalink</a>
+        <a rel="author" href="https://RyanNickel.com" class="p-author h-card">Ryan Nickel</a>
+      </main>        
     </article>
 
     <footer class="h-card">
-      <div class="content">      
-        <img src="/img/headshot.png" class="img-circle u-photo center-block" alt="headshot">
-        <span class="p-name">Ryan Nickel</span>
-        <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
-        <p>
-          <a rel="me" href="https://twitter.com/rnickel" class="url">Twitter</a> &#x26AC; <a rel="me" href="https://github.com/mrnickel" class="url">GitHub</a> &#x26AC; <a href="/about.html">About</a> &#x26AC; <a href="/rss.xml">RSS</a> &#x26AC; <a rel="me" href="https://techhub.social/@mrnickel">Mastodon</a>
-        </p>
-        <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
-        <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
-        <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
-      </div>
+      <img src="/img/headshot.png" class="u-photo" alt="headshot">
+      <span class="p-name">Ryan Nickel</span>
+      <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
+
+      <ul>
+        <li><a rel="me" href="https://twitter.com/rnickel" class="u-url">Twitter</a></li>
+        <li><a rel="me" href="https://github.com/mrnickel" class="u-url">GitHub</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a rel="me" href="https://indieweb.social/@mrnickel" class="u-url">Mastodon</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>   
+
+      <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
+
+      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+
+      <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
     </footer>
 
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      
       ga('create', 'UA-35684132-1', 'auto');
       ga('send', 'pageview');
-
+      
     </script>
+
   </body>
 </html>

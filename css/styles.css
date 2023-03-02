@@ -1,57 +1,64 @@
-body {
-  background-color: #fbfaee;
-  color: #000;
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {        
+  background-color: var(--body-background-color);
+  color: var(--body-text-color);
+  display: flex; 
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
-  background-color: #7a9ca1;
-  color: #382a2a;
+  text-align: center;        
+  padding: 0 var(--header-padding) 0 var(--header-padding);
+  background-color: var(--header-background-color);
+  color: var(--header-text-color);
   text-shadow: 1px 1px 2px #000;
 }
 
-h1 a {
-  text-decoration: none;
+header .name {
+  display: inline-block;
 }
 
-h1 a:hover {
-  text-decoration: underline;
+main {        
+  padding: var(--largeSpacing) var(--body-padding) 0 var(--body-padding);
+  display: flex;
+  flex-direction: column;
 }
 
-article .content {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 1em;
-}
-
-a {
-  color: #382a2a;
-  text-decoration: underline;
-}
-
-a:hover {
-  color: #000;
-}
-
-footer {
-  background-color: #382a2a;
-  padding: 20px;
-  color: #fbfaee;
-  text-align: center;
-}
-
-footer a {
-  color: #fbfaee;
-}
-
-.published-date {
-  color: #5bc1b2;
+time {
   font-weight: lighter;
 }
 
-article img {
-  width: 100%;
+footer {
+  background-color: var(--footer-background-color);
+  padding: 20px;
+  color: var(--footer-text-color);
+  text-align: center;
+}     
+
+a {
+  color: var(--body-accent-color);
+  text-decoration: solid underline;
+  -webkit-text-decoration: solid underline;
 }
 
-.u-photo {
+a:hover {
+  opacity: 0.4;        
+}
+
+footer a {
+  color: var(--footer-accent-color)
+}
+
+footer a:hover{
+  opacity: 0.9;
+}
+
+footer .u-photo {
   width: 50px;
   height: 50px;
   margin-bottom: 10px;
@@ -59,18 +66,38 @@ article img {
   border-radius: 50%;
 }
 
-.p-name {
+footer ul {
+  list-style-type: circle;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  padding: 0;
+}    
+
+footer li {
+  padding: 0px;
+  margin-left: 20px;
+}
+
+footer li:first-child {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+main img {
+  width: 100%;
+}
+
+/* Microformats */
+/* On the index page, do not display the author link as it's always me */
+a[rel=author] {
   display: none;
 }
 
-.name {
-  display: inline-block;
+a[rel=permalink] {
+  display: none;
 }
 
-.hidden {
-  display:none;
-}
-
-.cityicon {
-  height: 70px;
+.h-card .p-name {
+  display: none;
 }

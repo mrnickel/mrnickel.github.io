@@ -1,0 +1,45 @@
+:root {
+  --largeSpacing: 1.38rem;
+  --mediumSpacing: 1.38rem;
+  --smallSpacing: 1.38rem;
+
+  --header-background-color: rgb(122, 156, 161);
+  --header-text-color: rgb(56, 42, 42);
+
+  --body-background-color: rgb(251, 250, 238);        
+  --body-text-color: rgb(0, 0, 0);
+  --body-accent-color: rgb(122, 156, 161);
+  --body-accent-color2: rgb(91, 193, 178);
+
+  --footer-background-color: rgb(56, 42, 42);
+  --footer-text-color: rgb(251, 250, 238);
+  --footer-accent-color: rgb(91, 193, 178)
+
+  --whatever: 22vw;
+  --large-header-width: 68vw;
+  --large-body-width: 45vw;
+  --medium-header-width:90vw;
+  --medium-body-width: 80vw;
+  --small-header-width: 98vw;
+  --small-body-width: 80vw;
+
+  --header-padding: calc((100vw - var(--large-header-width)) / 2);
+  --body-padding: calc((100vw - var(--large-body-width)) / 2);
+}
+
+
+@media (max-width: 767px) {
+  /* start of medium styles */
+  :root {
+      --header-padding: calc((100vw - var(--medium-header-width)) / 2);
+      --body-padding: calc((100vw - var(--medium-body-width)) / 2);
+  }
+}
+
+@media (max-width: 479px) {
+  /* start of small styles */
+  :root {
+      --header-padding: calc((100vw - var(--small-header-width)) / 2);
+      --body-padding: calc((100vw - var(--small-body-width)) / 2);
+  }
+} 

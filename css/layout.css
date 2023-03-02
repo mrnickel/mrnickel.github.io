@@ -1,17 +1,9 @@
-/* Default layouts */
+Default layouts
 
-body {
-  min-height: 100vh;
+html, body {
+  /* min-height: 100vh; */
   margin: 0;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 2em;
-}
-
-header .content {
-  width: 68vw;
+  padding: 0;
 }
 
 /* The article fills all the space between header & footer */
@@ -20,54 +12,77 @@ body {
   flex-direction: column;
 }
 
-article {
-  flex: 1;
-  margin-bottom: 2em;
-  /* display: flex; */
+header {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16vw 0 16vw;
+  text-align: center;
 }
 
-header,
+main {
+  flex: auto;
+  padding: 1.38rem 27.5vw 0 27.5vw;
+}
+
+nav {
+  text-align: center;
+}
+
+/* article {
+  flex: 1;
+  margin-bottom: 2em;
+} */
+
+/* header,
 footer,
 nav,
 article {
   justify-content: center;
-  align-items: center;
   display: flex;
-}
+} */
 
-article .content {
-  width: 45vw;
-}   
+/* header { */
+  /* text-align: center; */
+  /* margin-bottom: 2em;   */
+
+  /* the content will take up 68VW of the screen */
+  /* (100 - 68) / 2 = 16vw on each side */
+  /* padding: 0 16vw 0 16vw;  */
+/* } */
 
 @media screen and (max-width: 991px) {
   /* start of large tablet styles */
-  header .content {
-    width: 90vw;
+  header {
+    /* the content will take up 90vw of the screen */
+    /* (100 - 90) / 2 = 5vw on each side */
+    padding: 0 5vw 0 5vw;
   }
 
-  article .content {
-    width: 80vw;
+  article  {
+    /* the content will take up 80vw of the screen */
+    /* (100 - 80) / 2 = 10vw on each side */
+    padding: 10vw;
   }
 }
 
 @media screen and (max-width: 767px) {
   /* start of medium tablet styles */
-  header .content {
-    width: 90vw;
+  header {
+    padding: 0 5vw 0 5vw;
   }
 
-  article .content {
-    width: 80vw;
+  article {
+    padding: 0 10vw 0 10vw;
   }
 }
 
 @media screen and (max-width: 479px) {
   /* start of phone styles */
-  header .content {
-    width: 98vw;
+  header {
+    padding: 0 1vw 0 1vw;    
   }
 
   article .content {
-    width: 80vw;
+    padding: 0 5vw 0 5vw;    
   }
-}
+} 

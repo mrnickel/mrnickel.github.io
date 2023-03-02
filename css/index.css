@@ -1,0 +1,32 @@
+nav {
+  text-align: center;
+  flex: 1;
+  margin-bottom: var(--largeSpacing);
+}
+
+article {
+  border-bottom: 1px solid var(--body-accent-color);
+  margin-bottom: 1.38rem;
+}
+
+article:last-child {
+  border-bottom: none;
+}
+
+article h1 {
+  text-transform: capitalize;
+}
+
+/* Microformats */
+/* On the index page, do not display the author link as it's always me */
+a[rel=author] {
+  display: none;
+}
+
+a[rel=permalink] {
+  display: none;
+}
+
+.h-card .p-name {
+  display: none;
+}
