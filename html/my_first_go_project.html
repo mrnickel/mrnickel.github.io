@@ -4,23 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <base href="https://ryannickel.com/" target="_blank">
+
     <title>RyanNickel.com  - My first go project</title>
 
     <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
-    <link rel="stylesheet" href="/css/markdown.css">
-    <link rel="stylesheet" href="/css/icons.css">
-    <link rel="stylesheet" href="/css/typography.css">
-    <link rel="stylesheet" href="/css/vars.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/post.css">    
+    <link rel="stylesheet" href="css/markdown.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/vars.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/post.css">    
   </head>
   <body>
-    <article>
+    <article class="h-entry">
       <header>
         <h1 class="p-name">My first go project</h1>
       </header>
 
-      <main>
+      <main class="e-content">
         <p>It&rsquo;s no secret that I&rsquo;m currently enamoured with <a href="https://golang.org">Go</a>, as well as the projects it powers. (<a href="https://www.docker.com">Docker</a> I&rsquo;m looking at you). As such I recently started my first project with the lovely &ldquo;new&rdquo; language. I wanted a project that would be easy to start and equally something that I&rsquo;d get some utility out of. I thought I would get my feet wet by creating yet another <a href="https://github.com/mrnickel/StaticSiteGenerator">static site generator</a>. The very generator I use to build this site (because dogfooding is important!).</p>
 
 <p>This post is primarily about getting myself acquainted with Go and writing my first little Go app.</p>
@@ -98,27 +100,27 @@ Peter Bourgon&rsquo;s post about <a href="http://peter.bourgon.org/go-in-product
 <p>*1. This is a tidbit I plan on implementing in all my projects going forward, regardless of which language it&rsquo;s written in.</p>
 
         <time class="published-date dt-published" datetime="2016-02-18 05:46:24 -0800 -0800">Feb 18, 2016</time>
-        <a rel="permalink" href="/html/my_first_go_project.html" class="u-url">Permalink</a>
-        <a rel="author" href="https://RyanNickel.com" class="p-author h-card">Ryan Nickel</a>
+        <a rel="permalink" href="html/my_first_go_project.html" class="u-url">Permalink</a>
+        <a rel="author" class="p-author" href="https://RyanNickel.com">Ryan Nickel</a>
       </main>        
     </article>
 
     <footer class="h-card">
-      <img src="/img/headshot.png" class="u-photo" alt="headshot">
+      <img class="u-photo" src="img/headshot.png" alt="headshot">
       <span class="p-name">Ryan Nickel</span>
       <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
 
       <ul>
         <li><a rel="me" href="https://twitter.com/rnickel" class="u-url">Twitter</a></li>
         <li><a rel="me" href="https://github.com/mrnickel" class="u-url">GitHub</a></li>
-        <li><a href="/about.html">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a rel="me" href="https://indieweb.social/@mrnickel" class="u-url">Mastodon</a></li>
         <li><a href="/rss.xml">RSS</a></li>
       </ul>   
 
       <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
 
-      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+      <img src="img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
 
       <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
     </footer>

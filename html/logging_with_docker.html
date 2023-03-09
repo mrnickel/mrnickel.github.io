@@ -4,23 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <base href="https://ryannickel.com/" target="_blank">
+
     <title>RyanNickel.com  - Logging with Docker</title>
 
     <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
-    <link rel="stylesheet" href="/css/markdown.css">
-    <link rel="stylesheet" href="/css/icons.css">
-    <link rel="stylesheet" href="/css/typography.css">
-    <link rel="stylesheet" href="/css/vars.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/post.css">    
+    <link rel="stylesheet" href="css/markdown.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/vars.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/post.css">    
   </head>
   <body>
-    <article>
+    <article class="h-entry">
       <header>
         <h1 class="p-name">Logging with Docker</h1>
       </header>
 
-      <main>
+      <main class="e-content">
         <p>As of late I&rsquo;ve been trying to learn <a href="https://www.docker.com">Docker</a>. I&rsquo;ve been using Ansible / Vagrant for quite some time now with great success. The only problem I have with this combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me. However, having many containers leads to many locations to look for logs. This is an annoyance I&rsquo;d wish to avoid.</p>
 
 <p>As such I&rsquo;ve been trying to move one of our smaller services over to running in a container. This service is a standalone Java application that runs all of the time and manages sending push notifications to all users.</p>
@@ -120,27 +122,27 @@ eval $(docker-machine env awslogging)
 <p>With the next blog post we&rsquo;ll look into popping logs up into Loggly and papertrail app to see if they offer anything a little more robust.</p>
 
         <time class="published-date dt-published" datetime="2016-01-18 09:07:58 -0800 -0800">Jan 18, 2016</time>
-        <a rel="permalink" href="/html/logging_with_docker.html" class="u-url">Permalink</a>
-        <a rel="author" href="https://RyanNickel.com" class="p-author h-card">Ryan Nickel</a>
+        <a rel="permalink" href="html/logging_with_docker.html" class="u-url">Permalink</a>
+        <a rel="author" class="p-author" href="https://RyanNickel.com">Ryan Nickel</a>
       </main>        
     </article>
 
     <footer class="h-card">
-      <img src="/img/headshot.png" class="u-photo" alt="headshot">
+      <img class="u-photo" src="img/headshot.png" alt="headshot">
       <span class="p-name">Ryan Nickel</span>
       <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
 
       <ul>
         <li><a rel="me" href="https://twitter.com/rnickel" class="u-url">Twitter</a></li>
         <li><a rel="me" href="https://github.com/mrnickel" class="u-url">GitHub</a></li>
-        <li><a href="/about.html">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a rel="me" href="https://indieweb.social/@mrnickel" class="u-url">Mastodon</a></li>
         <li><a href="/rss.xml">RSS</a></li>
       </ul>   
 
       <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
 
-      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+      <img src="img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
 
       <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
     </footer>

@@ -4,23 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <base href="https://ryannickel.com/" target="_blank">
+
     <title>RyanNickel.com  - Logging with Docker and Loggly</title>
 
     <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
-    <link rel="stylesheet" href="/css/markdown.css">
-    <link rel="stylesheet" href="/css/icons.css">
-    <link rel="stylesheet" href="/css/typography.css">
-    <link rel="stylesheet" href="/css/vars.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/post.css">    
+    <link rel="stylesheet" href="css/markdown.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/vars.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/post.css">    
   </head>
   <body>
-    <article>
+    <article class="h-entry">
       <header>
         <h1 class="p-name">Logging with Docker and Loggly</h1>
       </header>
 
-      <main>
+      <main class="e-content">
         <p>In part 2 of this series, I&rsquo;m going to explore using Loggly to aggregate my Docker container logs. When designing scalable software, typically you&rsquo;ll end up with many instances of a single service. Signing into each instance to view logs can be very troublesome (and annoying!). Luckily there are ways to get around this annoyance. Enter Loggly.</p>
 
 <p>Now I&rsquo;m partial to taking the path to least resistance, and as such I&rsquo;m going to follow Loggly&rsquo;s own documentation on using the <a href="https://www.loggly.com/docs/docker-logging-driver/">Docker Logging Driver</a>.</p>
@@ -65,27 +67,27 @@ ERROR: Base64 decode is not supported on your Operating System. Please update yo
 <p>Next up I&rsquo;ll try to <a href="https://www.loggly.com/docs/rsyslog-manual-configuration/">manually configure rsyslog</a> instead of using the setup script.</p>
 
         <time class="published-date dt-published" datetime="2016-02-05 17:57:18 -0800 -0800">Feb 05, 2016</time>
-        <a rel="permalink" href="/html/logging_with_docker_and_loggly.html" class="u-url">Permalink</a>
-        <a rel="author" href="https://RyanNickel.com" class="p-author h-card">Ryan Nickel</a>
+        <a rel="permalink" href="html/logging_with_docker_and_loggly.html" class="u-url">Permalink</a>
+        <a rel="author" class="p-author" href="https://RyanNickel.com">Ryan Nickel</a>
       </main>        
     </article>
 
     <footer class="h-card">
-      <img src="/img/headshot.png" class="u-photo" alt="headshot">
+      <img class="u-photo" src="img/headshot.png" alt="headshot">
       <span class="p-name">Ryan Nickel</span>
       <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
 
       <ul>
         <li><a rel="me" href="https://twitter.com/rnickel" class="u-url">Twitter</a></li>
         <li><a rel="me" href="https://github.com/mrnickel" class="u-url">GitHub</a></li>
-        <li><a href="/about.html">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a rel="me" href="https://indieweb.social/@mrnickel" class="u-url">Mastodon</a></li>
         <li><a href="/rss.xml">RSS</a></li>
       </ul>   
 
       <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
 
-      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+      <img src="img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
 
       <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
     </footer>
