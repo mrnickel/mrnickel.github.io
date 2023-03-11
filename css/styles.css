@@ -101,3 +101,8 @@ a[rel=permalink] {
 .h-card .p-name {
   display: none;
 }
+
+/* utilities */
+.hidden {
+  display: none;
+}
