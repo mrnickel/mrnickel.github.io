@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>RyanNickel.com  - Updating to use H-Entry for each article</title>
+
+    <link rel="stylesheet" href="//unpkg.com/sanitize.css">    
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/vars.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/post.css">
+  </head>
+  <body>
+    <article class="h-entry">
+      <header>
+        <h1 class="p-name">Updating to use H-Entry for each article</h1>
+      </header>
+
+      <main class="e-content">
+        <p>As I delve deeper into the <a href="https://indieweb.org/">IndieWeb</a>, I first took on the low hanging fruit of adding the <a href="adding-h-ard-to-this-site.html">h-card</a> format to the footer.</p>
+
+<p>With that low hanging fruit out of the way, I started looking into wrapping posts with the <a href="http://microformats.org/wiki/h-entry">h-entry</a> classes.</p>
+
+<p>The purpose to the <strong>h-entry</strong> card, as put forth by the <a href="http://microformats.org/">microformats.io</a> site is:</p>
+
+<blockquote>
+<p>h-entry is a simple, open format for episodic or date-stamped content on the web. h-entry is often used with content intended to be syndicated, e.g. blog posts. h-entry is one of several open microformat standards suitable for embedding data in HTML.</p>
+</blockquote>
+
+<p>Starting to add this made me realize that my blog post entries weren&rsquo;t <em>strictly</em> accurate. I was using an <code>&lt;article&gt;</code> tag to contain the content of the blog post. The intended purpose as outlined in <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article">this mdn doc is</a>:</p>
+
+<blockquote>
+<p>The <code>&lt;article&gt;</code> HTML element represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., in syndication)</p>
+</blockquote>
+
+<p>My article wasn&rsquo;t truly <em>self contained</em>. The title portion of the article was instead in the <code>&lt;header&gt;</code> tag of this site. I needed to change up the markup and css for the site in order to make it adhere to the standards.</p>
+
+<p>This led me down the rabbit hole of looking deeper into my markup.</p>
+
+<p>What else wasn&rsquo;t quite idiomatic? Could I take this opportunity to clean up and minimize my HTML? Take this opportunity to perhaps learn a little more about the newer CSS properties available?</p>
+
+<p>Why not!</p>
+
+<h2>Index.tmpl Cleanup</h2>
+
+<p>Looking at the index page, I thought I could clean it up a little bit. It was already fairly clean, but I could sense some <a href="https://csscreator.com/divitis">divitis</a> beginning to creep in.</p>
+
+<pre><code>&lt;header&gt;
+  &lt;div class=&quot;content&quot;&gt;
+	  &lt;h1&gt;Hello, my name is &lt;span class=&quot;name&quot;&gt;Ryan Nickel&lt;/span&gt;&lt;/h1&gt;
+	  &lt;p&gt;A personal blog focused on (primarily) software.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+</code></pre>
+
+<p>That extra <code>&lt;div class=&quot;content&quot;&gt;...&lt;/div&gt;</code> was in there purely for styling the page. It added no semantic meaning to the markup. This is something that should be handled purely with CSS.</p>
+
+<p>This was pretty simple to do, especially considering all I needed to do was set some padding, which is so much easier now with <code>vw</code>. I can use some simple media queries to make this responsive as well. Simple.</p>
+
+<p>The <code>&lt;article&gt;</code> tag was suffering from the same thing. One extra <code>&lt;div&gt;</code> in order to control the styles. The same <code>vw</code> CSS class can address this as well.</p>
+
+<p>Finally, looking at the <code>&lt;footer&gt;</code> tag, this one changed quite a bit.</p>
+
+<p>Again it had the same <code>&lt;div&gt;</code> issue, so I was able to easily remove that.</p>
+
+<p>I then took the opportunity to properly style the various social media links to be a proper <code>&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</code>. I was lazy the first time around and just wrote them out in a <code>&lt;p&gt;</code> tag, and modifying them was proving to be more arduous than I would prefer. Again this can all easily be styled via CSS and allow the markup to be more semantic.</p>
+
+<pre><code>footer ul {
+  list-style-type: circle;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  padding: 0;
+}    
+
+footer li {
+  padding: 0px;
+  margin-left: 20px;
+}
+
+footer li:first-child {
+  list-style-type: none;
+  margin-left: 0;
+}
+</code></pre>
+
+<p>I was then able to modify the markup from</p>
+
+<pre><code>&lt;p&gt;
+  &lt;a rel=&quot;me&quot; href=&quot;https://twitter.com/rnickel&quot; class=&quot;url&quot;&gt;Twitter&lt;/a&gt; &amp;#x26AC; &lt;a rel=&quot;me&quot; href=&quot;https://github.com/mrnickel&quot; class=&quot;url&quot;&gt;GitHub&lt;/a&gt; &amp;#x26AC; &lt;a href=&quot;/about.html&quot;&gt;About&lt;/a&gt; &amp;#x26AC; &lt;a href=&quot;/rss.xml&quot;&gt;RSS&lt;/a&gt; &amp;#x26AC; &lt;a rel=&quot;me&quot; href=&quot;https://techhub.social/@mrnickel&quot;&gt;Mastodon&lt;/a&gt;
+&lt;/p&gt;
+</code></pre>
+
+<p>to a much more readable</p>
+
+<pre><code>&lt;ul&gt;
+	&lt;li&gt;&lt;a rel=&quot;me&quot; href=&quot;https://twitter.com/rnickel&quot; class=&quot;u-url&quot;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;me&quot; href=&quot;https://github.com/mrnickel&quot; class=&quot;u-url&quot;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;/about.html&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;me&quot; href=&quot;https://indieweb.social/@mrnickel&quot; class=&quot;u-url&quot;&gt;Mastodon&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;/rss.xml&quot;&gt;RSS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;   
+</code></pre>
+
+<h2>Post.tmpl Cleanup</h2>
+
+<p>This one was the more difficult template to clean up.</p>
+
+<p>I want to ensure that the <code>&lt;article&gt;</code> tag was fully self-contained.</p>
+
+<p>This means that my <code>&lt;header&gt;</code> tag needs to now be a child of the <code>&lt;article&gt;</code> tag.</p>
+
+<p>To do this, I created a new <code>post.css</code> file that deviates somewhat from the <code>index.css</code> file. Although the overall styles are the same, the markup is different, which one could argue necessitates a new style sheet.</p>
+
+<p>This allowed me to move the <code>&lt;header&gt;</code> tag within the <code>&lt;article&gt;</code> tag, thus fulfilling the requirement of having the <code>&lt;article&gt;</code> fully self contained. I was then able to move the actual copy of each article into <code>&lt;main&gt;</code> which one could also argue is more semantically correct, as it is the <em>main</em> content of the document.</p>
+
+<p>Finally I was able to add the appropriate microformat classes for the associated items:
+- <code>p-name</code> to highlight the name of the article (within the header)
+- <code>e-content</code>  to capture the body of the article
+- <code>dt-published</code> I could add to the <code>&lt;time&gt;</code> element to capture the date in which the article was published
+- <code>u-url</code> to allow any scraper to grab the permalink</p>
+
+<p>And that was it.</p>
+
+<h2>Conclusion</h2>
+
+<p>This was an interesting exercise for me. Getting into the nitty gritty of HTML and CSS isn&rsquo;t something I often do during my day-to-day. It was fun to jump into looking at the semantics and try to clean it up and toy around with CSS a little. I&rsquo;m sure there are better ways to go about doing what I did, but my goal wasn&rsquo;t to do it perfectly but instead to just play around. That&rsquo;s half the fun of having your own website.</p>
+
+        <time class="published-date dt-published" datetime="2023-03-13 06:49:16.034857 -0400 EDT m=+0.001369626">Mar 13, 2023</time>
+        <a rel="permalink" href="html/updating_to_use_h-entry_for_each_article.html" class="u-url">Permalink</a>
+        <a rel="author" class="p-author" href="https://RyanNickel.com">Ryan Nickel</a>
+      </main>        
+    </article>
+
+    <footer class="h-card">
+      <img class="u-photo" src="/img/headshot.png" alt="headshot">
+      <span class="p-name">Ryan Nickel</span>
+      <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
+
+      <ul>
+        <li><a rel="me" href="https://twitter.com/rnickel" class="u-url">Twitter</a></li>
+        <li><a rel="me" href="https://github.com/mrnickel" class="u-url">GitHub</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a rel="me" href="https://indieweb.social/@mrnickel" class="u-url">Mastodon</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>   
+
+      <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
+
+      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+
+      <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+    </footer>
+
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      
+      ga('create', 'UA-35684132-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+
+  </body>
+</html>
