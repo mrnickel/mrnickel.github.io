@@ -1,0 +1,25 @@
+{
+    "subject":"acct:mrnickel@indieweb.social",
+    "aliases":
+    [
+        "https://indieweb.social/@mrnickel",
+        "https://indieweb.social/users/mrnickel"
+    ],
+    "links":
+    [
+        {
+            "rel":"http://webfinger.net/rel/profile-page",
+            "type":"text/html",
+            "href":"https://indieweb.social/@mrnickel"
+        },
+        {
+            "rel":"self",
+            "type":"application/activity+json",
+            "href":"https://indieweb.social/users/mrnickel"
+        },
+        {
+            "rel":"http://ostatus.org/schema/1.0/subscribe",
+            "template":"https://indieweb.social/authorize_interaction?uri={uri}"
+        }
+    ]
+}
