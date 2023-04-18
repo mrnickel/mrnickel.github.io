@@ -9,6 +9,38 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Setting up my own @ryannickel.com domain for Mastadon</title>
+			<link>http://RyanNickel.com/html/setting_up_my_own_@ryannickel.com_domain_for_mastadon.html</link>
+			<description>
+				<![CDATA[
+					<p>If you&rsquo;re using Mastodon or other decentralized social networks, you might be looking for ways to improve your discoverability. One technique that&rsquo;s gained popularity is using the webfinger protocol to create a discoverable profile for your domain.</p>
+
+<p><a href="https://www.hanselman.com">Scott Hanselman</a> wrote a <a href="https://www.hanselman.com/blog/use-your-own-user-domain-for-mastodon-discoverability-with-the-webfinger-protocol-without-hosting-a-server">blog post</a> about how to set this up, and it&rsquo;s a pretty easy process. Basically, you just need to create a webfinger file for your domain and add it to your site.</p>
+
+<p>The webfinger file is a JSON object that contains information about you or your service, like your email address or URL. You can also include links to your social media profiles or a brief description of what you&rsquo;re all about.</p>
+
+<p>In my case, I&rsquo;m running this site on GitHub Pages, and the tricky part is getting the webfinger file accessible from the well-known URL on your domain. By default, GitHub Pages doesn&rsquo;t serve up files or directories that start with a <code>.</code>. But fear not, my friend! You can use the <code>_config.yml</code> file to override this behavior and include the <code>.well-known</code> directory in your site.</p>
+
+<p>All you need to do is add the following line to your <code>_config.yml</code> file:</p>
+
+<p>(for a full list of overrides see <a href="https://jekyllrb.com/docs/configuration/options/">Jekylls Configuration Options</a> documentation)</p>
+
+<pre><code>include: ['.well-known']
+</code></pre>
+
+<p>That tells Jekyll to include the <code>.well-known</code> directory in your site&rsquo;s output, which means your webfinger file should now be accessible at <a href="https://yourdomain.com/.well-known/webfinger">https://yourdomain.com/.well-known/webfinger</a>.</p>
+
+<p>Once you&rsquo;ve got your webfinger file set up, Mastodon and other decentralized services should be able to discover information about you and your domain by performing a webfinger lookup. This can help others find and connect with you, which is always a good thing!</p>
+
+<p>So there you have it, folks. Adding a webfinger file to your GitHub Pages site is an easy way to improve your discoverability on decentralized social networks. Follow the steps outlined above and start making some new connections today!</p>
+
+				]]>
+			</description>
+			<pubDate>Tue, 18 Apr 2023 15:51:13 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/setting_up_my_own_@ryannickel.com_domain_for_mastadon.html</guid>
+		</item>
+	
+		<item>
 			<title>Updating to use H-Entry for each article</title>
 			<link>http://RyanNickel.com/html/updating_to_use_h-entry_for_each_article.html</link>
 			<description>
@@ -721,311 +753,6 @@ That&rsquo;s crazy! At 9ms I think I&rsquo;ll be able to finally realize my drea
 			</description>
 			<pubDate>Sat, 20 Jul 2019 18:06:25 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/my_thoughts_on_wwdc_2019.html</guid>
-		</item>
-	
-		<item>
-			<title>Creating My Ideal React Native Projects With TypeScript ESLint, Prettier and VSCode</title>
-			<link>http://RyanNickel.com/html/creating_my_ideal_react_native_projects_with_typescript_eslint,_prettier_and_vscode.html</link>
-			<description>
-				<![CDATA[
-					<p>With the <a href="https://medium.com/palantir/tslint-in-2019-1a144c2317a9">announcement of TSLint being deprecated in favour of using ESLint</a>
-I thought it was a good opportunity to set up a template project with my five required features on any React Native project I start. Namely:</p>
-
-<ol>
-<li>Writing in TypeScript with proper linting</li>
-<li>Utilize Prettier to automatically fix code styles</li>
-<li>Set up VSCode for live linting</li>
-<li>Set up VSCode to properly format using Prettier config on save</li>
-<li>Resolve imports from the root instead of relatively (i.e. no <code>import x from '../../../x';</code>)</li>
-</ol>
-
-<p>This post is really more for myself as a reminder on what is required to meet the above conditions. As I learn more I&rsquo;ll update this post.</p>
-
-<p>This took me <em>far</em> longer than I had originally anticipated. Although I&rsquo;m not new to React Native, I am new to some of the more advanced
-JavaScript tooling.</p>
-
-<p>I won&rsquo;t go through all of the things that I tried and <em>didn&rsquo;t</em> work, as there were far too many of them and I can&rsquo;t fully recall the number of hoops
-I tried to jump through before realizing they were the wrong hoop to begin with. (note to self: I should document my processes <em>as</em> they&rsquo;re happening,
-instead of after the fact).</p>
-
-<p>Let&rsquo;s walk through the process of creating an entirely new React Native TypeScript project, then set up the project to address the 5 requirements outlined
-above.</p>
-
-<p>Thankfully the process of adding TypeScript to the RN projects has been greatly simplified. Let&rsquo;s stick with the React Native convention and create a new
-project <strong>MyAwesomeProject</strong></p>
-
-<pre><code>$ react-native init MyAwesomeProject --template typescript
-</code></pre>
-
-<p>Done. We&rsquo;re running on TypeScript. Huzzah!</p>
-
-<p>Now let&rsquo;s set up the recommended VSCode extensions so we can verify the linting rules as we do everything:</p>
-
-<pre><code>$ cd MyAwesomeProject
-$ mkdir .vscode &amp;&amp; cd .vscode
-$ touch extensions.json
-$ touch settings.json
-$ cd ..
-$ mkdir src
-$ code .
-</code></pre>
-
-<p>This will create the .vscode project folder and open up the project.</p>
-
-<p>I prefer to keep my folder structure as follows:</p>
-
-<pre><code>MyAwesomeProject
-|____tests__/
-|__.vscode/
-|__android/
-|__ios/
-|__src/
-|  |__components/ // general components shared throughout the codebase
-|  |__scenes/ // full screen sections
-|  |  App.tsx
-|
-|  .bablerc.js
-|  ...
-|  etc
-|  ...
-</code></pre>
-
-<p>This will become important when specifying the root paths in <code>tsconfig.json</code> and <code>.babelrc.js</code>.</p>
-
-<p>Let&rsquo;s update the <code>extensions.json</code> file as below:</p>
-
-<h2>./vscode/extensions.json</h2>
-
-<pre><code>{
-  &quot;recommendations&quot;: [
-    &quot;dbaeumer.vscode-eslint&quot;,
-    &quot;esbenp.prettier-vscode&quot;
-  ]
-}
-</code></pre>
-
-<p>Now we can make sure that everyone opening this project will use the same default extensions and have the same consistent tooling.</p>
-
-<p>Now it&rsquo;s time to start adding the various dependencies:</p>
-
-<p>Open up the VSCode terminal by pressing <code>CTRL +</code>`.</p>
-
-<p>Let&rsquo;s start adding some dependencies:</p>
-
-<pre><code>$ yarn add --dev     @typescript-eslint/eslint-plugin \
-  @typescript-eslint/parser \
-  babel-eslint \
-  babel-plugin-module-resolver \
-  eslint \
-  eslint-config-airbnb \
-  eslint-config-prettier \
-  eslint-config-react \
-  eslint-import-resolver-babel-module \
-  eslint-import-resolver-typescript \
-  eslint-plugin-import \
-  eslint-plugin-jsx-a11y \
-  eslint-plugin-module-resolver \
-  eslint-plugin-prettier \
-  eslint-plugin-react \
-  prettier \
-  react-native-typescript-transformer \
-</code></pre>
-
-<p>Phew! That&rsquo;s a lot of dependencies. Welcome to JavaScript I guess!</p>
-
-<p>Note: I prefer to use the default Airbnb rules. (side note: Want to learn more about JavaScript eccentricities? Read the <a href="https://github.com/airbnb/javascript">Airbnb JavaScript style guide</a>)</p>
-
-<p>Finally, let&rsquo;s modify a few config files.</p>
-
-<h2>./vscode/settings.json</h2>
-
-<pre><code>{
-  &quot;search.exclude&quot;: {
-    &quot;ios/build&quot;: true,
-    &quot;android/app/build&quot;: true,
-  },
-  &quot;editor.formatOnSave&quot;: false,
-  &quot;editor.trimAutoWhitespace&quot;: true,
-  &quot;editor.tabSize&quot;: 2,
-  &quot;editor.rulers&quot;: [
-    150
-  ],
-  &quot;eslint.autoFixOnSave&quot;: true,
-  &quot;eslint.validate&quot;: [
-    {
-      &quot;language&quot;: &quot;javascript&quot;,
-      &quot;autoFix&quot;: true
-    },
-    {
-      &quot;language&quot;: &quot;javascriptreact&quot;,
-      &quot;autoFix&quot;: true
-    },
-    {
-      &quot;language&quot;: &quot;typescript&quot;,
-      &quot;autoFix&quot;: true
-    },
-    {
-      &quot;language&quot;: &quot;typescriptreact&quot;,
-      &quot;autoFix&quot;: true
-    }
-  ],
-  &quot;files.exclude&quot;: {
-    &quot;**/node_modules&quot;: true,
-    &quot;**/android/app/build&quot;: true,
-    &quot;**/ios/build&quot;: true
-  },
-  &quot;files.insertFinalNewline&quot;: true,
-}
-</code></pre>
-
-<h2>.eslintignore</h2>
-
-<pre><code>src/registerServiceWorker.js
-src/**/__tests__/**
-babel.config.js
-index.js
-node_modules/**
-ios/**
-android/**
-</code></pre>
-
-<h2>.eslint.js</h2>
-
-<pre><code>module.exports = {
-  &quot;parser&quot;: &quot;@typescript-eslint/parser&quot;,
-  &quot;plugins&quot;: [
-    &quot;@typescript-eslint&quot;,
-    &quot;prettier&quot;,
-    &quot;import&quot;,
-    &quot;module-resolver&quot;
-  ],
-  &quot;extends&quot;: [
-    &quot;airbnb&quot;,
-    &quot;plugin:@typescript-eslint/recommended&quot;,
-    &quot;plugin:import/typescript&quot;,
-    &quot;plugin:react/recommended&quot;,
-    &quot;plugin:import/recommended&quot;,
-    &quot;prettier&quot;,
-    &quot;prettier/@typescript-eslint&quot;,
-    &quot;prettier/react&quot;
-  ],
-  &quot;env&quot;: {
-    &quot;browser&quot;: true,
-    &quot;jasmine&quot;: true,
-    &quot;jest&quot;: true
-  },
-  &quot;rules&quot;: {
-    &quot;prettier/prettier&quot;: [&quot;error&quot;],
-    &quot;@typescript-eslint/explicit-member-accessibility&quot;: 0,
-    &quot;@typescript-eslint/no-empty-interface&quot;: 0,
-    &quot;@typescript-eslint/explicit-function-return-type&quot;: 0,
-    &quot;@typescript-eslint/no-non-null-assertion&quot;: 0,
-    &quot;@typescript-eslint/no-use-before-define&quot;: 0,
-    &quot;no-use-before-define&quot;: 0,
-    &quot;@typescript-eslint/indent&quot;: [&quot;error&quot;, 2],
-    &quot;max-len&quot;: [&quot;error&quot;, 150],
-    &quot;react/jsx-filename-extension&quot;: [1, { &quot;extensions&quot;: [&quot;.jsx&quot;, &quot;.tsx&quot;] }],
-    &quot;object-curly-newline&quot;: [&quot;error&quot;, { &quot;ImportDeclaration&quot;: &quot;never&quot; }],
-    &quot;@typescript-eslint/interface-name-prefix&quot;: 0,
-    &quot;class-methods-use-this&quot;: 0,
-    &quot;no-unused-vars&quot;: 0,
-    &quot;@typescript-eslint/no-unused-vars&quot;: [&quot;error&quot;, { &quot;argsIgnorePattern&quot;: &quot;^_[0-9]?&quot; }],
-    &quot;react/display-name&quot;: 0,
-    &quot;react/prop-types&quot;: 0, // not necessary as we use typescript
-    &quot;object-curly-newline&quot;: 0,
-
-  },
-  &quot;settings&quot;: {
-    &quot;import/resolver&quot;: {
-      &quot;babel-module&quot;: {},
-      &quot;typescript&quot;: {}
-    }
-  },
-  &quot;globals&quot;: {
-    &quot;__DEV__&quot;: true
-  }
-}
-</code></pre>
-
-<p>Note I prefer the js extension so I can add inline comments.</p>
-
-<h2>.prettierrc.js</h2>
-
-<pre><code>module.exports = {
-  &quot;tabWidth&quot;: 2,
-  &quot;semi&quot;: true,
-  &quot;singleQuote&quot;: true,
-  &quot;trailingComma&quot;: &quot;all&quot;,
-  &quot;printWidth&quot;: 150,
-  &quot;bracketSpacing&quot;: true
-};
-</code></pre>
-
-<h2>.babelrc.js</h2>
-
-<pre><code>module.exports = {
-  presets: [
-    'module:metro-react-native-babel-preset'
-  ],
-  plugins: [
-    ['module-resolver',
-      {
-        extensions: [
-          '.js',
-          '.jsx',
-          '.ts',
-          '.tsx'
-        ],
-        root: [&quot;./src&quot;],
-        alias: {
-          &quot;resources&quot;: &quot;./resources&quot;
-        }
-      }
-    ]
-  ]
-};
-</code></pre>
-
-<p>Note: I prefer to use the name <code>.bablerc.js</code> to stick with the other config file naming conventions.</p>
-
-<h2>tsconfig.json</h2>
-
-<pre><code>{
-  &quot;compilerOptions&quot;: {
-    &quot;allowJs&quot;: true,
-    &quot;allowSyntheticDefaultImports&quot;: true,
-    &quot;esModuleInterop&quot;: true,
-    &quot;isolatedModules&quot;: true,
-    &quot;jsx&quot;: &quot;react&quot;,
-    &quot;lib&quot;: [
-      &quot;es6&quot;
-    ],
-    &quot;module&quot;: &quot;es2015&quot;,
-    &quot;moduleResolution&quot;: &quot;node&quot;,
-    &quot;noEmit&quot;: true,
-    &quot;strict&quot;: true,
-    &quot;target&quot;: &quot;esnext&quot;,
-    &quot;baseUrl&quot;: &quot;./src&quot;,
-    &quot;rootDir&quot;: &quot;./src&quot;,
-    &quot;resolveJsonModule&quot;: true
-  },
-  &quot;exclude&quot;: [
-    &quot;node_modules&quot;,
-    &quot;babel.config.js&quot;,
-    &quot;metro.config.js&quot;,
-    &quot;jest.config.js&quot;
-  ]
-}
-</code></pre>
-
-<p>That&rsquo;s about it. Now get started writing your next world-changing app with sane defaults.</p>
-
-<p>I&rsquo;ve created a <a href="https://github.com/mrnickel/ReactNativeTypeScriptConfigDemo">demo project on GitHub</a>. If you have any recommendations on how I can make this better please feel free to submit a PR!</p>
-
-				]]>
-			</description>
-			<pubDate>Tue, 04 Jun 2019 15:41:58 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/creating_my_ideal_react_native_projects_with_typescript_eslint,_prettier_and_vscode.html</guid>
 		</item>
 	
 

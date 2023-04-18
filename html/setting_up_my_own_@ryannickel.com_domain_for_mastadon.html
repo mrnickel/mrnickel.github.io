@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>RyanNickel.com  - Setting up my own @ryannickel.com domain for Mastadon</title>
+
+    <link rel="stylesheet" href="//unpkg.com/sanitize.css">    
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/vars.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/post.css">
+  </head>
+  <body>
+    <article class="h-entry">
+      <header>
+        <h1 class="p-name">Setting up my own @ryannickel.com domain for Mastadon</h1>
+      </header>
+
+      <main class="e-content">
+        <p>If you&rsquo;re using Mastodon or other decentralized social networks, you might be looking for ways to improve your discoverability. One technique that&rsquo;s gained popularity is using the webfinger protocol to create a discoverable profile for your domain.</p>
+
+<p><a href="https://www.hanselman.com">Scott Hanselman</a> wrote a <a href="https://www.hanselman.com/blog/use-your-own-user-domain-for-mastodon-discoverability-with-the-webfinger-protocol-without-hosting-a-server">blog post</a> about how to set this up, and it&rsquo;s a pretty easy process. Basically, you just need to create a webfinger file for your domain and add it to your site.</p>
+
+<p>The webfinger file is a JSON object that contains information about you or your service, like your email address or URL. You can also include links to your social media profiles or a brief description of what you&rsquo;re all about.</p>
+
+<p>In my case, I&rsquo;m running this site on GitHub Pages, and the tricky part is getting the webfinger file accessible from the well-known URL on your domain. By default, GitHub Pages doesn&rsquo;t serve up files or directories that start with a <code>.</code>. But fear not, my friend! You can use the <code>_config.yml</code> file to override this behavior and include the <code>.well-known</code> directory in your site.</p>
+
+<p>All you need to do is add the following line to your <code>_config.yml</code> file:</p>
+
+<p>(for a full list of overrides see <a href="https://jekyllrb.com/docs/configuration/options/">Jekylls Configuration Options</a> documentation)</p>
+
+<pre><code>include: ['.well-known']
+</code></pre>
+
+<p>That tells Jekyll to include the <code>.well-known</code> directory in your site&rsquo;s output, which means your webfinger file should now be accessible at <a href="https://yourdomain.com/.well-known/webfinger">https://yourdomain.com/.well-known/webfinger</a>.</p>
+
+<p>Once you&rsquo;ve got your webfinger file set up, Mastodon and other decentralized services should be able to discover information about you and your domain by performing a webfinger lookup. This can help others find and connect with you, which is always a good thing!</p>
+
+<p>So there you have it, folks. Adding a webfinger file to your GitHub Pages site is an easy way to improve your discoverability on decentralized social networks. Follow the steps outlined above and start making some new connections today!</p>
+
+        <time class="published-date dt-published" datetime="2023-04-18 15:51:13.429344 -0400 EDT m=+0.005854584">Apr 18, 2023</time>
+        <a rel="permalink" href="html/setting_up_my_own_@ryannickel.com_domain_for_mastadon.html" class="u-url">Permalink</a>
+        <a rel="author" class="p-author" href="https://RyanNickel.com">Ryan Nickel</a>
+      </main>        
+    </article>
+
+    <footer class="h-card">
+      <img class="u-photo" src="/img/headshot.png" alt="headshot">
+      <span class="p-name">Ryan Nickel</span>
+      <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
+
+      <ul>
+        <li><a rel="me" href="https://twitter.com/rnickel" class="u-url">Twitter</a></li>
+        <li><a rel="me" href="https://github.com/mrnickel" class="u-url">GitHub</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a rel="me" href="https://indieweb.social/@mrnickel" class="u-url">Mastodon</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>   
+
+      <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
+
+      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+
+      <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+    </footer>
+
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      
+      ga('create', 'UA-35684132-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+
+  </body>
+</html>
