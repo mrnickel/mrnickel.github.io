@@ -9,6 +9,31 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Fall; Or, Dodge in Hell: A Promising Start That Got Lost in the Digital Abyss</title>
+			<link>http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
+			<description>
+				<![CDATA[
+					<p>So, I recently dove into Neal Stephenson&rsquo;s &ldquo;Fall; Or, Dodge in Hell,&rdquo; expecting an epic adventure. Well, let me tell you, it didn&rsquo;t quite deliver. Clocking in at a whopping 900 pages, you&rsquo;d think there&rsquo;d be enough room for some serious action. But nope, not much happens for the most part. I mean, we get bombarded with pages upon pages of philosophical musings, theological ramblings, and political banter. Some of it relates to the story, but a lot of it feels like it&rsquo;s just there to fill up space. It&rsquo;s like Stephenson took a philosophy/theology textbook and tried to disguise it as a novel.</p>
+
+<p>The story? Yeah, it&rsquo;s in there somewhere, but good luck finding it. It keeps getting swallowed up by this jungle of words. And let me tell you, it&rsquo;s not even that great of a story. In fact, it could&rsquo;ve been told in a fraction of the pages. But no, we&rsquo;re treated to this never-ending maze of verbiage instead.</p>
+
+<p>The writing itself is a bit odd, especially when we venture into the simulated &ldquo;souls&rdquo; in the virtual world. Those characters speak in this archaic, overdone high fantasy language that feels totally out of place. And get this—they draw inspiration from Norse, Greek, and Judeo-Christian mythology, which they just assume the reader to understand.. I mean, cool, but it&rsquo;s done in such an obvious and random way that it just doesn&rsquo;t make sense. The virtual world, which should be the heart of the book, ends up feeling forced and unconvincing. It&rsquo;s like, come on, give us something to believe in!</p>
+
+<p>Towards the end, we spend almost all our time in the virtual world, and guess what? It turns into a typical, run-of-the-mill Quest fantasy with a weak and predictable ending. Talk about a letdown!</p>
+
+<p>Overall, I hate to say it, but it feels like Stephenson wasn&rsquo;t giving it his all. It&rsquo;s like he was going through the motions, throwing together a mishmash of parts that don&rsquo;t fit well. It&rsquo;s a shame because we all know he can be a fantastic writer when he wants to be. Unfortunately, &ldquo;Fall; Or, Dodge in Hell&rdquo; isn&rsquo;t terrible, but it sure isn&rsquo;t a masterpiece either.</p>
+
+<p>Individually the &ldquo;parts&rdquo; offered a very interesting premise which could have been a story unto themselves. The hoax&rsquo;s propogated by the internet and then believed in by certain demographics. The idea of <strong>Ameristan</strong>, the idea of &ldquo;souls&rdquo; living in a digital world. All very interesting, however I was very much left wanting.</p>
+
+<p>Rating this one? Well, I&rsquo;d say it&rsquo;s a solid 2.5 out of 5 stars.</p>
+
+				]]>
+			</description>
+			<pubDate>Wed, 31 May 2023 13:12:16 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
+		</item>
+	
+		<item>
 			<title>Setting up my own @ryannickel.com domain for Mastadon</title>
 			<link>http://RyanNickel.com/html/setting_up_my_own_@ryannickel.com_domain_for_mastadon.html</link>
 			<description>
@@ -670,89 +695,6 @@ jobs:
 			</description>
 			<pubDate>Wed, 25 Mar 2020 16:06:17 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/on_getting_aws_solutions_architect_certified.html</guid>
-		</item>
-	
-		<item>
-			<title>My Thoughts on WWDC 2019</title>
-			<link>http://RyanNickel.com/html/my_thoughts_on_wwdc_2019.html</link>
-			<description>
-				<![CDATA[
-					<p>WWDC is an event I&rsquo;ve been watching every year since I think 2007, the year they announced the iPhone. At the time I was a big Apple fanboy.</p>
-
-<p>I bought my first iBook which I believe was the 2002 model. I can&rsquo;t be sure. I was in University and it cost me more money than I had, but I had
-never been so satisfied with a computer in my life. As Marie Kondo would say, it sparked joy. Our computer lab had macs, but they were running
-Mac OS 9. The OS made no sense to me. I came from a Windows world, and although I was very comfortable with that, OS 9 to me always felt clunky
-and unintuitive.</p>
-
-<p>Never would I buy a Mac, I told myself&hellip; even though the hardware was fun and always boasted more up-to-date technology, I just couldn&rsquo;t get
-past the OS.</p>
-
-<p>Then a friend of mine brought his Powerbook over running OS X. It immediately changed my mind. That machine was a revelation to me. &ldquo;Holy shit!&rdquo; I said,
-&ldquo;This is a Mac??&rdquo;. &ldquo;Yes&rdquo;, he replied. &ldquo;This is a Mac.&rdquo;.</p>
-
-<p>I went out a few weeks later and bought the iBook. Every device they released after that I felt the same reverence for:</p>
-
-<ul>
-<li>iPod</li>
-<li>iPod video</li>
-<li>iPhone</li>
-<li>iPad</li>
-<li>Apple TV</li>
-</ul>
-
-<p>All of them brought joy to my life. I dutifully upgraded my Apple devices throughout the years.</p>
-
-<p>I&rsquo;ve owned iBooks, MacMini&rsquo;s, MacBooks, MacBook Airs and now MacBook Pros. I&rsquo;ve been running the Pro series for the last 5+ years. I&rsquo;ve owned basically every
-generation of iPhone to date (I <em>am</em> an iOS developer after all), and various iPads. You name it, I&rsquo;ve bought it.</p>
-
-<p>I also continued to watch WWDC year after year soaking up all the SDK updates for OS X, then for iOS. Objective C was never my language of choice, but
-I used it, and grew to appreciate all the square brackets. It wasn&rsquo;t until the announcement of Swift that I realized my appreciation for the spacing
-in ObjC was more stokcholme syndrome.</p>
-
-<p>Over the years, I must admit I became more and more discouraged with the direction Apple was taking for their products.</p>
-
-<p>The hardware wasn&rsquo;t really pushing the envelope, the build quality of both the hardware and software seemed to be suffering. All the new features brought
-to iOS seemed a lot like &ldquo;me too&rdquo; features, years after Android (or even BlackBerry) had released them.</p>
-
-<p>Not to mention the plethora of issues with their latest keyboard.</p>
-
-<p>WWDC 2019 however has me excited for the first time in years. They announced a number of things that have me excited.</p>
-
-<h2>SwiftUI</h2>
-
-<p>Using swift within UIKit has always seemed a bit clunky.</p>
-
-<p>The introduction of SwiftUI seems to address this in a big way, and I&rsquo;m sure it&rsquo;s the direction Apple will be moving in going into the future.</p>
-
-<p>A quick glance at the declaritive style of reminds me very much of how you go about declaring your UI in React Native. A style that is very easy to understand.</p>
-
-<p>And the new design tools look incredible as well. No longer having to recompile the app in order to see if moving your component 3 points to the left is what you want
-is going to be a big game changer for a lot of developers. This is going to get XCode one step closer to the design experience of Anroid Studio, or StoryBooks in RN.</p>
-
-<h2>iPad OS</h2>
-
-<p>With regards to the iPad, it always felt to me like a missed opportunity. It was always treated as just a big iPhone. The device turned into a convenient
-way for me to watch Netflix on the go.</p>
-
-<p>I&rsquo;ve always wanted to use it to write my notes, but the lag on any of the 3rd party stylus&rsquo; have always been too long. The Pencil is much better, but still not quite fast enough for me to jot down a small note while working.</p>
-
-<p>However this year they are finally starting to use the plethora of screen realestate. Allowing multiple apps to move around, decreased the Pencil lag to 9ms!
-That&rsquo;s crazy! At 9ms I think I&rsquo;ll be able to finally realize my dream of going fully paperless!</p>
-
-<p>And my most anticipated feature: Sidecar. Yes! Finally allowing me to extend my MacBook Pro&rsquo;s screen to a second monitor when I&rsquo;m on the go (I&rsquo;m on the go a lot).</p>
-
-<h2>Catalina</h2>
-
-<p>No more iTunes. I mean I don&rsquo;t think I can add any more to this.</p>
-
-<p>Sidecar (again)</p>
-
-<p>More security. I really appreciate the stance Apple is making on security. Bringing it front and centre, and making it secure by default.</p>
-
-				]]>
-			</description>
-			<pubDate>Sat, 20 Jul 2019 18:06:25 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/my_thoughts_on_wwdc_2019.html</guid>
 		</item>
 	
 
