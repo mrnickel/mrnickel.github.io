@@ -1,12 +1,12 @@
 ---
-date: 2024-04-06T10:46:47-04:00
-draft: true
+date: 2024-04-06T11:03:50-04:00
+draft: false
 title: My workflow for managing documents with Paperless NGX
 ---
 
 Managing a pile of documents can be a real headache, can’t it? I used to have all these papers stuffed into folders, always mixing things up. Was my business tax return in the “Tax Returns” folder or jammed in the “Business” one? And good luck finding anything in that mess!
 
-## Enter the Digital Hero: Paperless
+## Enter the Digital Hero: Paperless-NGX
 
 Then, I decided enough was enough and started scanning all these documents to keep them in [Paperless](https://docs.paperless-ngx.com/). It was cool, but when I upgraded to Paperless-NGX, things got a whole lot cooler. Why? One word: [ASN (archive serial number) labels](https://docs.paperless-ngx.com/advanced_usage/#archive-serial-number-assignment). Sounds fancy, right? It basically means I slap a number on my paper documents, scan them, and bam – I can search for them in Paperless-NGX, then find it physically based on the number.
 

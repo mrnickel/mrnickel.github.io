@@ -9,8 +9,45 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>My workflow for managing documents with Paperless NGX</title>
+			<link>http://RyanNickel.com/html/my_workflow_for_managing_documents_with_paperless_ngx.html</link>
+			<description>
+				<![CDATA[
+					<p>Managing a pile of documents can be a real headache, can’t it? I used to have all these papers stuffed into folders, always mixing things up. Was my business tax return in the “Tax Returns” folder or jammed in the “Business” one? And good luck finding anything in that mess!</p>
+
+<h2>Enter the Digital Hero: Paperless-NGX</h2>
+
+<p>Then, I decided enough was enough and started scanning all these documents to keep them in <a href="https://docs.paperless-ngx.com/">Paperless</a>. It was cool, but when I upgraded to Paperless-NGX, things got a whole lot cooler. Why? One word: <a href="https://docs.paperless-ngx.com/advanced_usage/#archive-serial-number-assignment">ASN (archive serial number) labels</a>. Sounds fancy, right? It basically means I slap a number on my paper documents, scan them, and bam – I can search for them in Paperless-NGX, then find it physically based on the number.</p>
+
+<h2>The Magic of ASN Labels</h2>
+
+<p>So, I stumbled upon this nifty tool by <a href="https://tobiasmaier.info/asn-qr-code-label-generator/">Tobias L. Maier</a> that lets me print out these ASN labels right at home. But oh boy, did I go through a ton of label sheets trying to get the printer settings right. Eventually, I found just the right printer settings so I wouldn’t waste more labels. It was a game-changer. (I have a fork of the tool with my notes <a href="https://ryannickel.com/asn-qr-code-label-generator/">here</a>)</p>
+
+<h2>My New Workflow</h2>
+
+<p>Now, here’s how I roll with my documents:</p>
+
+<ol>
+<li>Slap a Label: Every new document gets the next number in line. No guessing games.</li>
+<li>Scan and Upload: I scan the doc, upload it to Paperless-NGX, and it’s in the system.</li>
+<li>Physical Filing: Then, the paper version just goes on top of my physical pile. Easy to find with its number if I ever need it again.</li>
+</ol>
+
+<p>This setup has made my life a whole lot easier. No more digging through folders or wondering where I put that one bill. It’s all there, a search away in Paperless-NGX.</p>
+
+<h2>Wrapping It Up: Living the Organized Life</h2>
+
+<p>Switching from a chaotic pile of folders to a neat, numbered system with Paperless-NGX felt like a huge win. If you’re tired of playing hide and seek with your documents, give this method a shot. It’s pretty laid back once you get the hang of it, and you’ll wonder how you ever managed without it. Plus, you get to feel a bit like a librarian with your very own indexing system. Who doesn’t love that?</p>
+
+				]]>
+			</description>
+			<pubDate>Sat, 06 Apr 2024 11:03:50 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/my_workflow_for_managing_documents_with_paperless_ngx.html</guid>
+		</item>
+	
+		<item>
 			<title>Fall; Or, Dodge in Hell: A Promising Start That Got Lost in the Digital Abyss</title>
-			<link>http://RyanNickel.com/html/fall_or_dodge_in_hell_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
+			<link>http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
 			<description>
 				<![CDATA[
 					<p>So, I recently dove into Neal Stephenson&rsquo;s &ldquo;Fall; Or, Dodge in Hell,&rdquo; expecting an epic adventure. Well, let me tell you, it didn&rsquo;t quite deliver. Clocking in at a whopping 900 pages, you&rsquo;d think there&rsquo;d be enough room for some serious action. But nope, not much happens for the most part. I mean, we get bombarded with pages upon pages of philosophical musings, theological ramblings, and political banter. Some of it relates to the story, but a lot of it feels like it&rsquo;s just there to fill up space. It&rsquo;s like Stephenson took a philosophy/theology textbook and tried to disguise it as a novel.</p>
@@ -30,7 +67,7 @@
 				]]>
 			</description>
 			<pubDate>Wed, 31 May 2023 13:12:16 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/fall_or_dodge_in_hell_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
+			<guid isPermaLink="false">http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
 		</item>
 	
 		<item>
@@ -611,90 +648,6 @@ jobs:
 			</description>
 			<pubDate>Wed, 22 Apr 2020 20:11:52 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/on_open_source_trolls.html</guid>
-		</item>
-	
-		<item>
-			<title>On Getting AWS Solutions Architect Certified</title>
-			<link>http://RyanNickel.com/html/on_getting_aws_solutions_architect_certified.html</link>
-			<description>
-				<![CDATA[
-					<p>Having accomplished my personal challenge of completing an olympic triathlon (while simultaneously rediscovering my love of cycling), I decided to tackle a professional challenge.</p>
-
-<p>So I went in search of something new.</p>
-
-<p>At the time, my team was  knee-deep in a lift and shift of our platform from MediaTemple to AWS. The process was going very smoothly and I found myself  intrigued by the number of overwhelming-yet-fascinating services they offer.</p>
-
-<p>An abundance of shiny new tools to  take our platform to the next level. I was hooked!  The search was over.  My professional challenge was to get my Solutions Architect Certification on AWS.</p>
-
-<h2>THE PREPARATION</h2>
-
-<h3>Online Course</h3>
-
-<p>Just like anything new, I had to do my research and gather learning resources.</p>
-
-<p>Amazon offered a number of white papers on the subject, but I found them to be too dry for my liking. I generally prefer to get my hands dirty and at least see some live examples.</p>
-
-<p>This led me to Pluralsight’s <a href="https://www.pluralsight.com/courses/aws-certified-solutions-architect-associate">AWS Certified Solutions Architect - Associate</a> course by <a href="https://twitter.com/ekhnaser">Elias Khnaser</a>. Other than the disappointment of marginally dated content, it was an overall solid course that allowed me to wrap my head around the networking and IAM concepts to help me improve the overall security of our platform.</p>
-
-<h3>Linux Academy</h3>
-
-<p>I also played around with <a href="https://linuxacademy.com/">Linux Academy</a> as I was captivated  by the prospect of working through exercises on a live AWS account and having my solution verified. However, at the time the platform was quite new and the results were inconsistent and quite often incorrect.</p>
-
-<p>I wish I could recall more details as to what my issues were but this was a long time ago and I&rsquo;m certain the platform has gotten much better. I&rsquo;d be curious to try it again when I decide to get another certification.</p>
-
-<h3>Study Guide</h3>
-
-<p>The final piece of learning material I picked up was the official <a href="https://www.amazon.ca/Certified-Solutions-Architect-Study-Guide/dp/111950421X/ref=sr_1_1?keywords=solutions+architect+study+guide&amp;qid=1580314684&amp;sr=8-1">AWS Certified Solutions Architect Study Guide</a>. It should come as no surprise that this book covered everything that one would be tested on. It was  valuable at presenting the various concepts and topics and offered some  fundamental study materials.</p>
-
-<h3>Practical Application</h3>
-
-<p>Now that I had the learning materials, I wanted to apply best practices and gain practical experience before I wrote the exam.</p>
-
-<p>Some of the goals I wanted to achieve with this were:</p>
-
-<ul>
-<li>Secure networking</li>
-<li>Secure IAM roles and security groups</li>
-<li>Autoscaling</li>
-<li>Reduce costs</li>
-</ul>
-
-<p>As I don&rsquo;t have a background in networking, that was the part I struggled with the most (Well&hellip; that and IAM). At the beginning I was excited just to get things up and running so my security groups weren&rsquo;t exactly up to snuff. Open to too many services and external network attacks. RDS was the biggest culprit for this as I was used to opening up my SQL app and connecting directly to it in order to debug any issues. I had contemplated setting up a VPN but considering one of my goals was to reduce costs I settled on locking down requests to my own IP address. As our platform was quite stable this was acceptable. If I or my team were connecting regularly I would have set up the VPN.</p>
-
-<p>Setting up proper networking was a hurdle for me. As the <a href="https://Volu.me">Volu.me</a> back end grew organically into a monolith, networking was never a thing I had to think about. It&rsquo;s easy to build and deploy a single codebase to a single server when everything is synchronous and request based. However as soon as your platform needs to scale you need to start thinking about being more reactive and asynchronous. This means at the very least running on difference processes, which quickly leads to overburdening a single machine. In the short term this can be mitigated by increasing the size of your EC2 instance, but this is obviously not sustainable. Best practice dictates to use multiple smaller EC2 instances which means putting more thought into networking. My goal was to only have two services publically available: S3 and our ELB. Our system was essentially a monolith with a number of cron jobs running as services so networking was pretty straight forward. I could go into more technical detail about our solution, but that would be better left to another blog post.</p>
-
-<p>My next hurdle was properly setting up IAM across our system. Again, because our system was essentially a monolith that was now distributed it gave me a good opportunity to ideally have services split up. I created the appropriate IAM accounts with the ideal microservice setup that we were aiming for and after some stressful afternoons we got everything running.</p>
-
-<h2>THE DEEP BREATH</h2>
-
-<p>Now that I had some practical experience setting up a non-trivial system on AWS following best practice I had one last hurdle to jump: My negative internal dialog constantly telling me that I wasn&rsquo;t ready.</p>
-
-<p>I hadn&rsquo;t written any tests in 10+ years! How would I know if I&rsquo;ve prepared enough? How do I know if I&rsquo;m really ready? I spent far too much time procrastinating by convincing myself that I wasn&rsquo;t prepared.</p>
-
-<p>After months of putting it off I dug my heels in, logged into the portal and booked a date.  There was no turning back. I told myself that I wasn&rsquo;t going to reschedule no matter what. I then did what I always do just before tests and crammed the entire week prior. Ran through all of the practice exams, exercises and anything else I could find.</p>
-
-<p>The night before the exam, I couldn’t focus on anything else.  My palms were sweaty, knees weak, arms were heavy…</p>
-
-<h2>THE EXAM</h2>
-
-<p>The day of the exam came and that familiar fluttering feeling in my stomach returned.</p>
-
-<p>I went through the test and I realized that as per usual I had over-prepared. In retrospect If it wasn’t for my fear,  I could have written the test months earlier.</p>
-
-<p>To my relief, I passed the test and was very thankful that I got the results instantly.</p>
-
-<h2>THE CONCLUSION</h2>
-
-<p>Although the <a href="https://Volu.me">Volu.me</a> (my company) platform has since been taken down, I am still an avid user of AWS and always recommend it to clients.</p>
-
-<p>I am concerned about vendor lockin, and to some extent it is unavoidable, but it can be mitigated with some effort&hellip; but again that is another blog post for another day.</p>
-
-<p>There it is; I tackled my professional challenge. I think my next personal (physical) challenge this year will either be learning to fly-fish, or run a full marathon Maybe both!</p>
-
-				]]>
-			</description>
-			<pubDate>Wed, 25 Mar 2020 16:06:17 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/on_getting_aws_solutions_architect_certified.html</guid>
 		</item>
 	
 
