@@ -9,6 +9,89 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>How NPM's Defaults Set You Up for Failure</title>
+			<link>http://RyanNickel.com/html/how_npms_defaults_set_you_up_for_failure.html</link>
+			<description>
+				<![CDATA[
+<p>In software development, consistency and stability are critical — especially when managing dependencies. However, NPM&rsquo;s default behavior when installing packages—using the caret (<code>^</code>) in <code>package.json</code> — creates a fragile environment that often leads to frustrating issues for developers. Idempotent and reproducible dependency management should be the standard experience by default, but NPM&rsquo;s use of <code>^</code> undermines this goal.</p>
+
+<p>Here&rsquo;s why it&rsquo;s time to rethink the default use of caret versioning in NPM, and how it sets developers up for future pain, particularly given the complexities of semantic versioning (semver).</p>
+
+<h2>Why ^ Versioning Isn’t a Safe Default</h2>
+
+<p>The caret (<code>^</code>) prefix in NPM allows minor and patch version updates automatically. For example, if you run:</p>
+
+<pre><code>npm install lodash
+</code></pre>
+
+<p>NPM adds the following entry to your <code>package.json</code>:</p>
+
+<pre><code>&quot;lodash&quot;: &quot;^4.17.21&quot;
+</code></pre>
+
+<p>This means that any future installation can upgrade the <code>lodash</code> dependency to anything below <code>5.0.0</code>. While this aims to provide developers with bug fixes and new features without manual intervention, it introduces significant risks: <strong>unexpected changes</strong>, <strong>hidden regressions</strong>, and <strong>version incompatibilities</strong> in complex projects.</p>
+
+<h2>1. Semver is Hard—and NPM Makes it Harder</h2>
+
+<p>Semantic versioning (semver) is designed to make versioning predictable: major versions introduce breaking changes, minor versions add features, and patches fix bugs. However, not all packages in the JavaScript ecosystem strictly adhere to semver rules. Accidental breaking changes are common, even in minor or patch versions.</p>
+
+<p>By defaulting to <code>^</code>, NPM shifts the burden of semver compliance onto developers, who must constantly monitor updates to avoid potential breakages. This behavior creates unpredictable outcomes that often surface in production or CI pipelines. <strong>NPM’s default makes the promise of semver nearly impossible to uphold</strong>, resulting in wasted time troubleshooting issues that stem from unintended updates.</p>
+
+<h2>2. A Reproducible Developer Experience Should Be the Default</h2>
+
+<p>An idempotent development environment ensures that every code checkout and dependency installation yields the same behavior, regardless of when or where it happens. This level of consistency is essential for stable CI/CD pipelines, reliable production releases, and seamless collaboration across teams.</p>
+
+<p>Other ecosystems, such as <a href="https://go.dev/">Go</a> and <a href="https://www.nuget.org/">NuGet</a>, use exact versioning to prevent dependency drift. In Go, the <code>go.mod</code> file locks dependencies to specific versions, ensuring builds are reproducible every time. NuGet favors deterministic package management for similar reasons. These approaches prioritize stability by ensuring nothing changes unless a developer explicitly updates a version.</p>
+
+<p>In contrast, NPM&rsquo;s default caret (<code>^</code>) versioning can lead to differing versions on different machines. Reproducing bugs becomes a nightmare when dependencies shift between development, CI, and production environments, making stability difficult to maintain.</p>
+
+<h2>3. ^ is a Time Bomb Waiting to Go Off</h2>
+
+<p>The flexibility provided by ^ introduces risks that compound over time. Here’s why:</p>
+
+<ol>
+<li><strong>Invisible Updates</strong>: Dependencies can be updated silently, resulting in unexpected issues.</li>
+<li><strong>Version Conflicts</strong>: As the dependency tree grows, conflicts arise between direct and transitive dependencies.</li>
+<li><strong>CI Pipeline Failures</strong>: Even if code works locally, a new patch version of a dependency may cause unexpected CI build failures.</li>
+</ol>
+
+<p>These issues could be avoided by making exact versioning the default. Developers should have control over when to upgrade dependencies, whether through planned reviews, automated tools like Dependabot, or manually tested patch releases.</p>
+
+<h2>4. The Case for <code>--save-exact</code> as the Default</h2>
+
+<p>NPM should default to <code>--save-exact</code> behavior, where every dependency is locked to the precise version installed. This would look like:</p>
+
+<pre><code>&quot;lodash&quot;: &quot;4.17.21&quot;
+</code></pre>
+
+<p>This ensures that the versions used during development are identical across all environments. Developers can still upgrade dependencies intentionally, but only when they are ready to manage the risks. This approach reduces reactive debugging and ensures a <strong>reproducible</strong> development experience by default.</p>
+
+<h2>How to Implement an Idempotent NPM Workflow</h2>
+
+<p>If NPM doesn’t change its default behavior, you can take these steps to enforce stability in your projects:</p>
+
+<ol>
+<li><strong>Use npm install <code>--save-exact</code></strong>. Set this behavior as the default:
+<code>npm config set save-exact true</code></li>
+<li><strong>Leverage <code>npm ci</code> for CI pipelines</strong>. This ensures only the versions listed in <code>package-lock.json</code> are installed, preventing unexpected updates.</li>
+<li><strong>Use automated tools to manage updates</strong>. Tools like Dependabot can help you control upgrades in a systematic manner.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>NPM&rsquo;s default use of the caret (<code>^</code>) for versioning creates more problems than it solves. In an ideal world, semantic versioning would work flawlessly, but in reality, <strong>semver is hard</strong> — and NPM’s current behavior makes it even harder by encouraging version drift and unpredictable builds. A reproducible, idempotent developer experience should be the default, not the exception.</p>
+
+<p>By shifting to <code>--save-exact</code>, NPM would align with practices of more stable ecosystems like Go and NuGet. This change would empower developers to upgrade dependencies on their own terms, reducing surprises and enabling smoother workflows. The minor inconvenience of managing updates manually is a small price to pay for long-term stability and consistency.</p>
+
+<p>It’s time for NPM to rethink its defaults and prioritize stability—because predictable software is <strong>better software</strong>.</p>
+
+				]]>
+			</description>
+			<pubDate>Tue, 22 Oct 2024 19:06:32 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/how_npms_defaults_set_you_up_for_failure.html</guid>
+		</item>
+	
+		<item>
 			<title>My workflow for managing documents with Paperless NGX</title>
 			<link>http://RyanNickel.com/html/my_workflow_for_managing_documents_with_paperless_ngx.html</link>
 			<description>
@@ -47,7 +130,7 @@
 	
 		<item>
 			<title>Fall; Or, Dodge in Hell: A Promising Start That Got Lost in the Digital Abyss</title>
-			<link>http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
+			<link>http://RyanNickel.com/html/fall_or_dodge_in_hell_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
 			<description>
 				<![CDATA[
 					<p>So, I recently dove into Neal Stephenson&rsquo;s &ldquo;Fall; Or, Dodge in Hell,&rdquo; expecting an epic adventure. Well, let me tell you, it didn&rsquo;t quite deliver. Clocking in at a whopping 900 pages, you&rsquo;d think there&rsquo;d be enough room for some serious action. But nope, not much happens for the most part. I mean, we get bombarded with pages upon pages of philosophical musings, theological ramblings, and political banter. Some of it relates to the story, but a lot of it feels like it&rsquo;s just there to fill up space. It&rsquo;s like Stephenson took a philosophy/theology textbook and tried to disguise it as a novel.</p>
@@ -67,7 +150,7 @@
 				]]>
 			</description>
 			<pubDate>Wed, 31 May 2023 13:12:16 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
+			<guid isPermaLink="false">http://RyanNickel.com/html/fall_or_dodge_in_hell_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
 		</item>
 	
 		<item>
@@ -99,7 +182,7 @@
 				]]>
 			</description>
 			<pubDate>Tue, 18 Apr 2023 15:51:13 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/setting_up_my_own_@ryannickel.com_domain_for_mastadon.html</guid>
+			<guid isPermaLink="false">http://RyanNickel.com/html/setting_up_my_own_ryannickelcom_domain_for_mastadon.html</guid>
 		</item>
 	
 		<item>
@@ -595,59 +678,6 @@ jobs:
 			</description>
 			<pubDate>Mon, 02 Jan 2023 20:26:18 EST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/on_adding_github_actions_to_my_staticsitegenerator.html</guid>
-		</item>
-	
-		<item>
-			<title>On Open Source Trolls</title>
-			<link>http://RyanNickel.com/html/on_open_source_trolls.html</link>
-			<description>
-				<![CDATA[
-					<p>We all use open source projects to complete our daily jobs. We all stand on the shoulders of giants. However it seems as though there are many who take the hard work of others for granted. They&rsquo;ve come to expect enterprise level support and stability from projects that are given away for free from generous people.</p>
-
-<p>Since I&rsquo;ve started developing with React Native/JS, I&rsquo;ve begun to actually contribute back to some of the projects that I use. Not nearly enough, but something is better than nothing.</p>
-
-<p>As my involvement in the community has increased, so too has my empathy towards those who manage these heavily used projects.</p>
-
-<p>I understand why people may feel frustrated when updates to their dependencies introduce regressions, but why this sense of entitlement? These regressions are never intentional, and breaking changes are generally well communicated especially with large projects such as ReactJS / ReactNative.</p>
-
-<p>There will always be edge cases that the team simply can&rsquo;t account for. ReactJS in general is downloaded millions of times each week. The distribution is so large that introducing bugs is inevitable.</p>
-
-<p>Bug reports are incredibly valuable, but comments such as:</p>
-
-<blockquote>
-<p>Yeah &hellip; RN is so instable &hellip; RN dev spend more time fixing bugs than properly coding</p>
-</blockquote>
-
-<p>or</p>
-
-<blockquote>
-<p>I hate React Native now. The basic functionality is not working what the worst team, don&rsquo;t you know test before release?</p>
-</blockquote>
-
-<p>This type of response/comment is not helpful to anyone. Instead, let’s try to positively articulate our experience when we issue bug fixes and circumvent negative comments. Let’s not forget that there is a person on the receiving end of these harsh comments.</p>
-
-<p>We need to focus on the issue at hand, offer helpful suggestions to the best of our ability, and if possible offer a code repo / sandbox that duplicates the issue. These are solutions that will benefit others who have the curiosity to learn.</p>
-
-<p>See this post on on <a href="https://www.softwaretestinghelp.com/how-to-write-good-bug-report/">how to write helpful bug reports</a></p>
-
-<p>Here are a few items that I believe are of utmost significance:</p>
-
-<blockquote>
-<p><strong>Don’t assume</strong> that the developer has made a mistake and hence you can use harsh words. Before reporting, it is equally important to check if the same bug has been reported or not.</p>
-</blockquote>
-
-<p>and</p>
-
-<blockquote>
-<p><strong>A duplicate bug</strong> is a burden in the testing cycle. Check the whole list of known bugs. At times, the developers might have known the issue and ignored it for a future release. Tools like Bugzilla which automatically searches for duplicate bugs can also be used. However, it is best to manually search for any duplicate bug.</p>
-</blockquote>
-
-<p>In the current world we live in, we need to recognize the developers that are  giving away their work to help you improve  so let&rsquo;s pay it forward and show them the respect and appreciation warranted.</p>
-
-				]]>
-			</description>
-			<pubDate>Wed, 22 Apr 2020 20:11:52 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/on_open_source_trolls.html</guid>
 		</item>
 	
 

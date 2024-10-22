@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+
+    <title>RyanNickel.com - How NPM's Defaults Set You Up for Failure</title>
+
+    <link rel="stylesheet" href="//unpkg.com/sanitize.css" />
+    <link rel="stylesheet" href="/css/typography.css" />
+    <link rel="stylesheet" href="/css/vars.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/post.css" />
+  </head>
+  <body>
+    <article class="h-entry">
+      <header>
+        <h1 class="p-name">How NPM's Defaults Set You Up for Failure</h1>
+      </header>
+
+      <main class="e-content">
+        <p>
+          In software development, consistency and stability are critical —
+          especially when managing dependencies. However, NPM&rsquo;s default
+          behavior when installing packages—using the caret (<code>^</code>) in
+          <code>package.json</code> — creates a fragile environment that often
+          leads to frustrating issues for developers. Idempotent and
+          reproducible dependency management should be the standard experience
+          by default, but NPM&rsquo;s use of <code>^</code> undermines this
+          goal.
+        </p>
+
+        <p>
+          Here&rsquo;s why it&rsquo;s time to rethink the default use of caret
+          versioning in NPM, and how it sets developers up for future pain,
+          particularly given the complexities of semantic versioning (semver).
+        </p>
+
+        <h2>Why ^ Versioning Isn’t a Safe Default</h2>
+
+        <p>
+          The caret (<code>^</code>) prefix in NPM allows minor and patch
+          version updates automatically. For example, if you run:
+        </p>
+
+        <pre><code>npm install lodash
+</code></pre>
+
+        <p>NPM adds the following entry to your <code>package.json</code>:</p>
+
+        <pre><code>&quot;lodash&quot;: &quot;^4.17.21&quot;
+</code></pre>
+
+        <p>
+          This means that any future installation can upgrade the
+          <code>lodash</code> dependency to anything below <code>5.0.0</code>.
+          While this aims to provide developers with bug fixes and new features
+          without manual intervention, it introduces significant risks:
+          <strong>unexpected changes</strong>,
+          <strong>hidden regressions</strong>, and
+          <strong>version incompatibilities</strong> in complex projects.
+        </p>
+
+        <h2>1. Semver is Hard—and NPM Makes it Harder</h2>
+
+        <p>
+          Semantic versioning (semver) is designed to make versioning
+          predictable: major versions introduce breaking changes, minor versions
+          add features, and patches fix bugs. However, not all packages in the
+          JavaScript ecosystem strictly adhere to semver rules. Accidental
+          breaking changes are common, even in minor or patch versions.
+        </p>
+
+        <p>
+          By defaulting to <code>^</code>, NPM shifts the burden of semver
+          compliance onto developers, who must constantly monitor updates to
+          avoid potential breakages. This behavior creates unpredictable
+          outcomes that often surface in production or CI pipelines.
+          <strong
+            >NPM’s default makes the promise of semver nearly impossible to
+            uphold</strong
+          >, resulting in wasted time troubleshooting issues that stem from
+          unintended updates.
+        </p>
+
+        <h2>2. A Reproducible Developer Experience Should Be the Default</h2>
+
+        <p>
+          An idempotent development environment ensures that every code checkout
+          and dependency installation yields the same behavior, regardless of
+          when or where it happens. This level of consistency is essential for
+          stable CI/CD pipelines, reliable production releases, and seamless
+          collaboration across teams.
+        </p>
+
+        <p>
+          Other ecosystems, such as <a href="https://go.dev/">Go</a> and
+          <a href="https://www.nuget.org/">NuGet</a>, use exact versioning to
+          prevent dependency drift. In Go, the <code>go.mod</code> file locks
+          dependencies to specific versions, ensuring builds are reproducible
+          every time. NuGet favors deterministic package management for similar
+          reasons. These approaches prioritize stability by ensuring nothing
+          changes unless a developer explicitly updates a version.
+        </p>
+
+        <p>
+          In contrast, NPM&rsquo;s default caret (<code>^</code>) versioning can
+          lead to differing versions on different machines. Reproducing bugs
+          becomes a nightmare when dependencies shift between development, CI,
+          and production environments, making stability difficult to maintain.
+        </p>
+
+        <h2>3. ^ is a Time Bomb Waiting to Go Off</h2>
+
+        <p>
+          The flexibility provided by ^ introduces risks that compound over
+          time. Here’s why:
+        </p>
+
+        <ol>
+          <li>
+            <strong>Invisible Updates</strong>: Dependencies can be updated
+            silently, resulting in unexpected issues.
+          </li>
+          <li>
+            <strong>Version Conflicts</strong>: As the dependency tree grows,
+            conflicts arise between direct and transitive dependencies.
+          </li>
+          <li>
+            <strong>CI Pipeline Failures</strong>: Even if code works locally, a
+            new patch version of a dependency may cause unexpected CI build
+            failures.
+          </li>
+        </ol>
+
+        <p>
+          These issues could be avoided by making exact versioning the default.
+          Developers should have control over when to upgrade dependencies,
+          whether through planned reviews, automated tools like Dependabot, or
+          manually tested patch releases.
+        </p>
+
+        <h2>4. The Case for <code>--save-exact</code> as the Default</h2>
+
+        <p>
+          NPM should default to <code>--save-exact</code> behavior, where every
+          dependency is locked to the precise version installed. This would look
+          like:
+        </p>
+
+        <pre><code>&quot;lodash&quot;: &quot;4.17.21&quot;
+</code></pre>
+
+        <p>
+          This ensures that the versions used during development are identical
+          across all environments. Developers can still upgrade dependencies
+          intentionally, but only when they are ready to manage the risks. This
+          approach reduces reactive debugging and ensures a
+          <strong>reproducible</strong> development experience by default.
+        </p>
+
+        <h2>How to Implement an Idempotent NPM Workflow</h2>
+
+        <p>
+          If NPM doesn’t change its default behavior, you can take these steps
+          to enforce stability in your projects:
+        </p>
+
+        <ol>
+          <li>
+            <strong>Use npm install <code>--save-exact</code></strong
+            >. Set this behavior as the default:
+            <code>npm config set save-exact true</code>
+          </li>
+          <li>
+            <strong>Leverage <code>npm ci</code> for CI pipelines</strong>. This
+            ensures only the versions listed in
+            <code>package-lock.json</code> are installed, preventing unexpected
+            updates.
+          </li>
+          <li>
+            <strong>Use automated tools to manage updates</strong>. Tools like
+            Dependabot can help you control upgrades in a systematic manner.
+          </li>
+        </ol>
+
+        <h2>Conclusion</h2>
+
+        <p>
+          NPM&rsquo;s default use of the caret (<code>^</code>) for versioning
+          creates more problems than it solves. In an ideal world, semantic
+          versioning would work flawlessly, but in reality,
+          <strong>semver is hard</strong> — and NPM’s current behavior makes it
+          even harder by encouraging version drift and unpredictable builds. A
+          reproducible, idempotent developer experience should be the default,
+          not the exception.
+        </p>
+
+        <p>
+          By shifting to <code>--save-exact</code>, NPM would align with
+          practices of more stable ecosystems like Go and NuGet. This change
+          would empower developers to upgrade dependencies on their own terms,
+          reducing surprises and enabling smoother workflows. The minor
+          inconvenience of managing updates manually is a small price to pay for
+          long-term stability and consistency.
+        </p>
+
+        <p>
+          It’s time for NPM to rethink its defaults and prioritize
+          stability—because predictable software is
+          <strong>better software</strong>.
+        </p>
+
+        <time
+          class="published-date dt-published"
+          datetime="2024-10-22 19:06:32.3862193 -0400 EDT m=+0.002806601"
+          >Oct 22, 2024</time
+        >
+        <a
+          rel="permalink"
+          href="html/how_npm's_defaults_set_you_up_for_failure.html"
+          class="u-url"
+          >Permalink</a
+        >
+        <a rel="author" class="p-author" href="https://RyanNickel.com"
+          >Ryan Nickel</a
+        >
+      </main>
+    </article>
+
+    <footer class="h-card">
+      <img class="u-photo" src="/img/headshot.png" alt="headshot" />
+      <span class="p-name">Ryan Nickel</span>
+      <a class="hidden u-url" rel="me" href="https://RyanNickel.com"
+        >https://RyanNickel.com</a
+      >
+
+      <ul>
+        <li>
+          <a rel="me" href="https://twitter.com/rnickel" class="u-url"
+            >Twitter</a
+          >
+        </li>
+        <li>
+          <a rel="me" href="https://github.com/mrnickel" class="u-url"
+            >GitHub</a
+          >
+        </li>
+        <li><a href="/about.html">About</a></li>
+        <li>
+          <a rel="me" href="https://indieweb.social/@mrnickel" class="u-url"
+            >Mastodon</a
+          >
+        </li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>
+
+      <p>
+        Made with &hearts; by <span class="p-given-name">Ryan</span>
+        <span class="p-family-name">Nickel</span> in
+        <span class="p-locality">Toronto</span>, <span>Canada</span>
+      </p>
+
+      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon" />
+
+      <p>
+        Generated with my super awesome
+        <a href="https://github.com/mrnickel/StaticSiteGenerator"
+          >StaticSiteGenerator</a
+        >
+      </p>
+    </footer>
+
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
+
+      ga("create", "UA-35684132-1", "auto");
+      ga("send", "pageview");
+    </script>
+  </body>
+</html>
