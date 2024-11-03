@@ -9,10 +9,73 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
-			<title>How NPM's Defaults Set You Up for Failure</title>
-			<link>http://RyanNickel.com/html/how_npms_defaults_set_you_up_for_failure.html</link>
+			<title>The One True Code Value: Why Maintainability is the Unsung Hero of Programming</title>
+			<link>http://RyanNickel.com/html/the_one_true_code_value:_why_maintainability_is_the_unsung_hero_of_programming.html</link>
 			<description>
 				<![CDATA[
+					<p>There are two kinds of programmers in this world: those who love writing brand-new code (fresh, shiny, and untouched by mortal hands), and those who have gazed into the horrifying abyss of code maintenance – and survived. You know where I stand. Give me maintainability any day. Because nothing says “programming value” quite like writing code you can still understand a year later.</p>
+
+<p>Let’s be honest: the thrill of solving problems and shipping features tends to make us a bit reckless. We’ve all experienced the coding flow state – that zen place where you’re cranking out solutions, piling up commits like there’s no tomorrow. It’s exciting! But tomorrow does come, and it’s not as kind as you might hope. That’s when maintainability steps in. Think of it as a sort of wisdom, gently whispering, &ldquo;Future You will be the one cleaning up this mess. Be kind to Future You.&rdquo;</p>
+
+<h2>A Love Letter to Maintainability</h2>
+
+<p>First, let’s define this beautiful concept. Maintainability isn’t just about making things “easier to fix later.” It’s about creating code that your teammates can read without taking headache medicine, code that will remain functional and reliable under the stress of future updates, code that won’t spontaneously combust just because the product team had an epiphany at 3 a.m.</p>
+
+<p>There’s an underrated elegance to maintainable code. It’s code that fits together neatly, like a well-organized sock drawer. You’re not just throwing things in randomly, but folding, sorting, and arranging with intention. The goal? To make sure that every future visit to that code is painless. Blissful, even.</p>
+
+<h2>It’s All Fun and Games Until Someone Says, “Let’s Add a New Feature”</h2>
+
+<p>The real test of code isn’t whether it works today but whether it’ll still work – and be adaptable – tomorrow. Picture this: you’re deep into a project, your code is humming along nicely, and the product team suddenly decides to add a new feature. If your code is a spaghetti nest of confusing logic, scattered files, and function names like <code>doStuff123</code>, then I’m afraid you’re in for a long night. Adding anything to a mess is just going to make a bigger mess.</p>
+
+<p>But if your code is maintainable, your response is different. Instead of a sinking feeling, you get to say, “Sure! That’s an easy tweak.” Because your functions are readable, your components are organized, and your logic makes sense. That’s the power of maintainability: it’s a gift you give yourself, wrapped in clean, readable code and a bow of future-proofing.</p>
+
+<h2>The Perks of Maintainable Code</h2>
+
+<p>So, what exactly makes maintainable code so precious? Here are some benefits that make it worth prioritizing above all else (yes, even above &ldquo;It Works™&rdquo;):</p>
+
+<p><strong>Readability</strong> – Imagine writing code that makes sense even to someone who didn’t write it. Cue gasps of amazement. Well-structured, maintainable code is like a well-written novel: anyone can jump in, understand the plot, and see the purpose behind each character (er, function).</p>
+
+<p><strong>Adaptability</strong> – Remember that feature request we just talked about? Maintainable code makes changes feel like a gentle adjustment rather than a Herculean task. When your functions are modular, your variables are meaningfully named, and your logic flows naturally, new features fit right in.</p>
+
+<p><strong>Collaboration</strong> – Writing code isn’t a solo act. You’re a part of a team, and nothing says “team player” like writing code that someone else can actually understand. After all, there’s no better feeling than receiving a Slack message from a teammate that reads, “Your code was so clear – adding that feature was a breeze!”</p>
+
+<p><strong>Easier Debugging</strong> – Bugs are inevitable, but debugging doesn’t have to be a nightmare. Maintainable code means that, when things break, they do so in predictable ways. Debugging is like following a trail of breadcrumbs through the forest instead of hacking your way through dense underbrush with a dull machete.</p>
+
+<p><strong>Longevity</strong> – Code that’s maintainable can withstand the test of time. It’s robust, resilient, and – dare I say it – timeless. You might move on to another project or another company, but your maintainable code will be a gift to those who come after you, and they will sing your praises in hushed, reverent tones. (Okay, maybe not, but they will be grateful.)</p>
+
+<h2>The Art of Maintainability: A Few Tips</h2>
+
+<p>Achieving maintainable code isn’t rocket science, but it does take a little <strong>intentionality</strong>. Here are some practical ways to start putting maintainability front and center in your codebase:</p>
+
+<p><strong>Name Things Well</strong> – Clear, descriptive names are your best friends. A function called <code>calculateTotalInvoiceAmount</code> beats <code>calc1</code> any day. Don’t force Future You (or anyone else) to decipher what you were thinking.</p>
+
+<p><strong>Keep It DRY (Don’t Repeat Yourself)</strong> – Write reusable functions and avoid copying and pasting code blocks. Not only is DRY code easier to maintain, but it’s also less error-prone.</p>
+
+<p><strong>Comment with Purpose</strong> – A well-placed comment can be a lifesaver, but too many comments can muddy the waters. Focus on explaining why you did something, not what you did.</p>
+
+<p><strong>Write Tests</strong> – Tests are the unsung heroes of maintainable code. They give you confidence that changes won’t accidentally break everything.</p>
+
+<p><strong>Refactor Relentlessly</strong> – Maintainability isn’t something you achieve once and then forget. Revisiting and refining code is essential for long-term maintainability.</p>
+
+<h2>Embrace the Boring Virtue of Maintainability</h2>
+
+<p>In a world that loves the new, the flashy, and the cutting-edge, maintainability might seem like the shy kid at the back of the class. But here’s the truth: the shiniest, most performant code in the world is useless if no one can work with it six months down the line.</p>
+
+<p>So next time you’re coding, embrace the humbling virtue of maintainability. Write code that’s clear, organized, and prepared for whatever the future holds.</p>
+
+				]]>
+			</description>
+			<pubDate>Sun, 03 Nov 2024 08:51:50 EST</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/the_one_true_code_value:_why_maintainability_is_the_unsung_hero_of_programming.html</guid>
+		</item>
+	
+		<item>
+			<title>How NPM's Defaults Set You Up for Failure</title>
+			<link>http://RyanNickel.com/html/how_npm's_defaults_set_you_up_for_failure.html</link>
+			<description>
+				<![CDATA[
+					<h1>How NPM&rsquo;s Defaults Set You Up for Failure</h1>
+
 <p>In software development, consistency and stability are critical — especially when managing dependencies. However, NPM&rsquo;s default behavior when installing packages—using the caret (<code>^</code>) in <code>package.json</code> — creates a fragile environment that often leads to frustrating issues for developers. Idempotent and reproducible dependency management should be the standard experience by default, but NPM&rsquo;s use of <code>^</code> undermines this goal.</p>
 
 <p>Here&rsquo;s why it&rsquo;s time to rethink the default use of caret versioning in NPM, and how it sets developers up for future pain, particularly given the complexities of semantic versioning (semver).</p>
@@ -88,7 +151,7 @@
 				]]>
 			</description>
 			<pubDate>Tue, 22 Oct 2024 19:06:32 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/how_npms_defaults_set_you_up_for_failure.html</guid>
+			<guid isPermaLink="false">http://RyanNickel.com/html/how_npm's_defaults_set_you_up_for_failure.html</guid>
 		</item>
 	
 		<item>
@@ -130,7 +193,7 @@
 	
 		<item>
 			<title>Fall; Or, Dodge in Hell: A Promising Start That Got Lost in the Digital Abyss</title>
-			<link>http://RyanNickel.com/html/fall_or_dodge_in_hell_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
+			<link>http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
 			<description>
 				<![CDATA[
 					<p>So, I recently dove into Neal Stephenson&rsquo;s &ldquo;Fall; Or, Dodge in Hell,&rdquo; expecting an epic adventure. Well, let me tell you, it didn&rsquo;t quite deliver. Clocking in at a whopping 900 pages, you&rsquo;d think there&rsquo;d be enough room for some serious action. But nope, not much happens for the most part. I mean, we get bombarded with pages upon pages of philosophical musings, theological ramblings, and political banter. Some of it relates to the story, but a lot of it feels like it&rsquo;s just there to fill up space. It&rsquo;s like Stephenson took a philosophy/theology textbook and tried to disguise it as a novel.</p>
@@ -150,7 +213,7 @@
 				]]>
 			</description>
 			<pubDate>Wed, 31 May 2023 13:12:16 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/fall_or_dodge_in_hell_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
+			<guid isPermaLink="false">http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
 		</item>
 	
 		<item>
@@ -182,7 +245,7 @@
 				]]>
 			</description>
 			<pubDate>Tue, 18 Apr 2023 15:51:13 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/setting_up_my_own_ryannickelcom_domain_for_mastadon.html</guid>
+			<guid isPermaLink="false">http://RyanNickel.com/html/setting_up_my_own_@ryannickel.com_domain_for_mastadon.html</guid>
 		</item>
 	
 		<item>
@@ -582,102 +645,6 @@ This will create a formula definition file that will be committed to the <strong
 			</description>
 			<pubDate>Wed, 04 Jan 2023 10:42:53 EST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/on_adding_gzip_compression_to_staticsitegenerator.html</guid>
-		</item>
-	
-		<item>
-			<title>On Adding GitHub Actions To My StaticSiteGenerator</title>
-			<link>http://RyanNickel.com/html/on_adding_github_actions_to_my_staticsitegenerator.html</link>
-			<description>
-				<![CDATA[
-					<p>A number of years ago I started toying with <a href="https://go.dev">Go</a>. At the same time I was building this website you&rsquo;re reading right now. I wanted to join these two desires, so I thought I&rsquo;d take advantage of the, new to me, static site hosting of github for my personal website.</p>
-
-<p>I love learning new programming languages. I find that even if I don&rsquo;t use them in my day-to-day there&rsquo;s always a new paradigm that can be applied to whatever language I use as my daily driver.</p>
-
-<p>My big takeaway from Go was to <em>always</em> handle your errors, and to <em>always</em> make your errors explicit. Handling errors appropriately is a difficult thing to do. Do you retry? How many times? Does it make sense to simply retry? In what context do you retry? Do you simply bubble the error up to the user and have them address the errors? How many different kinds of errors can be returned? Errors and edge cases are the Hard Part of programming, and handling these appropriately separates a Good Developer from a Bad Developer.</p>
-
-<p>As an aside, when working with clients, I spend an inordinate amount of time trying to highlight and solution all of the possible edge cases. Somtimes they&rsquo;re edge cases that are incredibly unlikely to happen, however it&rsquo;s always good to highlight everything that could pontentially go wrong and how to deal with said issues.</p>
-
-<p>I build the <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a> as a way to play with Go, and to also tie that in with my attempt to statically host a site on <a href="https://pages.github.com/">GitHub Pages</a>.</p>
-
-<p>I maintain enough servers daily, so the idea of maintaining another one for my personal site didn&rsquo;t appeal to me. Also, static site generators were all the rage, so why not jump on that band wagon?</p>
-
-<p>Anyway, I built the <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a>, which has been meeting my needs. The application has been running for me just fine, and my last commit was in 2018. If it ain&rsquo;t broke don&rsquo;t fix it.</p>
-
-<p>More recently I thought to myself, why not set up some CI/CD to automatically publish this software as a release to GitHub so I can easily pull it down to any of my machines to author a new post. No longer will I have to download the github repo, build it locally and set up aliases in my <code>.zprofile</code>. I can simply install the Go module and be on my way.</p>
-
-<p>I originally thought all I&rsquo;d have to do is create a github workflow to build and release it, however this is when I discovered that my app was a little outdated. Go had moved on from where I was. I had to quickly sort out their new module interfaces.</p>
-
-<p>Thankfully it wasn&rsquo;t too arduous.</p>
-
-<p>Previously I&rsquo;d simply <code>go build</code> and take the generated binary and be off to the races.</p>
-
-<p>Now it seems that go has these <em>modules</em>, which is Go&rsquo;s new way of managing Dependencies.</p>
-
-<p>I added the <code>go.mod</code> file which is sort of like <code>npm</code>&rsquo;s <code>package.json</code> file. Outlining all 3rd party dependencies, and I was back to building again.</p>
-
-<h2>Publish Binary To GitHub Release</h2>
-
-<p>Setting up the GitHub Action to publish the SimpleSiteGenerator was pretty straight forwrd.</p>
-
-<ol>
-<li>Add a <code>build.yml</code> file to the <code>.github/workflows</code> directory</li>
-</ol>
-
-<h2>Build.yml</h2>
-
-<pre><code>name: Go
-
-on:
-  push:
-    branches:
-      - &quot;!*&quot;
-    tags:
-      - &quot;v*.*.*&quot;
-
-jobs:
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.19
-
-    - name: Run GoReleaser
-      uses: goreleaser/goreleaser-action@v4
-      with:
-        args: release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-</code></pre>
-
-<p>Fairly minimal. Whenever a tag is created in the format of <strong>vX.X.X</strong> the action will kick off, build the binary and upload it as a release.</p>
-
-<p>Alright, now that we have a package that we can <code>go install</code>, I can get to running things locally.</p>
-
-<h2>Install StaticSiteGenerator Locally</h2>
-
-<p>I want to do this in order to ensure that it will work remotely.</p>
-
-<p><code>go install github.com/mrnickel/StaticSiteGenerator@latest</code>
-<code>echo alias ssg='StaticSiteGenerator &gt;&gt; ~/.zprofile</code>
-<code>ssg</code></p>
-
-<p>This should now print out the actions of the StaticSiteGenerator.</p>
-
-<h1>Conclusion</h1>
-
-<p>Lately I&rsquo;ve been working primarily with TypeScript/JavaScript. Jumping back into Go is a nice breath of fresh air. It&rsquo;s so lightweight, doesn&rsquo;t require all sorts of build systems and bundlers. It <strong>just works</strong>.</p>
-
-<p>Next up I think I&rsquo;ll look into adding this as a <a href="https://brew.sh/">HomeBrew</a> package.</p>
-
-				]]>
-			</description>
-			<pubDate>Mon, 02 Jan 2023 20:26:18 EST</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/on_adding_github_actions_to_my_staticsitegenerator.html</guid>
 		</item>
 	
 
