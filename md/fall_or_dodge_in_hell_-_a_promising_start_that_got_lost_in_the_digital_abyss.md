@@ -1,7 +1,7 @@
 ---
-date: 2023-05-31T13:12:16-04:00
+date: 2023-05-31T12:34:00-04:00
 draft: false
-title: Fall; Or, Dodge in Hell: A Promising Start That Got Lost in the Digital Abyss
+title: Fall Or Dodge in Hell - A Promising Start That Got Lost in the Digital Abyss
 ---
 
 So, I recently dove into Neal Stephenson's "Fall; Or, Dodge in Hell," expecting an epic adventure. Well, let me tell you, it didn't quite deliver. Clocking in at a whopping 900 pages, you'd think there'd be enough room for some serious action. But nope, not much happens for the most part. I mean, we get bombarded with pages upon pages of philosophical musings, theological ramblings, and political banter. Some of it relates to the story, but a lot of it feels like it's just there to fill up space. It's like Stephenson took a philosophy/theology textbook and tried to disguise it as a novel.

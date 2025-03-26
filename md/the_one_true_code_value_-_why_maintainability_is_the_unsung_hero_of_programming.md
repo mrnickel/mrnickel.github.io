@@ -1,7 +1,7 @@
 ---
 date: 2024-11-03T08:51:50-05:00
 draft: false
-title: The One True Code Value: Why Maintainability is the Unsung Hero of Programming
+title: The One True Code Value - Why Maintainability is the Unsung Hero of Programming
 ---
 
 There are two kinds of programmers in this world: those who love writing brand-new code (fresh, shiny, and untouched by mortal hands), and those who have gazed into the horrifying abyss of code maintenance – and survived. You know where I stand. Give me maintainability any day. Because nothing says “programming value” quite like writing code you can still understand a year later.
