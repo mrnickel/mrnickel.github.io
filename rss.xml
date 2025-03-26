@@ -9,6 +9,117 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Functional Programming Meets Dependency Injection in Express.js</title>
+			<link>http://RyanNickel.com/html/functional_programming_meets_dependency_injection_in_express.js.html</link>
+			<description>
+				<![CDATA[
+					<p>Recently, I’ve been exploring some core functional programming (FP) principles and experimenting with how to incorporate them into my daily development workflow. One area where FP really shines is in how it pairs with Express.js—especially when it comes to structuring dependency injection (DI).</p>
+
+<p>DI is a familiar pattern used to keep application code modular, clean, and maintainable. In the Node.js + Express ecosystem, you’ll often come across tutorials where services, database clients, and configuration are wired directly into the app. That works, but there’s a simpler and more flexible alternative using FP principles like composition and higher-order functions.</p>
+
+<h2>What is Dependency Injection (DI)?</h2>
+
+<p>In a typical Express.js app, services, database clients, and config values are commonly wired up like this:</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const dbClient = require('./dbClient');
+const userService = require('./userService')(dbClient);
+
+app.get('/users', async (req, res) =&gt; {
+    const users = await userService.getUsers();
+    res.json(users);
+});
+
+app.listen(3000, () =&gt; console.log('Server running on port 3000'));
+</code></pre>
+
+<p>While this approach is functional and easy to follow, it has a few downsides:</p>
+
+<ul>
+<li><code>userService</code> is tightly coupled to dbClient, making testing and future changes harder.</li>
+<li>The app logic is directly tied to how the services are instantiated, which reduces flexibility.</li>
+</ul>
+
+<h2>Bringing in Functional Programming</h2>
+
+<p>Functional programming encourages passing dependencies <strong>explicitly</strong> via <strong>parameters</strong>. It focuses on <strong>pure functions</strong>, <strong>composition</strong>, and <strong>clarity</strong>. Here’s how that can play out in your Express.js app.</p>
+
+<h2>Step 1: Create Pure Business Logic Functions</h2>
+
+<p>Instead of defining <code>userService</code> as a class or an immediately invoked function, use a factory function:</p>
+
+<pre><code>const createUserService = (db) =&gt; ({
+    getUsers: async () =&gt; {
+        return db.query('SELECT * FROM users');
+    }
+});
+</code></pre>
+
+<p>This keeps your business logic clean and makes it easy to pass in any kind of <code>db</code> — a real client in production or a mock in tests.</p>
+
+<h2>Step 2: Compose Routes Using Injected Dependencies</h2>
+
+<p>Route handlers can be built in a similarly modular way:</p>
+
+<pre><code>const createUserRoutes = (userService) =&gt; {
+    const router = require('express').Router();
+
+    router.get('/users', async (req, res) =&gt; {
+        const users = await userService.getUsers();
+        res.json(users);
+    });
+
+    return router;
+};
+</code></pre>
+
+<p>Now your routing layer doesn’t know or care how the service is built — it just uses what it’s given.</p>
+
+<h2>Step 3: Assemble the Application</h2>
+
+<p>Finally, you bring everything together in the main application file:</p>
+
+<pre><code>const express = require('express');
+const dbClient = require('./dbClient');
+const createUserService = require('./userService');
+const createUserRoutes = require('./userRoutes');
+
+const app = express();
+
+const userService = createUserService(dbClient);
+const userRoutes = createUserRoutes(userService);
+
+app.use('/api', userRoutes);
+
+app.listen(3000, () =&gt; console.log('Server up on 3000'));
+</code></pre>
+
+<p>This approach keeps your main file focused on configuration and composition.</p>
+
+<h2>Why This Approach Works Well</h2>
+
+<p>Adopting functional programming for DI offers several benefits:</p>
+
+<ol>
+<li><strong>Improved Testability</strong> – Easily swap in mock implementations without rewriting core logic.</li>
+<li><strong>Greater Modularity</strong> – Each component is self-contained and can be developed in isolation.</li>
+<li><strong>Enhanced Reusability</strong> – Functions and services can be reused across routes or even projects.</li>
+<li><strong>Simplified Maintenance</strong> – With clear dependency boundaries, the code is easier to understand and refactor.</li>
+<li><strong>Reduced Dependency Overhead</strong> – There’s no need to rely on an external DI framework. Let’s face it: npm packages can be black holes—pulling in way more than expected.</li>
+</ol>
+
+<p>You don’t need a complex setup or heavy abstraction to apply DI effectively in Express.js. With just a few functional programming patterns, you can keep your app lightweight, testable, and easy to evolve.</p>
+
+<p>If you&rsquo;re looking to simplify your architecture while staying flexible, this approach is definitely worth trying out.</p>
+
+				]]>
+			</description>
+			<pubDate>Wed, 26 Mar 2025 12:45:14 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/functional_programming_meets_dependency_injection_in_express.js.html</guid>
+		</item>
+	
+		<item>
 			<title>The One True Code Value - Why Maintainability is the Unsung Hero of Programming</title>
 			<link>http://RyanNickel.com/html/the_one_true_code_value_-_why_maintainability_is_the_unsung_hero_of_programming.html</link>
 			<description>
@@ -66,7 +177,7 @@
 				]]>
 			</description>
 			<pubDate>Sun, 03 Nov 2024 08:51:50 EST</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/the_one_true_code_value:_why_maintainability_is_the_unsung_hero_of_programming.html</guid>
+			<guid isPermaLink="false">http://RyanNickel.com/html/the_one_true_code_value_-_why_maintainability_is_the_unsung_hero_of_programming.html</guid>
 		</item>
 	
 		<item>
@@ -74,9 +185,7 @@
 			<link>http://RyanNickel.com/html/how_npm's_defaults_set_you_up_for_failure.html</link>
 			<description>
 				<![CDATA[
-					<h1>How NPM&rsquo;s Defaults Set You Up for Failure</h1>
-
-<p>In software development, consistency and stability are critical — especially when managing dependencies. However, NPM&rsquo;s default behavior when installing packages—using the caret (<code>^</code>) in <code>package.json</code> — creates a fragile environment that often leads to frustrating issues for developers. Idempotent and reproducible dependency management should be the standard experience by default, but NPM&rsquo;s use of <code>^</code> undermines this goal.</p>
+					<p>In software development, consistency and stability are critical — especially when managing dependencies. However, NPM&rsquo;s default behavior when installing packages—using the caret (<code>^</code>) in <code>package.json</code> — creates a fragile environment that often leads to frustrating issues for developers. Idempotent and reproducible dependency management should be the standard experience by default, but NPM&rsquo;s use of <code>^</code> undermines this goal.</p>
 
 <p>Here&rsquo;s why it&rsquo;s time to rethink the default use of caret versioning in NPM, and how it sets developers up for future pain, particularly given the complexities of semantic versioning (semver).</p>
 
@@ -192,7 +301,7 @@
 		</item>
 	
 		<item>
-			<title>Fall; Or, Dodge in Hell: A Promising Start That Got Lost in the Digital Abyss</title>
+			<title>Fall Or Dodge in Hell - A Promising Start That Got Lost in the Digital Abyss</title>
 			<link>http://RyanNickel.com/html/fall_or_dodge_in_hell_-_a_promising_start_that_got_lost_in_the_digital_abyss.html</link>
 			<description>
 				<![CDATA[
@@ -212,8 +321,8 @@
 
 				]]>
 			</description>
-			<pubDate>Wed, 31 May 2023 13:12:16 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/fall;_or,_dodge_in_hell:_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
+			<pubDate>Wed, 31 May 2023 12:34:00 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/fall_or_dodge_in_hell_-_a_promising_start_that_got_lost_in_the_digital_abyss.html</guid>
 		</item>
 	
 		<item>
@@ -597,54 +706,6 @@ This will create a formula definition file that will be committed to the <strong
 			</description>
 			<pubDate>Fri, 13 Jan 2023 12:19:42 EST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/creating_homebrew_package_for_staticsitegenerator_distribution.html</guid>
-		</item>
-	
-		<item>
-			<title>On Adding GZip Compression To StaticSiteGenerator</title>
-			<link>http://RyanNickel.com/html/on_adding_gzip_compression_to_staticsitegenerator.html</link>
-			<description>
-				<![CDATA[
-					<p>In an attempt to be a Good Web Citizen, I thought I&rsquo;d try to add some GZip compression to the responses served up by the <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a>.</p>
-
-<p>What kind of performance increases will I get from this? Likely very little as my site is incredibly basic.</p>
-
-<p>Who&rsquo;s asking for this update? Absolutely no one.</p>
-
-<p>Why am I doing it? Curiosity.</p>
-
-<h2>Question 1: Performance Increase?</h2>
-
-<p>I&rsquo;m assuming there will be little to none. The site is essentially 99% text based. The other 1% would be the few images served up.</p>
-
-<ul>
-<li>Non GZipped: 169kb transfered</li>
-<li>GZipped: 54.8kb transferred</li>
-</ul>
-
-<p>Roughly a third less transferred to the client. I guess my assumption above was incorrect!</p>
-
-<h2>Question 2: How Complicated Would This Be?</h2>
-
-<p>Go is a very well thought out language purpose built for creating web applications. My assumption here is that it would be very straight forward.</p>
-
-<p>As I&rsquo;m by no means an effective Go programmer, and my experience is very limited with the language, I did what any developer would do: Google it.</p>
-
-<p>I found a few examples that relied on 3rd party packages to solve the problem, but as I always try to limit my reliance on others packages, I continued until I found something that relied solely on the <a href="https://pkg.go.dev/std">Go stdlib</a>. I found <a href="https://gist.github.com/bryfry/09a650eb8aac0fb76c24">this example</a> by <a href="https://github.com/bryfry">bryfry</a>, plugged it in and it worked instantly.</p>
-
-<h1>Conclusion</h1>
-
-<p>This was a fun little experiment. It was refreshing to dip my toes back into Go again, and dust off the knowledge a bit.</p>
-
-<p>Go&rsquo;s middleware design pattern is incredibly effective allowing for an elegant plug-n-play solution.</p>
-
-<p>I was suitably impressed with the performance gains of adding just a few lines of code. A third of the file size is enough to ensure that I definitely use this on all my other projects.</p>
-
-<p>I also always find it satisfying to work towards being a Good Web Citizen. No sense in adding more unnecessary bandwidth to the internet.</p>
-
-				]]>
-			</description>
-			<pubDate>Wed, 04 Jan 2023 10:42:53 EST</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/on_adding_gzip_compression_to_staticsitegenerator.html</guid>
 		</item>
 	
 

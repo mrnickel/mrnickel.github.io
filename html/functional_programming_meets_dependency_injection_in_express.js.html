@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>RyanNickel.com  - Functional Programming Meets Dependency Injection in Express.js</title>
+
+    <link rel="stylesheet" href="//unpkg.com/sanitize.css">    
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/vars.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/post.css">
+  </head>
+  <body>
+    <article class="h-entry">
+      <header>
+        <h1 class="p-name">Functional Programming Meets Dependency Injection in Express.js</h1>
+      </header>
+
+      <main class="e-content">
+        <p>Recently, I’ve been exploring some core functional programming (FP) principles and experimenting with how to incorporate them into my daily development workflow. One area where FP really shines is in how it pairs with Express.js—especially when it comes to structuring dependency injection (DI).</p>
+
+<p>DI is a familiar pattern used to keep application code modular, clean, and maintainable. In the Node.js + Express ecosystem, you’ll often come across tutorials where services, database clients, and configuration are wired directly into the app. That works, but there’s a simpler and more flexible alternative using FP principles like composition and higher-order functions.</p>
+
+<h2>What is Dependency Injection (DI)?</h2>
+
+<p>In a typical Express.js app, services, database clients, and config values are commonly wired up like this:</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const dbClient = require('./dbClient');
+const userService = require('./userService')(dbClient);
+
+app.get('/users', async (req, res) =&gt; {
+    const users = await userService.getUsers();
+    res.json(users);
+});
+
+app.listen(3000, () =&gt; console.log('Server running on port 3000'));
+</code></pre>
+
+<p>While this approach is functional and easy to follow, it has a few downsides:</p>
+
+<ul>
+<li><code>userService</code> is tightly coupled to dbClient, making testing and future changes harder.</li>
+<li>The app logic is directly tied to how the services are instantiated, which reduces flexibility.</li>
+</ul>
+
+<h2>Bringing in Functional Programming</h2>
+
+<p>Functional programming encourages passing dependencies <strong>explicitly</strong> via <strong>parameters</strong>. It focuses on <strong>pure functions</strong>, <strong>composition</strong>, and <strong>clarity</strong>. Here’s how that can play out in your Express.js app.</p>
+
+<h2>Step 1: Create Pure Business Logic Functions</h2>
+
+<p>Instead of defining <code>userService</code> as a class or an immediately invoked function, use a factory function:</p>
+
+<pre><code>const createUserService = (db) =&gt; ({
+    getUsers: async () =&gt; {
+        return db.query('SELECT * FROM users');
+    }
+});
+</code></pre>
+
+<p>This keeps your business logic clean and makes it easy to pass in any kind of <code>db</code> — a real client in production or a mock in tests.</p>
+
+<h2>Step 2: Compose Routes Using Injected Dependencies</h2>
+
+<p>Route handlers can be built in a similarly modular way:</p>
+
+<pre><code>const createUserRoutes = (userService) =&gt; {
+    const router = require('express').Router();
+
+    router.get('/users', async (req, res) =&gt; {
+        const users = await userService.getUsers();
+        res.json(users);
+    });
+
+    return router;
+};
+</code></pre>
+
+<p>Now your routing layer doesn’t know or care how the service is built — it just uses what it’s given.</p>
+
+<h2>Step 3: Assemble the Application</h2>
+
+<p>Finally, you bring everything together in the main application file:</p>
+
+<pre><code>const express = require('express');
+const dbClient = require('./dbClient');
+const createUserService = require('./userService');
+const createUserRoutes = require('./userRoutes');
+
+const app = express();
+
+const userService = createUserService(dbClient);
+const userRoutes = createUserRoutes(userService);
+
+app.use('/api', userRoutes);
+
+app.listen(3000, () =&gt; console.log('Server up on 3000'));
+</code></pre>
+
+<p>This approach keeps your main file focused on configuration and composition.</p>
+
+<h2>Why This Approach Works Well</h2>
+
+<p>Adopting functional programming for DI offers several benefits:</p>
+
+<ol>
+<li><strong>Improved Testability</strong> – Easily swap in mock implementations without rewriting core logic.</li>
+<li><strong>Greater Modularity</strong> – Each component is self-contained and can be developed in isolation.</li>
+<li><strong>Enhanced Reusability</strong> – Functions and services can be reused across routes or even projects.</li>
+<li><strong>Simplified Maintenance</strong> – With clear dependency boundaries, the code is easier to understand and refactor.</li>
+<li><strong>Reduced Dependency Overhead</strong> – There’s no need to rely on an external DI framework. Let’s face it: npm packages can be black holes—pulling in way more than expected.</li>
+</ol>
+
+<p>You don’t need a complex setup or heavy abstraction to apply DI effectively in Express.js. With just a few functional programming patterns, you can keep your app lightweight, testable, and easy to evolve.</p>
+
+<p>If you&rsquo;re looking to simplify your architecture while staying flexible, this approach is definitely worth trying out.</p>
+
+        <time class="published-date dt-published" datetime="2025-03-26 12:45:14.6212541 -0400 EDT m=+0.002754701">Mar 26, 2025</time>
+        <a rel="permalink" href="html/functional_programming_meets_dependency_injection_in_express.js.html" class="u-url">Permalink</a>
+        <a rel="author" class="p-author" href="https://RyanNickel.com">Ryan Nickel</a>
+      </main>        
+    </article>
+
+    <footer class="h-card">
+      <img class="u-photo" src="/img/headshot.png" alt="headshot">
+      <span class="p-name">Ryan Nickel</span>
+      <a class="hidden u-url" rel="me" href="https://RyanNickel.com">https://RyanNickel.com</a>
+
+      <ul>
+        <li><a rel="me" href="https://twitter.com/rnickel" class="u-url">Twitter</a></li>
+        <li><a rel="me" href="https://github.com/mrnickel" class="u-url">GitHub</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a rel="me" href="https://indieweb.social/@mrnickel" class="u-url">Mastodon</a></li>
+        <li><a href="/rss.xml">RSS</a></li>
+      </ul>   
+
+      <p>Made with &hearts; by <span class="p-given-name">Ryan</span> <span class="p-family-name">Nickel</span> in <span class="p-locality">Toronto</span>, <span>Canada</span></p>
+
+      <img src="/img/toronto-icon-sm.png" alt="Toronto Icon" class="cityicon">
+
+      <p>Generated with my super awesome <a href="https://github.com/mrnickel/StaticSiteGenerator">StaticSiteGenerator</a></p>
+    </footer>
+
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      
+      ga('create', 'UA-35684132-1', 'auto');
+      ga('send', 'pageview');
+      
+    </script>
+
+  </body>
+</html>
