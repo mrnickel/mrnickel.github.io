@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["VWMV29L9L9.world.xello.studentdev", "AZ8HCKWCZJ.world.xello.studentdev"],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Matches any URL"
+          }
+        ]
+      }
+    ]
+  }
+}
