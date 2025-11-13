@@ -2,6 +2,7 @@
 date: 2023-03-13T06:49:16-04:00
 draft: false
 title: Updating to use H-Entry for each article
+guid: 97e99d36-1800-4591-bfc8-9d0ec2473217
 ---
 
 As I delve deeper into the [IndieWeb](https://indieweb.org/), I first took on the low hanging fruit of adding the [h-card](adding-h-ard-to-this-site.html) format to the footer.

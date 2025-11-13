@@ -2,6 +2,7 @@
 date: 2018-05-15T22:16:48-04:00
 draft: false
 title: Docker and Charles
+guid: 53e9f18d-7135-49fe-9787-bfabf37446df
 ---
 
 Ah, [Charles](https://www.charlesproxy.com/). Every mobile developers' best friend. When logging fails and you just can't figure it out, it's time to go deep into the system and see the raw data.

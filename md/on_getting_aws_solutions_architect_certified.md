@@ -2,6 +2,7 @@
 date: 2020-03-25T16:06:17-04:00
 draft: false
 title: On Getting AWS Solutions Architect Certified
+guid: 79d3ee63-ff67-46d2-b715-665fb2c282c5
 ---
 
 Having accomplished my personal challenge of completing an olympic triathlon (while simultaneously rediscovering my love of cycling), I decided to tackle a professional challenge. 

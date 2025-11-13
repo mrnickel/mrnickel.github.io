@@ -16,11 +16,11 @@
   <body>
     <article class="h-entry">
       <header>
-        <h1 class="p-name">Logging with Docker and Sumo Logic</h1>
+        <h1 class="p-name article-title-header" style="view-transition-name: title-570ac570-c432-4aa0-af48-277e1a752cd8">Logging with Docker and Sumo Logic</h1>
       </header>
 
       <main class="e-content">
-        <p>SumoLogic is another player in the ever growing logging aggregator / log analytics service providers. In my quest to find the &ldquo;sweet spot&rdquo; of tools to use for my software solutions I thought I&rsquo;d give them a try. It also gave me the opportunity to dive deeper into Docker and explore my options.</p>
+        <span style="view-transition-name: content-570ac570-c432-4aa0-af48-277e1a752cd8"><p>SumoLogic is another player in the ever growing logging aggregator / log analytics service providers. In my quest to find the &ldquo;sweet spot&rdquo; of tools to use for my software solutions I thought I&rsquo;d give them a try. It also gave me the opportunity to dive deeper into Docker and explore my options.</p>
 
 <p>I was asked by Houston of <a href="https://www.sumologic.com">Sumo Logic</a> to do a writeup about linking docker logging with their service.</p>
 
@@ -127,7 +127,7 @@ $ sudo tail -f /syslog
 <p>Don&rsquo;t worry about setting up syslog and all the trouble that comes with it. Simply mount the .sock file and go on with life. This seems to be how most logging containers are going. It makes sense to use a dedicated container to aggregate and push logs to the respective platform, as opposed to modifying each container, or even managing the logging mechanisms of the host container.</p>
 
 <p>In my next post I&rsquo;ll write up my findings on using the Sumo Logic service.</p>
-
+</span>
         <time class="published-date dt-published" datetime="2016-03-10 06:11:23 -0800 -0800">Mar 10, 2016</time>
         <a rel="permalink" href="html/logging_with_docker_and_sumo_logic.html" class="u-url">Permalink</a>
         <a rel="author" class="p-author" href="https://RyanNickel.com">Ryan Nickel</a>
@@ -166,6 +166,5 @@ $ sudo tail -f /syslog
       ga('send', 'pageview');
       
     </script>
-
   </body>
 </html>

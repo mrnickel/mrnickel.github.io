@@ -1,18 +1,24 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
-body {        
+/* View Transitions */
+@view-transition {
+  navigation: auto;
+}
+
+body {
   background-color: var(--body-background-color);
   color: var(--body-text-color);
-  display: flex; 
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
 header {
-  text-align: center;        
+  text-align: center;
   padding: 0 var(--header-padding) 0 var(--header-padding);
   background-color: var(--header-background-color);
   color: var(--header-text-color);
@@ -23,7 +29,7 @@ header .name {
   display: inline-block;
 }
 
-main {        
+main {
   padding: var(--largeSpacing) var(--body-padding) 0 var(--body-padding);
   display: flex;
   flex-direction: column;
@@ -38,7 +44,7 @@ footer {
   padding: 20px;
   color: var(--footer-text-color);
   text-align: center;
-}     
+}
 
 a {
   color: var(--body-accent-color);
@@ -47,14 +53,14 @@ a {
 }
 
 a:hover {
-  opacity: 0.4;        
+  opacity: 0.4;
 }
 
 footer a {
   color: var(--footer-accent-color)
 }
 
-footer a:hover{
+footer a:hover {
   opacity: 0.9;
 }
 
@@ -70,9 +76,9 @@ footer ul {
   list-style-type: circle;
   display: flex;
   flex-direction: row;
-  justify-content: center; 
+  justify-content: center;
   padding: 0;
-}    
+}
 
 footer li {
   padding: 0px;
@@ -106,3 +112,16 @@ a[rel=permalink] {
 .hidden {
   display: none;
 }
+
+/* View transitions - only the clicked element and destination get the transition */
+/* @media (prefers-reduced-motion: no-preference) {
+
+  .article-title-link,
+  .article-title-header {
+    view-transition-name: article-title;
+  }
+} */
+
+/* main article h1 {
+  view-transition-name: match-element;
+} */

@@ -23,8 +23,8 @@
     <main>
       {{ range .Posts }}
         <article class="h-entry">
-            <h1><a href="{{ .HTMLPath }}" class="u-url p-name">{{ .Title}}</a></h1>
-            <span class="p-summary">{{ .Summary }}</span>
+            <h1 style="view-transition-name: title-{{ .GUID }}"><a href="{{ .HTMLPath }}" class="u-url p-name">{{ .Title}}</a></h1>
+            <span class="p-summary" style="view-transition-name: content-{{ .GUID }}">{{ .Summary }}</span>
             <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "Jan 02, 2006" }}</time>
             <a rel="author" href="https://RyanNickel.com">Ryan Nickel</a>
         </article>

@@ -2,6 +2,7 @@
 date: 2016-01-04T11:33:21-08:00
 draft: false
 title: Hello world
+guid: 45f89a5e-bfd6-42ed-9b3c-f070d7d5109c
 ---
 
 Welcome to my personal site. Here I will be posting my "thought poops". It's mostly musings about development and design related stuff... I think. I likely won't be writing too much. The site is more of a place for me to experiment.

@@ -2,6 +2,7 @@
 date: 2019-07-20T18:06:25-04:00
 draft: false
 title: My Thoughts on WWDC 2019
+guid: 5789b77c-5509-45de-a524-4735fc23a93d
 ---
 
 WWDC is an event I've been watching every year since I think 2007, the year they announced the iPhone. At the time I was a big Apple fanboy.

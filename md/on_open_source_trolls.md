@@ -2,6 +2,7 @@
 date: 2020-04-22T20:11:52-04:00
 draft: false
 title: On Open Source Trolls
+guid: 129f26c1-ad28-4b26-a13b-c2e11dde4eaa
 ---
 
 We all use open source projects to complete our daily jobs. We all stand on the shoulders of giants. However it seems as though there are many who take the hard work of others for granted. They've come to expect enterprise level support and stability from projects that are given away for free from generous people.

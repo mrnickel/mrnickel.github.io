@@ -2,6 +2,7 @@
 date: 2023-04-18T15:51:13-04:00
 draft: false
 title: Setting up my own @ryannickel.com domain for Mastadon
+guid: d53d28e0-30d5-4256-86c1-752a6c26948b
 ---
 
 If you're using Mastodon or other decentralized social networks, you might be looking for ways to improve your discoverability. One technique that's gained popularity is using the webfinger protocol to create a discoverable profile for your domain.

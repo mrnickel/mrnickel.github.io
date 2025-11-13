@@ -2,6 +2,7 @@
 date: 2023-01-13T12:19:42-05:00
 draft: false
 title: Creating Homebrew Package For StaticSiteGenerator Distribution
+guid: 2f8cfcdb-9bec-4d00-8444-f33070928e60
 ---
 
 In a previous post playing with [GitHub Actions](./on_adding_github_actions_to_my_staticsitegenerator.html) I thought it might be interseting to figure out how to distribute the binary via Homebrew.

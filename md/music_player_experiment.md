@@ -2,6 +2,7 @@
 date: 2016-01-05T11:29:15-05:00
 draft: true
 title: Music Player Experiment
+guid: 5126eac5-2b5e-4d6f-b886-9ff3cbfef207
 ---
 
 In an effort to become more proficient with Swift and autolayout, I've decided that I'm going to start some UI experiments. This section will be about re-creating
@@ -20,5 +21,3 @@ I also want to see if I can get a few basic animations to work with this. The ob
 
 
 # Step 1: Basic controls
-
-

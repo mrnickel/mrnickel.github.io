@@ -2,6 +2,7 @@
 date: 2016-02-18T05:46:24-08:00
 draft: false
 title: My first go project
+guid: 9bbc5692-5f0a-42bd-aec4-c7ed65a44d8c
 ---
 
 It's no secret that I'm currently enamoured with [Go](https://golang.org), as well as the projects it powers. ([Docker](https://www.docker.com) I'm looking at you). As such I recently started my first project with the lovely "new" language. I wanted a project that would be easy to start and equally something that I'd get some utility out of. I thought I would get my feet wet by creating yet another [static site generator](https://github.com/mrnickel/StaticSiteGenerator). The very generator I use to build this site (because dogfooding is important!).

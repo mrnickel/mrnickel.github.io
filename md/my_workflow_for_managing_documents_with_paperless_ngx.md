@@ -2,6 +2,7 @@
 date: 2024-04-06T11:03:50-04:00
 draft: false
 title: My workflow for managing documents with Paperless NGX
+guid: 7f5ef3d1-ccc8-4688-9abd-8de2a6c8e25e
 ---
 
 Managing a pile of documents can be a real headache, can’t it? I used to have all these papers stuffed into folders, always mixing things up. Was my business tax return in the “Tax Returns” folder or jammed in the “Business” one? And good luck finding anything in that mess!

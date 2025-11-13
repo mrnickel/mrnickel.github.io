@@ -2,6 +2,7 @@
 date: 2019-06-04T15:41:58-04:00
 draft: false
 title: Creating My Ideal React Native Projects With TypeScript ESLint, Prettier and VSCode
+guid: 36cd7dd0-d0e8-4b15-a23f-51149510dfe5
 ---
 
 With the [announcement of TSLint being deprecated in favour of using ESLint](https://medium.com/palantir/tslint-in-2019-1a144c2317a9) 

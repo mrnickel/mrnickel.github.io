@@ -2,6 +2,7 @@
 date: 2016-01-18T09:07:58-08:00
 draft: false
 title: Logging with Docker
+guid: 1cdfb044-2af0-42d8-a951-e11a6fb9caee
 ---
 
 As of late I've been trying to learn [Docker](https://www.docker.com). I've been using Ansible / Vagrant for quite some time now with great success. The only problem I have with this combination is that it takes up quite a bit of system resources to run each instance. The idea of running a single VM and individual containers for each service really speaks to me. However, having many containers leads to many locations to look for logs. This is an annoyance I'd wish to avoid.

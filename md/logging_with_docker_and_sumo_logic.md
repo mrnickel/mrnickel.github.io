@@ -2,6 +2,7 @@
 date: 2016-03-10T06:11:23-08:00
 draft: false
 title: Logging with Docker and Sumo Logic
+guid: 570ac570-c432-4aa0-af48-277e1a752cd8
 ---
 
 SumoLogic is another player in the ever growing logging aggregator / log analytics service providers. In my quest to find the "sweet spot" of tools to use for my software solutions I thought I'd give them a try. It also gave me the opportunity to dive deeper into Docker and explore my options.

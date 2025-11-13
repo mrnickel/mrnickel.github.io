@@ -2,6 +2,7 @@
 date: 2025-03-26T12:45:14-04:00
 draft: false
 title: Functional Programming Meets Dependency Injection in Express.js
+guid: b4a4b0a1-6c7d-42f1-96b0-64961fcf4e09
 ---
 
 Recently, I’ve been exploring some core functional programming (FP) principles and experimenting with how to incorporate them into my daily development workflow. One area where FP really shines is in how it pairs with Express.js—especially when it comes to structuring dependency injection (DI).

@@ -2,6 +2,7 @@
 date: 2024-10-22T19:06:32-04:00
 draft: false
 title: How NPM's Defaults Set You Up for Failure
+guid: b6340dbf-75b9-4c05-9986-afa6700d6460
 ---
 
 In software development, consistency and stability are critical — especially when managing dependencies. However, NPM's default behavior when installing packages—using the caret (`^`) in `package.json` — creates a fragile environment that often leads to frustrating issues for developers. Idempotent and reproducible dependency management should be the standard experience by default, but NPM's use of `^` undermines this goal.

@@ -2,6 +2,7 @@
 date: 2023-01-02T20:26:18-05:00
 draft: false
 title: On Adding GitHub Actions To My StaticSiteGenerator
+guid: e05b0c41-d8b9-43c8-bc23-e27b49993e62
 ---
 
 A number of years ago I started toying with [Go](https://go.dev). At the same time I was building this website you're reading right now. I wanted to join these two desires, so I thought I'd take advantage of the, new to me, static site hosting of github for my personal website.

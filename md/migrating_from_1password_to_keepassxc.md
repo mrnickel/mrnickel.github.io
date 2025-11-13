@@ -2,6 +2,7 @@
 date: 2019-01-02T14:41:54-08:00
 draft: false
 title: Migrating from 1Password to KeePassXC
+guid: 76ab4ecb-6995-4096-9f59-bf2685431f3a
 ---
 
 I'm a big proponent of password managers, and I've been a heavy user of 1Password for a long time now. Several years ago, I purchased it for Mac, Windows, iOS and Android.

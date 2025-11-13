@@ -2,6 +2,7 @@
 date: 2023-01-16T21:34:45-05:00
 draft: false
 title: Adding H-Card To This Site, and Scope Creep
+guid: 9d5effab-b54a-42f5-ab88-b5ca579dca98
 ---
 
 I was recently inspired by [@tbeseda@indieweb.social](https://indieweb.social/@tbeseda) to add some [h-card](http://microformats.org/wiki/h-card) formatting to my site.

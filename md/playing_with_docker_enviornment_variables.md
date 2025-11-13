@@ -2,6 +2,7 @@
 date: 2016-03-02T09:52:18-08:00
 draft: false
 title: Playing With Docker Enviornment Variables
+guid: b5ff3b71-5b17-4ec2-a3cc-dcd5ad3f9545
 ---
 
 Managing various enviornments can always be a challenging task. Things have changed substantially over the years. With the introduction of AWS and other PaaS providers introducing their own solutions and the vast differences that can occur between developers own machines, staging, QA and production, we as developers and solution architects have to be ever vigilant in our quest to keep things simple, and stable.

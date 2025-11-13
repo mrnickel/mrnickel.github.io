@@ -2,6 +2,7 @@
 date: 2023-01-04T10:42:53-05:00
 draft: false
 title: On Adding GZip Compression To StaticSiteGenerator
+guid: b91b6845-a6fa-47c5-919e-c39ff2957d11
 ---
 
 In an attempt to be a Good Web Citizen, I thought I'd try to add some GZip compression to the responses served up by the [StaticSiteGenerator](https://github.com/mrnickel/StaticSiteGenerator).

@@ -2,6 +2,7 @@
 date: 2018-10-31T14:20:23-04:00
 draft: false
 title: On Deleting My Facebook Account
+guid: ad9f3133-718d-4dfb-b6d4-251b6b52fc96
 ---
 
 I'm deleting my Facebook account.

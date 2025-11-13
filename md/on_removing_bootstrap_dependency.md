@@ -2,6 +2,7 @@
 date: 2023-01-17T20:14:23-05:00
 draft: false
 title: On Removing Bootstrap Dependency
+guid: 144a6d1d-c703-4303-8d25-a6660efe4b27
 ---
 
 As part of my ongoing blog update, I'm working on removing my dependency on [Bootstrap](https://getbootstrap.com).

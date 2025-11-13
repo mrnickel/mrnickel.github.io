@@ -2,6 +2,7 @@
 date: 2016-04-08T08:43:47-04:00
 draft: false
 title: More Project Updates
+guid: ebecd030-024c-48aa-a96f-f1b02640357a
 ---
 
 As I write more posts I've noticed more and more glaring holes in my site design / [StaticSiteGenerator](https://github.com/mrnickel/StaticSiteGenerator) solution. A few pain points if you will. In an effort to reflect on my projects every so often I figured I'd take a few notes on my blog / StaticSiteGenerator.

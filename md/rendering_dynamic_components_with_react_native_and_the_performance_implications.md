@@ -2,6 +2,7 @@
 date: 2019-05-08T09:59:01-04:00
 draft: false
 title: Rendering dynamic components with React Native and the performance implications
+guid: 77000a8b-30e7-4b6a-8e08-a252c7280509
 ---
 
 I am currently working on a project that cries out for flexibility and dynamic functionality. Different builds require slightly different UI. 
