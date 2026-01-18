@@ -9,6 +9,35 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Mole: The Utility I Didn’t Know My Mac Needed</title>
+			<link>http://RyanNickel.com/html/mole_the_utility_i_didnt_know_my_mac_needed.html</link>
+			<description>
+				<![CDATA[
+					<p>I recently discovered a small macOS utility called <a href="https://github.com/tw93/Mole">Mole</a>, and it very quickly earned a permanent place in my setup.</p>
+
+<p>I first heard about it while listening to a <a href="https://changelog.com/">ChangeLog</a> podcast titled <a href="https://changelog.com/friends/124">Kaizen! Let it crash</a>. One of the hosts casually mentioned Mole as a tool they’d had great luck with, and that was enough to send me digging. I’ve tried plenty of Mac “cleanup” utilities over the years. Some are beautiful. Some are functional. Most eventually hit you with a paywall or subscription right when you actually need them.</p>
+
+<p>Mole felt different almost immediately.</p>
+
+<p>My <strong>M1 MacBook isn’t slow</strong>—not even close. Apple silicon still holds up incredibly well. But after years of installs, experiments, abandoned apps, and random tooling, it was clearly overdue for some TLC. I wasn’t looking to wipe my machine or reinstall macOS. I just wanted to clean house properly without blowing everything up.</p>
+
+<p>That’s where Mole <em>really</em> shines.</p>
+
+<p>Its real value, at least for me, was <strong>truly uninstalling apps</strong> and aggressively cleaning caches, logs, and leftover system junk. Not just removing an app bundle, but all the hidden remnants that quietly pile up over time. On my first run, Mole reclaimed <strong>over 70GB of cached data</strong>—which immediately justified the install. (why was my slack cache over 500mb??)</p>
+
+<p>Mole is multiple utilities rolled into one: deep cleaning, a smart uninstaller, disk usage insights, and live system monitoring—all in a single, lightweight binary.</p>
+
+<p>No bloat. No upsell. No account creation. Just a free tool that does its job well and gets out of the way.</p>
+
+<p>Software like this reminds me how good small, focused utilities can be. Huge shout-out to <a href="https://github.com/tw93">tc39</a>—I’ll definitely be keeping Mole in my core Homebrew installs.</p>
+
+				]]>
+			</description>
+			<pubDate>Sun, 18 Jan 2026 12:48:46 EST</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/mole_the_utility_i_didnt_know_my_mac_needed.html</guid>
+		</item>
+	
+		<item>
 			<title>Functional Programming Meets Dependency Injection in Express.js</title>
 			<link>http://RyanNickel.com/html/functional_programming_meets_dependency_injection_in_express.js.html</link>
 			<description>
@@ -628,84 +657,6 @@ footer li:first-child {
 			</description>
 			<pubDate>Mon, 16 Jan 2023 21:34:45 EST</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/adding_h-card_to_this_site_and_scope_creep.html</guid>
-		</item>
-	
-		<item>
-			<title>Creating Homebrew Package For StaticSiteGenerator Distribution</title>
-			<link>http://RyanNickel.com/html/creating_homebrew_package_for_staticsitegenerator_distribution.html</link>
-			<description>
-				<![CDATA[
-					<p>In a previous post playing with <a href="./on_adding_github_actions_to_my_staticsitegenerator.html">GitHub Actions</a> I thought it might be interseting to figure out how to distribute the binary via Homebrew.</p>
-
-<p>While reading through the <a href="https://docs.brew.sh/Acceptable-Formulae">Acceptable Formulae</a> documentation, my dreams of being accepted into the Homebrew-core packages were dashed. (end sarcasm)</p>
-
-<p>The primary rule that would be broken by this software are:</p>
-
-<blockquote>
-<h2>Niche (or self-submitted) stuff</h2>
-</blockquote>
-
-<p>Namely:</p>
-
-<blockquote>
-<p>be maintained (i.e. the last release wasn’t ages ago, it works without patching on all Homebrew-supported OS versions and has no outstanding, unpatched security vulnerabilities)</p>
-</blockquote>
-
-<p>The software <em>has</em> had an update in the past few weeks (at time of this writing), however previous to that was 4 years ago. Not exactly actively maintained.</p>
-
-<blockquote>
-<p>be known</p>
-</blockquote>
-
-<p>Nobody knows this software exists except for myself</p>
-
-<blockquote>
-<p>be used</p>
-</blockquote>
-
-<p>As far as I know, I&rsquo;m the only user of it</p>
-
-<blockquote>
-<p>have a homepage</p>
-</blockquote>
-
-<p>&hellip; not yet, however perhaps a quick github self hosted page that&rsquo;s essentially the readme file.</p>
-
-<p>The next question to answer is how can I self host this formula? Seeing as I highly doubt Homebrew would accept my PR (and for good reason. Please continue your processes).</p>
-
-<p>In Homebrew parlance, what I want to create is a <a href="https://docs.brew.sh/Taps">tap</a>. By default this relies on GitHub, which is perfect for this series of events.</p>
-
-<p>I&rsquo;m going to partially re-hash the official Homebrew documentation here for my own convenience:</p>
-
-<ol>
-<li>Create a github repo <strong>/mrnickel/homebrew-mrnickel</strong>
-This is the convention that Homebrew uses in order to tap properly.</li>
-<li>Create the <strong>Go</strong> formula using:
- <code>brew create https://github.com/mrnickel/StaticSiteGenerator/archive/refs/tags/{RELEASE_VERSION_HERE}.tar.gz --go</code>
-This will create a formula definition file that will be committed to the <strong>mrnickel/homebrew-mrnickel</strong> repo.</li>
-<li>Edit the information as appropriate in the definition. Setting the <strong>desc, homepage, url</strong></li>
-<li>Copy the file from <code>$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula</code> directory,  to the <strong>homebrew-mrnickel</strong> git directory.</li>
-<li>Commit and push to the <strong>mrnickel/homebrew-mrnickel</strong> repository</li>
-<li>Run <code>brew tap mrnickel/mrnickel</code></li>
-<li>Run <code>brew install StaticSiteGenerator</code></li>
-</ol>
-
-<h2>Conclusion</h2>
-
-<p>After some trial and error I came up with a suitable <a href="https://github.com/mrnickel/homebrew-mrnickel/blob/main/staticsitegenerator.rb">homebrew formula</a>.</p>
-
-<p>I&rsquo;ve used Homebrew for many many years now. I&rsquo;ve never fully understood how it works, just that it works. It was interesting to dive into it a bit deeper. They&rsquo;ve done an excellent job with their documentation, and it&rsquo;s a well thought out package manager. I suppose that&rsquo;s why it&rsquo;s essentially the default package manager for MacOS.</p>
-
-<p>I spent far too much time googling for ways to create the formula file, and I should have instead have just relied on the <code>brew help</code> and <code>brew create help</code> documentation as it&rsquo;s well represented. If only more software took as much pride in their docs as Homebrew does.</p>
-
-<p>One thing I wish they would add would be a way to specify the path of the generated .rb file.</p>
-
-<p>Now that I&rsquo;ve set up this homebrew tap, I can add this to some machine provisioning scripts I&rsquo;ve been meaning to write. Perhaps an article for another day. That along with some dotfiles that I should persist.</p>
-
-				]]>
-			</description>
-			<pubDate>Fri, 13 Jan 2023 12:19:42 EST</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/creating_homebrew_package_for_staticsitegenerator_distribution.html</guid>
 		</item>
 	
 
