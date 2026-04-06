@@ -9,6 +9,51 @@
     <description>Ryan Nickel's thought poops</description>
     
 		<item>
+			<title>Friction and Quality</title>
+			<link>http://RyanNickel.com/html/friction_and_quality.html</link>
+			<description>
+				<![CDATA[
+					<p>My threshold for friction is low. That&rsquo;s not a complaint &ndash; it&rsquo;s one of my most useful signals of quality.</p>
+
+<p>Most conversations about software quality gravitate toward things that are measurable: test coverage percentages, cyclomatic complexity scores, deployment frequency. These are fine proxies. But I&rsquo;ve found another reliable signal &ndash; how much friction I feel when I go to change something.</p>
+
+<p>My personal threshold for friction is low. Annoyingly low, some might say. If I open a file and have to scroll past 400 lines before I understand what it does, that&rsquo;s friction. If adding a feature means touching five separate modules in sequence, hoping I don&rsquo;t miss one, that&rsquo;s friction. If the local dev setup requires following a seven-step README, two of which are outdated, that&rsquo;s friction. None of these are catastrophic individually. Together, they&rsquo;re a sign of rot.</p>
+
+<p>Quality isn&rsquo;t what the code does when everything goes right. It&rsquo;s how hard the code <em>fights</em> you when you need to change it.</p>
+
+<p>The subtle thing about friction is that it accumulates slowly and invisibly. Each shortcut is defensible in isolation. The test you skipped because the deadline was real. The abstraction you deferred because the requirement felt unstable. The naming you left vague because you&rsquo;d come back to it. You always intend to come back. You rarely do. The debt compounds quietly, and then one day a routine change takes three times as long as it should, and you can&rsquo;t quite say why.</p>
+
+<p>I like to think about maintainability less as a property of code and more as a property of the future developer experience (that future developer is usually me, three months later, with no memory of why I made any of these decisions). Writing with empathy for future me is a forcing function. It pushes toward smaller functions, honest naming, and architecture where the seams are obvious. Not because some style guide said so, but because future-me is going to feel it if present-me is lazy.</p>
+
+<p>This is why I&rsquo;ve come to treat my own friction response as a legitimate quality metric. When something feels annoying to work with, I try to resist the urge to push through and instead ask why it&rsquo;s annoying. Usually the answer points directly at something worth fixing &ndash; a missing abstraction, a leaky boundary, a function doing too much. The irritation is diagnostic.</p>
+
+<p>Good software doesn&rsquo;t just work. It stays workable. It stays workable when the requirements change, when the team changes, when the context you had in your head six months ago is completely gone. That durability doesn&rsquo;t come from clever architecture alone. It comes from a consistent, almost stubborn refusal to let friction slide &ndash; catching it early, naming it honestly, and fixing it before it fossilizes into the codebase.</p>
+
+<blockquote>
+<p>How you do one thing is how you do everything.</p>
+</blockquote>
+
+<p>That applies here. The developer who lets a confusing variable name slide is the same one who lets an unclear API boundary slide. The team that skips the test because it&rsquo;s &ldquo;just a small fix&rdquo; is the same team that ships the outage. Standards aren&rsquo;t rules &ndash; they&rsquo;re habits. And habits show up everywhere, whether you&rsquo;re watching or not.</p>
+
+<h2>The AI Angle</h2>
+
+<p>I&rsquo;ve been thinking lately about how this threshold in the age of AI coding. AI coding tools are genuinely useful. I use them. But they have a particular failure mode that maps directly onto everything above: they generate plausible code faster than you can evaluate it. The friction of writing is gone. The friction of <em>understanding</em> what was written is very much still there.</p>
+
+<p>If your standard before was &ldquo;I&rsquo;ll clean this up later,&rdquo; AI gives you ten times the surface area of later to deal with. It will happily produce a 200-line function, inconsistent naming, and a abstraction that almost makes sense &ndash; and it will do it confidently, in seconds. The output isn&rsquo;t wrong enough to reject immediately. It&rsquo;s just subtly not right, in ways that <em>compound</em>.</p>
+
+<p>This is why a low friction tolerance might be <em>more</em> valuable now, not less. The bottleneck has shifted. You&rsquo;re no longer constrained by how fast you can type &ndash; you&rsquo;re constrained by how fast you can think critically about what&rsquo;s in front of you. Developers who trained themselves to feel friction, to notice when something is harder to follow than it should be, have a real edge here. They&rsquo;ll catch the AI&rsquo;s lazy abstractions. They&rsquo;ll push back on the generated code that technically works but quietly makes the next change harder.</p>
+
+<p>The old excuse was that there wasn&rsquo;t time to do it right. AI has largely killed that excuse. There&rsquo;s now almost always time to do it right &ndash; the question is whether you&rsquo;ve built the habit of caring. How you do one thing is how you do everything. If you accepted slop before, you&rsquo;ll accept AI slop now, just faster and at greater volume.</p>
+
+<p>Low friction tolerance is a feature. In the age of AI, it might be the feature.</p>
+
+				]]>
+			</description>
+			<pubDate>Sun, 05 Apr 2026 20:20:11 EDT</pubDate>
+			<guid isPermaLink="false">http://RyanNickel.com/html/friction_and_quality.html</guid>
+		</item>
+	
+		<item>
 			<title>How AI Amplifies NPM Supply-Chain Risk</title>
 			<link>http://RyanNickel.com/html/how_ai_amplifies_npm_supply-chain_risk.html</link>
 			<description>
@@ -422,126 +467,6 @@ app.listen(3000, () =&gt; console.log('Server up on 3000'));
 			</description>
 			<pubDate>Tue, 18 Apr 2023 15:51:13 EDT</pubDate>
 			<guid isPermaLink="false">http://RyanNickel.com/html/setting_up_my_own_ryannickel.com_domain_for_mastadon.html</guid>
-		</item>
-	
-		<item>
-			<title>Updating to use H-Entry for each article</title>
-			<link>http://RyanNickel.com/html/updating_to_use_h-entry_for_each_article.html</link>
-			<description>
-				<![CDATA[
-					<p>As I delve deeper into the <a href="https://indieweb.org/">IndieWeb</a>, I first took on the low hanging fruit of adding the <a href="adding-h-ard-to-this-site.html">h-card</a> format to the footer.</p>
-
-<p>With that low hanging fruit out of the way, I started looking into wrapping posts with the <a href="http://microformats.org/wiki/h-entry">h-entry</a> classes.</p>
-
-<p>The purpose to the <strong>h-entry</strong> card, as put forth by the <a href="http://microformats.org/">microformats.io</a> site is:</p>
-
-<blockquote>
-<p>h-entry is a simple, open format for episodic or date-stamped content on the web. h-entry is often used with content intended to be syndicated, e.g. blog posts. h-entry is one of several open microformat standards suitable for embedding data in HTML.</p>
-</blockquote>
-
-<p>Starting to add this made me realize that my blog post entries weren&rsquo;t <em>strictly</em> accurate. I was using an <code>&lt;article&gt;</code> tag to contain the content of the blog post. The intended purpose as outlined in <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article">this mdn doc is</a>:</p>
-
-<blockquote>
-<p>The <code>&lt;article&gt;</code> HTML element represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., in syndication)</p>
-</blockquote>
-
-<p>My article wasn&rsquo;t truly <em>self contained</em>. The title portion of the article was instead in the <code>&lt;header&gt;</code> tag of this site. I needed to change up the markup and css for the site in order to make it adhere to the standards.</p>
-
-<p>This led me down the rabbit hole of looking deeper into my markup.</p>
-
-<p>What else wasn&rsquo;t quite idiomatic? Could I take this opportunity to clean up and minimize my HTML? Take this opportunity to perhaps learn a little more about the newer CSS properties available?</p>
-
-<p>Why not!</p>
-
-<h2>Index.tmpl Cleanup</h2>
-
-<p>Looking at the index page, I thought I could clean it up a little bit. It was already fairly clean, but I could sense some <a href="https://csscreator.com/divitis">divitis</a> beginning to creep in.</p>
-
-<pre><code>&lt;header&gt;
-  &lt;div class=&quot;content&quot;&gt;
-	  &lt;h1&gt;Hello, my name is &lt;span class=&quot;name&quot;&gt;Ryan Nickel&lt;/span&gt;&lt;/h1&gt;
-	  &lt;p&gt;A personal blog focused on (primarily) software.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/header&gt;
-</code></pre>
-
-<p>That extra <code>&lt;div class=&quot;content&quot;&gt;...&lt;/div&gt;</code> was in there purely for styling the page. It added no semantic meaning to the markup. This is something that should be handled purely with CSS.</p>
-
-<p>This was pretty simple to do, especially considering all I needed to do was set some padding, which is so much easier now with <code>vw</code>. I can use some simple media queries to make this responsive as well. Simple.</p>
-
-<p>The <code>&lt;article&gt;</code> tag was suffering from the same thing. One extra <code>&lt;div&gt;</code> in order to control the styles. The same <code>vw</code> CSS class can address this as well.</p>
-
-<p>Finally, looking at the <code>&lt;footer&gt;</code> tag, this one changed quite a bit.</p>
-
-<p>Again it had the same <code>&lt;div&gt;</code> issue, so I was able to easily remove that.</p>
-
-<p>I then took the opportunity to properly style the various social media links to be a proper <code>&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</code>. I was lazy the first time around and just wrote them out in a <code>&lt;p&gt;</code> tag, and modifying them was proving to be more arduous than I would prefer. Again this can all easily be styled via CSS and allow the markup to be more semantic.</p>
-
-<pre><code>footer ul {
-  list-style-type: circle;
-  display: flex;
-  flex-direction: row;
-  justify-content: center; 
-  padding: 0;
-}    
-
-footer li {
-  padding: 0px;
-  margin-left: 20px;
-}
-
-footer li:first-child {
-  list-style-type: none;
-  margin-left: 0;
-}
-</code></pre>
-
-<p>I was then able to modify the markup from</p>
-
-<pre><code>&lt;p&gt;
-  &lt;a rel=&quot;me&quot; href=&quot;https://twitter.com/rnickel&quot; class=&quot;url&quot;&gt;Twitter&lt;/a&gt; &amp;#x26AC; &lt;a rel=&quot;me&quot; href=&quot;https://github.com/mrnickel&quot; class=&quot;url&quot;&gt;GitHub&lt;/a&gt; &amp;#x26AC; &lt;a href=&quot;/about.html&quot;&gt;About&lt;/a&gt; &amp;#x26AC; &lt;a href=&quot;/rss.xml&quot;&gt;RSS&lt;/a&gt; &amp;#x26AC; &lt;a rel=&quot;me&quot; href=&quot;https://techhub.social/@mrnickel&quot;&gt;Mastodon&lt;/a&gt;
-&lt;/p&gt;
-</code></pre>
-
-<p>to a much more readable</p>
-
-<pre><code>&lt;ul&gt;
-	&lt;li&gt;&lt;a rel=&quot;me&quot; href=&quot;https://twitter.com/rnickel&quot; class=&quot;u-url&quot;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a rel=&quot;me&quot; href=&quot;https://github.com/mrnickel&quot; class=&quot;u-url&quot;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;/about.html&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a rel=&quot;me&quot; href=&quot;https://indieweb.social/@mrnickel&quot; class=&quot;u-url&quot;&gt;Mastodon&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;/rss.xml&quot;&gt;RSS&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;   
-</code></pre>
-
-<h2>Post.tmpl Cleanup</h2>
-
-<p>This one was the more difficult template to clean up.</p>
-
-<p>I want to ensure that the <code>&lt;article&gt;</code> tag was fully self-contained.</p>
-
-<p>This means that my <code>&lt;header&gt;</code> tag needs to now be a child of the <code>&lt;article&gt;</code> tag.</p>
-
-<p>To do this, I created a new <code>post.css</code> file that deviates somewhat from the <code>index.css</code> file. Although the overall styles are the same, the markup is different, which one could argue necessitates a new style sheet.</p>
-
-<p>This allowed me to move the <code>&lt;header&gt;</code> tag within the <code>&lt;article&gt;</code> tag, thus fulfilling the requirement of having the <code>&lt;article&gt;</code> fully self contained. I was then able to move the actual copy of each article into <code>&lt;main&gt;</code> which one could also argue is more semantically correct, as it is the <em>main</em> content of the document.</p>
-
-<p>Finally I was able to add the appropriate microformat classes for the associated items:
-- <code>p-name</code> to highlight the name of the article (within the header)
-- <code>e-content</code>  to capture the body of the article
-- <code>dt-published</code> I could add to the <code>&lt;time&gt;</code> element to capture the date in which the article was published
-- <code>u-url</code> to allow any scraper to grab the permalink</p>
-
-<p>And that was it.</p>
-
-<h2>Conclusion</h2>
-
-<p>This was an interesting exercise for me. Getting into the nitty gritty of HTML and CSS isn&rsquo;t something I often do during my day-to-day. It was fun to jump into looking at the semantics and try to clean it up and toy around with CSS a little. I&rsquo;m sure there are better ways to go about doing what I did, but my goal wasn&rsquo;t to do it perfectly but instead to just play around. That&rsquo;s half the fun of having your own website.</p>
-
-				]]>
-			</description>
-			<pubDate>Mon, 13 Mar 2023 06:49:16 EDT</pubDate>
-			<guid isPermaLink="false">http://RyanNickel.com/html/updating_to_use_h-entry_for_each_article.html</guid>
 		</item>
 	
 
