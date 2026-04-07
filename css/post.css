@@ -14,3 +14,13 @@ article {
 main {
   padding-bottom: var(--largeSpacing);
 }
+
+.back-link {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  align-self: flex-start;
+  display: inline-block;
+  padding: 0.5rem;
+  background-color: var(--body-background-color);
+}
